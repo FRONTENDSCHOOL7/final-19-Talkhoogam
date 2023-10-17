@@ -1,10 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from "styled-reset";
-import "./font.css";
+import './font.css';
 
 
 const GlobalStyle = createGlobalStyle`
+${reset}
+
+
 :root {
+    /* 색 */
     --color-mainColor: #14B069;
     --color-navy: #132644;
     --color-lime: #E1FF67;
@@ -17,51 +21,12 @@ const GlobalStyle = createGlobalStyle`
     --color-bg: #F2F2F2;
 }
 
-${reset};
-
-body,
-header,
-footer,
-section,
-div,
-img,
-h1,
-h2,
-h3,
-dt,
-dd,
-p {
-    margin: 0;
-    padding: 0;
-}
-
-h1,
-h2,
-h3,
-input,
-button {
-    font: inherit;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-button {
-    border: 0;
-    background: none;
+body {
+    font-family: 'Pretendard', sans-serif;
 }
 
 button:enabled {
     cursor: pointer;
-}
-
-ul,
-li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .a11y-hidden {
@@ -74,6 +39,8 @@ li {
         padding: 0;
         position: absolute;
     }
+
+
 
 `;
 

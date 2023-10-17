@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import reset from "styled-reset";
 import "./font.css";
 
+
 const GlobalStyle = createGlobalStyle`
 :root {
     --color-mainColor: #14B069;
@@ -18,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
 
 ${reset};
 
- body,
+body,
 header,
 footer,
 section,

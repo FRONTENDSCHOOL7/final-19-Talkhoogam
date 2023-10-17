@@ -1,8 +1,10 @@
+import Gathering from "./pages/Gathering";
+
 function App() {
-  return (
-    <div>
-      hello world
-    </div>
-  );
+    return (
+        <>
+            <Gathering />
+        </>
+    );
 }
 export default App;

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import logoImg from "../images/Logo.png";
-import iconKakao from "../images/icon_kakao.png";
-import iconFacebook from "../images/icon_facebook.png";
-import iconGoogle from "../images/icon_google.png";
+import logoImg from "../assets/images/Logo.png";
+import iconKakao from "../assets/images/icon_kakao.png";
+import iconFacebook from "../assets/images/icon_facebook.png";
+import iconGoogle from "../assets/images/icon_google.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");

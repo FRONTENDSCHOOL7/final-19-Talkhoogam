@@ -1,15 +1,118 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import IconSearch from '../Assets/icon/icon-search.svg';
-import SymbolLogo from '../Assets/icon/symbol-logo.svg';
-import IconHome from '../Assets/icon/icon-home.svg';
-import IconMessage from '../Assets/icon/icon-message-circle.svg';
-import IconEdit from '../Assets/icon/icon-edit.svg';
-import IconUser from '../Assets/icon/icon-user.svg';
-import ImgProfile from '../images/img-profile.png';
-import IconDot from '../Assets/icon/s-icon-more-vertical.svg';
-import ImgFeed from '../Assets/icon/feed-img.jpeg';
-import IconHeart from '../Assets/icon/heart.svg';
+import IconSearch from '../assets/icons/icon-search.svg';
+import SymbolLogo from '../assets/icons/symbol-logo.svg';
+import IconHome from '../assets/icons/icon-home.svg';
+import IconMessage from '../assets/icons/icon-message-circle.svg';
+import IconEdit from '../assets/icons/icon-edit.svg';
+import IconUser from '../assets/icons/icon-user.svg';
+import ImgProfile from '../assets/images/img-profile.png';
+import IconDot from '../assets/icons/s-icon-more-vertical.svg';
+import ImgFeed from '../assets/icons/feed-img.jpeg';
+import IconHeart from '../assets/icons/heart.svg';
+
+
+
+function PlzFollow(){
+    return (
+        <>
+            <img className='symbol-logo' src={SymbolLogo} alt="심볼로고"/>
+            <p className='home-text'>유저를 검색해 팔로우 해보세요!</p>
+            <button>검색하기</button>
+        </>
+    )
+}
+
+function ShowFeed (){
+    return (
+        <div className="user-timeline">
+            <img className="user-profileimg" src={ImgProfile} alt="프로필이미지" />
+            <div className="user-contents">
+                <div className='timeline-title-wrap'>
+                    <p className='timeline-title'>애월읍 위니브 감귤농장</p>
+                    <img className='img-dot' src={IconDot} alt='도트이미지'/>
+                </div>
+                <p className='timeline-id'>@ weniv_Mandarin</p>
+                <p className='timeline-main-text'>옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.</p>
+                <img className='timelin-img' src={ImgFeed} alt="피드이미지" />
+                <div className='social-wrap'>
+                    <div><img className='social-icon' src={IconHeart} alt="하트아이콘" /></div>
+                    <div><img className='social-icon' src={IconMessage} alt="메세지아이콘" /></div>
+                </div>
+                <p className="wr-date">2020년 10월 21일</p>
+            </div>
+        </div>
+    )
+}
+
+function HomeContents({showHome}){
+        
+    return(
+        
+        <>
+        <FeedWrap>
+            {showHome ? (
+                <PlzFollow></PlzFollow>
+            ) : (
+                <ShowFeed></ShowFeed>
+            )}
+            
+        </FeedWrap>
+        </>
+    )
+}
+
+export default function Home() {
+
+    const [showHome, setShowHome] = useState(false);
+
+    const changeHome = () => {
+        if(!showHome){
+            console.log("아니야!")
+            setShowHome(true)
+        }else{
+            console.log("맞아!")
+            setShowHome(false)
+        }
+        
+    }
+
+    return (
+        <HomeWrap>
+            <Header>
+                <p className="feedname">감귤마켓 피드</p>
+                <button onClick={changeHome}><img src={IconSearch} alt="피드"/></button>
+            </Header>
+            
+            <HomeContents showHome={showHome}/>
+            <HomeContents showHome={showHome}/>
+            <HomeContents showHome={showHome}/>
+
+            <FooterTap>
+                <FooterIconWrap>
+                    <img src={IconHome} alt="홈아이콘"/>
+                    <p>홈</p>
+                </FooterIconWrap>
+                <FooterIconWrap>
+                    <img src={IconHome} alt="홈아이콘"/>
+                    <p>거래</p>
+                </FooterIconWrap>
+                <FooterIconWrap>
+                    <img src={IconMessage} alt="메세지아이콘"/>
+                    <p>게시물 작성</p>
+                </FooterIconWrap>
+                <FooterIconWrap>
+                    <img src={IconEdit} alt="게시물작성아이콘"/>
+                    <p>번개모임</p>
+                </FooterIconWrap>
+                <FooterIconWrap>
+                    <img src={IconUser} alt="프로필아이콘"/>
+                    <p>프로필</p>
+                </FooterIconWrap>
+            </FooterTap>
+        </HomeWrap>
+    )
+}
 
 const HomeWrap = styled.section`
     max-width: 390px;
@@ -163,104 +266,3 @@ const FooterIconWrap = styled.div`
         color: #767676;
     }
 `
-
-function PlzFollow(){
-    return (
-        <>
-            <img className='symbol-logo'  src={SymbolLogo} alt="심볼로고"/>
-            <p className='home-text'>유저를 검색해 팔로우 해보세요!</p>
-            <button>검색하기</button>
-        </>
-    )
-}
-
-function ShowFeed (){
-    return (
-        <div className="user-timeline">
-            <img className="user-profileimg" src={ImgProfile} alt="프로필이미지" />
-            <div className="user-contents">
-                <div className='timeline-title-wrap'>
-                    <p className='timeline-title'>애월읍 위니브 감귤농장</p>
-                    <img className='img-dot' src={IconDot} alt='도트이미지'/>
-                </div>
-                <p className='timeline-id'>@ weniv_Mandarin</p>
-                <p className='timeline-main-text'>옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.</p>
-                <img className='timelin-img' src={ImgFeed} alt="피드이미지" />
-                <div className='social-wrap'>
-                    <div><img className='social-icon' src={IconHeart} alt="하트아이콘" /></div>
-                    <div><img className='social-icon' src={IconMessage} alt="메세지아이콘" /></div>
-                </div>
-                <p className="wr-date">2020년 10월 21일</p>
-            </div>
-        </div>
-    )
-}
-
-function HomeContents({showHome}){
-        
-    return(
-        
-        <>
-        <FeedWrap>
-            {showHome ? (
-                <PlzFollow></PlzFollow>
-            ) : (
-                <ShowFeed></ShowFeed>
-            )}
-            
-        </FeedWrap>
-        </>
-    )
-}
-
-export default function Home() {
-
-    const [showHome, setShowHome] = useState(false);
-
-    const changeHome = () => {
-        if(!showHome){
-            console.log("아니야!")
-            setShowHome(true)
-        }else{
-            console.log("맞아!")
-            setShowHome(false)
-        }
-        
-    }
-
-    return (
-        <HomeWrap>
-            <Header>
-                <p className="feedname">감귤마켓 피드</p>
-                <button onClick={changeHome}><img src={IconSearch} alt="피드"/></button>
-            </Header>
-            
-            <HomeContents showHome={showHome}/>
-            <HomeContents showHome={showHome}/>
-            <HomeContents showHome={showHome}/>
-
-            <FooterTap>
-                <FooterIconWrap>
-                    <img src={IconHome} alt="홈아이콘"/>
-                    <p>홈</p>
-                </FooterIconWrap>
-                <FooterIconWrap>
-                    <img src={IconHome} alt="홈아이콘"/>
-                    <p>거래</p>
-                </FooterIconWrap>
-                <FooterIconWrap>
-                    <img src={IconMessage} alt="메세지아이콘"/>
-                    <p>게시물 작성</p>
-                </FooterIconWrap>
-                <FooterIconWrap>
-                    <img src={IconEdit} alt="게시물작성아이콘"/>
-                    <p>번개모임</p>
-                </FooterIconWrap>
-                <FooterIconWrap>
-                    <img src={IconUser} alt="프로필아이콘"/>
-                    <p>프로필</p>
-                </FooterIconWrap>
-            </FooterTap>
-        </HomeWrap>
-    )
-}

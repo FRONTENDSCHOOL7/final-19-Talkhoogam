@@ -3,7 +3,7 @@
     font-weight: 400;
     font-display: swap;
     src: local('Pretendard Regular'),
-        url('../assets/fonts/Pretendard/Pretendard-Regular.woff2') format('font-woff2'),
+        url('../assets/fonts/Pretendard/Pretendard-Regular.woff') format('font-woff2'),
         url('../assets/fonts/Pretendard/Pretendard-Regular.woff') format('woff'),
         url('../assets/fonts/Pretendard/Pretendard-Regular.otf') format('opentype');
 }

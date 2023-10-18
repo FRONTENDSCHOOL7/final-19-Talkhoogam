@@ -9,7 +9,7 @@ ${reset}
 
 :root {
     /* 색 */
-    --color-mainColor: #14B069;
+    --color-mainColor: #56b778;
     --color-navy: #132644;
     --color-lime: #E1FF67;
     --color-blue: #1643DB;
@@ -23,6 +23,20 @@ ${reset}
 
 body {
     font-family: 'Pretendard', sans-serif;
+}
+
+input {
+    border : none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: 0;
+    background: none;
 }
 
 button:enabled {

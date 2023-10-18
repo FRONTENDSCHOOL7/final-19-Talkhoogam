@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Welcome from "../pages/Welcome";
-import Login from "../pages/Login";
+import Login from "../pages/login/Login";
 import Join from "../pages/Join";
 import Gathering from "../pages/Gathering";
-import Header from "../components/header/BasicHeader"
+import Header from "../components/header/BasicHeader";
 
 export default function Routers() {
   return (

@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Gathering from "../pages/Gathering";
 import Header from "../components/header/BasicHeader";
+import Profile from "../pages/Profile";
 
 export default function Routers() {
   return (
@@ -16,6 +17,7 @@ export default function Routers() {
       <Route path="/join" element={<Join />} />
       <Route path="/gathering" element={<Gathering />} />
       <Route path="/header" element={<Header />} />
+      <Route path="/profile" element={<Profile/>}/>
     </Routes>
   );
 }

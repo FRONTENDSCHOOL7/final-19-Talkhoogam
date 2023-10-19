@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import iconKakao from "../../assets/images/icon_kakao.png";
-import iconFacebook from "../../assets/images/icon_facebook.png";
-import iconGoogle from "../../assets/images/icon_google.png";
+import iconKakao from "../assets/images/icon_kakao.png";
+import iconFacebook from "../assets/images/icon_facebook.png";
+import iconGoogle from "../assets/images/icon_google.png";
 
 export const LoginPage = styled.article`
   height: 100vh;

@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import * as S from "./LoginStyled.js";
-import Logo from "../../components/common/Logo";
+import {
+  LoginPage,
+  EmailLoginForm,
+  InputBox,
+  LoginBtn,
+  SnsLogin,
+  SnsLoginText,
+  SnsLoginBtn,
+  ErrorText,
+} from "../styles/LoginStyled";
+import Logo from "../components/common/Logo.jsx";
 import { Link } from "react-router-dom";
 
 export default function Login() {
@@ -32,28 +41,28 @@ export default function Login() {
   };
 
   return (
-    <S.LoginPage>
+    <LoginPage>
       <Logo />
-      <S.EmailLoginForm>
-        <S.InputBox type="email" placeholder="이메일" onChange={EmailValue} />
-        <S.InputBox
+      <EmailLoginForm>
+        <InputBox type="email" placeholder="이메일" onChange={EmailValue} />
+        <InputBox
           type="password"
           placeholder="비밀번호"
           minLength="8"
           maxLength="16"
           onChange={PasswordValue}
         />
-        <S.ErrorText>{error}</S.ErrorText>
-        <S.LoginBtn onClick={LoginError}>로그인</S.LoginBtn>
-      </S.EmailLoginForm>
-      <S.SnsLoginText>SNS 로그인</S.SnsLoginText>
+        <ErrorText>{error}</ErrorText>
+        <LoginBtn onClick={LoginError}>로그인</LoginBtn>
+      </EmailLoginForm>
+      <SnsLoginText>SNS 로그인</SnsLoginText>
 
-      <S.SnsLogin>
-        <S.SnsLoginBtn className="btn-kakao"></S.SnsLoginBtn>
-        <S.SnsLoginBtn className="btn-facebook"></S.SnsLoginBtn>
-        <S.SnsLoginBtn className="btn-google"></S.SnsLoginBtn>
-      </S.SnsLogin>
+      <SnsLogin>
+        <SnsLoginBtn className="btn-kakao"></SnsLoginBtn>
+        <SnsLoginBtn className="btn-facebook"></SnsLoginBtn>
+        <SnsLoginBtn className="btn-google"></SnsLoginBtn>
+      </SnsLogin>
       <Link to="/join">회원가입</Link>
-    </S.LoginPage>
+    </LoginPage>
   );
 }

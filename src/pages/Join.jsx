@@ -1,6 +1,6 @@
 import React from "react";
-import { InputBox } from "./login/LoginStyled.js";
-import { JoinPage, JoinText, JoinTitle } from "./JoinStyled";
+import { InputBox } from "../styles/LoginStyled.js";
+import { JoinPage, JoinText, JoinTitle } from "../styles/JoinStyled";
 
 export default function Join() {
   return (

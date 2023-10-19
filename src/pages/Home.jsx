@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import IconSearch from "../assets/icons/icon-search.svg";
 import SymbolLogo from "../assets/icons/symbol-logo.svg";
-import IconHome from "../assets/icons/icon-home.svg";
 import IconMessage from "../assets/icons/icon-message-circle.svg";
-import IconEdit from "../assets/icons/icon-edit.svg";
-import IconUser from "../assets/icons/icon-user.svg";
 import ImgProfile from "../assets/images/img-profile.png";
 import IconDot from "../assets/icons/s-icon-more-vertical.svg";
 import ImgFeed from "../assets/icons/feed-img.jpeg";
 import IconHeart from "../assets/icons/heart.svg";
+import Footer from "../components/footer/Footer";
 
 function PlzFollow() {
   return (
@@ -87,28 +85,8 @@ export default function Home() {
       <HomeContents showHome={showHome} />
       <HomeContents showHome={showHome} />
 
-      <FooterTap>
-        <FooterIconWrap>
-          <img src={IconHome} alt="홈아이콘" />
-          <p>홈</p>
-        </FooterIconWrap>
-        <FooterIconWrap>
-          <img src={IconHome} alt="홈아이콘" />
-          <p>거래</p>
-        </FooterIconWrap>
-        <FooterIconWrap>
-          <img src={IconMessage} alt="메세지아이콘" />
-          <p>게시물 작성</p>
-        </FooterIconWrap>
-        <FooterIconWrap>
-          <img src={IconEdit} alt="게시물작성아이콘" />
-          <p>번개모임</p>
-        </FooterIconWrap>
-        <FooterIconWrap>
-          <img src={IconUser} alt="프로필아이콘" />
-          <p>프로필</p>
-        </FooterIconWrap>
-      </FooterTap>
+      <Footer />
+      
     </HomeWrap>
   );
 }
@@ -234,32 +212,5 @@ const FeedWrap = styled.div`
     font-weight: 400;
     line-height: 12px;
     margin-top: 16px;
-  }
-`;
-
-const FooterTap = styled.div`
-  border-top: 1px solid #dbdbdb;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-`;
-
-const FooterIconWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  cursor: pointer;
-  width: 84px;
-  height: 60px;
-
-  & p {
-    margin-top: 4px;
-    text-align: center;
-    font-size: 14px;
-    color: #767676;
   }
 `;

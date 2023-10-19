@@ -42,6 +42,7 @@ export default function Login() {
 
   return (
     <LoginPage>
+      <h1 className="a11y-hidden">로그인 페이지</h1>
       <Logo />
       <EmailLoginForm>
         <InputBox type="email" placeholder="이메일" onChange={EmailValue} />

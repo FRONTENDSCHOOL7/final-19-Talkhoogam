@@ -2,6 +2,7 @@ import styled from "styled-components";
 import iconKakao from "../assets/images/icon_kakao.png";
 import iconFacebook from "../assets/images/icon_facebook.png";
 import iconGoogle from "../assets/images/icon_google.png";
+import { Btn } from "../components/common/button/Button";
 
 export const LoginPage = styled.article`
   height: 100vh;
@@ -45,19 +46,6 @@ export const InputBox = styled.input`
     outline: none;
     outline: 1px solid var(--color-mainColor);
   }
-`;
-
-export const LoginBtn = styled.button`
-  width: 100%;
-  background-color: var(--color-mainColor);
-  box-sizing: border-box;
-  padding: 13px;
-  margin-top: 10px;
-  border-radius: 30px;
-
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
 `;
 
 export const SnsLoginText = styled.p`
@@ -122,4 +110,8 @@ export const ErrorText = styled.p`
   font-size: 14px;
   color: red;
   margin-top: 5px;
+`;
+
+export const LoginBtn = styled(Btn)`
+  margin-top: 10px;
 `;

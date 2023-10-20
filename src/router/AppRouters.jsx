@@ -7,6 +7,7 @@ import Join from "../pages/Join";
 import Gathering from "../pages/Gathering";
 import Header from "../components/header/BasicHeader";
 import Profile from "../pages/Profile";
+import NotFound from "../pages/NotFound";
 
 export default function Routers() {
   return (
@@ -18,6 +19,7 @@ export default function Routers() {
       <Route path="/gathering" element={<Gathering />} />
       <Route path="/header" element={<Header />} />
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="*" element={<NotFound/>}/>
     </Routes>
   );
 }

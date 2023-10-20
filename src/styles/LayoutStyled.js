@@ -5,7 +5,7 @@ export const LayoutStyle = styled.section`
     min-height: 820px;
     margin: 0 auto;
     position: relative;
-
+    
     /* 임시 border */
     border: 1px solid #dbdbdb;
 `

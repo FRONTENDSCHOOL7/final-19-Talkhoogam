@@ -18,9 +18,12 @@ function Footer() {
     
     const handleClickState = (pageName) => {
         navigate(`/${pageName}`);
-        console.log(uselocation.pathname.toLowerCase())
-        if(uselocation.pathname === "/home"){
-            setSvgColor("/home")
+        setSvgColor(pageName)
+        console.log(`페이지 이름 : /${pageName}`)
+        if(`/${pageName}` === "/home"){
+            setSvgColor(`/${pageName}`)
+        } else if(`/${pageName}` === "/profile"){
+            setSvgColor(`/${pageName}`)
         }
     };
     return (
@@ -34,10 +37,10 @@ function Footer() {
         </FooterIconWrap>
 
         <FooterIconWrap onClick={() => {
-            handleClickState("transacion");
+            handleClickState("sellbook");
         }}>
-            <IconHand className="footer-icon" fill={svgColor === "/transacion" ? "#56b778" : "#767676"}/>
-            <p style={{color:svgColor === "/transacion" ? "#56b778" : "#767676"}}>거래</p>
+            <IconHand className="footer-icon" fill={svgColor === "/sellbook" ? "#56b778" : "#767676"}/>
+            <p style={{color:svgColor === "/sellbook" ? "#56b778" : "#767676"}}>거래</p>
         </FooterIconWrap>
 
         <FooterIconWrap onClick={() => {
@@ -74,6 +77,8 @@ const FooterLayout = styled.footer`
     align-items: center;
     justify-content: center;
     gap: 5px;
+    position: absolute;
+    bottom: 0;
 `;
 
 const FooterIconWrap = styled.button`

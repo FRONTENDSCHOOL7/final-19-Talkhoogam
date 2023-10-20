@@ -7,6 +7,8 @@ import ImgProfile from "../assets/images/img-profile.png";
 import IconDot from "../assets/icons/s-icon-more-vertical.svg";
 import ImgFeed from "../assets/icons/feed-img.jpeg";
 import IconHeart from "../assets/icons/heart.svg";
+import { LayoutStyle, LayoutInsideStyle } from "../styles/LayoutStyled";
+import MainHeader from "../components/header/MainHeader";
 import Footer from "../components/footer/Footer";
 
 function PlzFollow() {
@@ -49,7 +51,7 @@ function ShowFeed() {
   );
 }
 
-function HomeContents({ showHome }) {
+export function HomeContents({ showHome }) {
   return (
     <>
       <FeedWrap>
@@ -73,21 +75,24 @@ export default function Home() {
   };
 
   return (
-    <HomeWrap>
-      <Header>
+    <LayoutStyle>
+      <MainHeader />
+      <LayoutInsideStyle>
+      {/* <Header>
         <p className="feedname">감귤마켓 피드</p>
         <button onClick={changeHome}>
           <img src={IconSearch} alt="피드" />
         </button>
-      </Header>
-
-      <HomeContents showHome={showHome} />
-      <HomeContents showHome={showHome} />
-      <HomeContents showHome={showHome} />
-
-      <Footer />
+      </Header> */}
       
-    </HomeWrap>
+      <HomeContents showHome={showHome} />
+      <HomeContents showHome={showHome} />
+      <HomeContents showHome={showHome} />
+
+
+      </LayoutInsideStyle>
+      <Footer />
+    </LayoutStyle>
   );
 }
 
@@ -95,11 +100,7 @@ const HomeWrap = styled.section`
   max-width: 390px;
   border: 1px solid #dbdbdb;
   margin: auto auto;
-  .feedname {
-    display: inline-block;
-    font-size: 18px;
-    margin: 13px 0 13px 16px;
-  }
+  
 `;
 const Header = styled.div`
   width: 100%;
@@ -107,6 +108,11 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #dbdbdb;
+  .feedname {
+    display: inline-block;
+    font-size: 18px;
+    margin: 13px 0 13px 16px;
+  }
 
   & img {
     margin-right: 16px;
@@ -114,7 +120,7 @@ const Header = styled.div`
   }
 `;
 
-const FeedWrap = styled.div`
+export const FeedWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +144,6 @@ const FeedWrap = styled.div`
   }
 
   & .user-timeline {
-    margin: 20px 0;
     display: flex;
     justify-content: space-between;
     gap: 12px;

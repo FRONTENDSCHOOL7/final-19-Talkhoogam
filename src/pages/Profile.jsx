@@ -6,7 +6,7 @@ import ImgSet from "../assets/icons/icon_settings.svg";
 import ImgShare from "../assets/icons/icon-share.svg";
 import ImgMessage from "../assets/icons/icon-message-circle.svg";
 import ImgLayes from "../assets/icons/icon-img-layers.svg";
-import ImgExample from "../assets/images/example/슈독.jfif";
+import ImgExample from "../assets/images/슈독.jfif";
 
 export default function Profile() {
     return (

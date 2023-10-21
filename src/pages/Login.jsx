@@ -10,12 +10,14 @@ import {
   ErrorText,
 } from "../styles/LoginStyled";
 import Logo from "../components/common/Logo.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import LoginApi from "../api/LoginApi";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const EmailValue = (e) => {
     setEmail(e.target.value);
@@ -25,18 +27,23 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const LoginError = (e) => {
+  const LoginValid = async (e) => {
+    e.preventDefault();
     if (!email && !password) {
-      e.preventDefault();
       setError("이메일과 비밀번호를 입력해 주세요.");
     } else if (!email) {
-      e.preventDefault();
       setError("이메일을 입력해 주세요.");
     } else if (!password) {
-      e.preventDefault();
       setError("비밀번호를 입력해 주세요.");
     } else {
       setError("");
+      const loginRes = await LoginApi(email, password);
+
+      if (loginRes.status !== 422) {
+        navigate("/home");
+      } else {
+        setError("이메일 또는 비밀번호가 일치하지 않습니다.");
+      }
     }
   };
 
@@ -49,12 +56,12 @@ export default function Login() {
         <InputBox
           type="password"
           placeholder="비밀번호"
-          minLength="8"
-          maxLength="16"
+          minLength="6"
+          maxLength="14"
           onChange={PasswordValue}
         />
         <ErrorText>{error}</ErrorText>
-        <LoginBtn onClick={LoginError}>로그인</LoginBtn>
+        <LoginBtn onClick={LoginValid}>로그인</LoginBtn>
       </EmailLoginForm>
       <SnsLoginText>SNS 로그인</SnsLoginText>
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import {
   LoginPage,
   EmailLoginForm,
@@ -12,14 +13,22 @@ import {
 import Logo from "../components/common/Logo.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import LoginApi from "../api/LoginApi";
+import loginCheck from "../recoil/loginCheck";
+import loginToken from "../recoil/loginToken";
+import accountname from "../recoil/accountname";
+
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [token, setToken] = useRecoilState(loginToken);
+  const [isLogin, setIsLogin] = useRecoilState(loginCheck);
+  const [isAccountname, setIsAccountname] = useRecoilState(accountname);
 
-  const EmailValue = (e) => {
+    const EmailValue = (e) => {
     setEmail(e.target.value);
   };
 
@@ -38,8 +47,16 @@ export default function Login() {
     } else {
       setError("");
       const loginRes = await LoginApi(email, password);
-
+      
       if (loginRes.status !== 422) {
+        console.log(loginRes);
+        const newToken = loginRes.user.token;
+        const newAccountname = loginRes.user.accountname;
+        setToken(newToken);
+        setIsLogin(true);
+        setIsAccountname(newAccountname);
+
+        localStorage.setItem("userToken", newToken);
         navigate("/home");
       } else {
         setError("이메일 또는 비밀번호가 일치하지 않습니다.");

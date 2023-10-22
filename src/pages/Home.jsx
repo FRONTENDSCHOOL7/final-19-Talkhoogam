@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import IconSearch from "../assets/icons/icon-search.svg";
-import SymbolLogo from "../assets/icons/symbol-logo.svg";
 import IconMessage from "../assets/icons/icon-message-circle.svg";
 import ImgProfile from "../assets/images/img-profile.png";
 import IconDot from "../assets/icons/s-icon-more-vertical.svg";
@@ -10,24 +8,21 @@ import IconHeart from "../assets/icons/heart.svg";
 import { LayoutStyle, LayoutInsideStyle } from "../styles/LayoutStyled";
 import MainHeader from "../components/header/MainHeader";
 import Footer from "../components/footer/Footer";
-
-function PlzFollow() {
-  return (
-    <>
-      <img className="symbol-logo" src={SymbolLogo} alt="심볼로고" />
-      <p className="home-text">유저를 검색해 팔로우 해보세요!</p>
-      <button>검색하기</button>
-    </>
-  );
-}
+import { useRecoilValue } from "recoil";
+import accountname from "../recoil/accountname";
+import GetFollowerFeedListAPI from "../api/Post/GetFollowerFeedListAPI";
+import Empty from '../components/empty/Empty';
+import LogoImg from "../assets/images/Logo.png"
 
 function ShowFeed() {
+
+  const newAccountname = useRecoilValue(accountname);
   return (
     <div className="user-timeline">
       <img className="user-profileimg" src={ImgProfile} alt="프로필이미지" />
       <div className="user-contents">
         <div className="timeline-title-wrap">
-          <p className="timeline-title">애월읍 위니브 감귤농장</p>
+          <p className="timeline-title">{newAccountname}</p>
           <img className="img-dot" src={IconDot} alt="도트이미지" />
         </div>
         <p className="timeline-id">@ weniv_Mandarin</p>
@@ -51,74 +46,43 @@ function ShowFeed() {
   );
 }
 
-export function HomeContents({ showHome }) {
+export function HomeContents() {
+  const getFeed = GetFollowerFeedListAPI();
+  console.log("피드 데이터 수 " , getFeed.getData.length)
+
   return (
+    
     <>
       <FeedWrap>
-        {showHome ? <PlzFollow></PlzFollow> : <ShowFeed></ShowFeed>}
+        {getFeed.getData.length > 0 ? (
+          <p>팔로우 존재합니다</p>
+        ) : (
+          <>
+            <h1 className='a11y-hidden'>팔로우가 존재하지 않습니다.</h1>
+            <Empty image={LogoImg} alt={"404페이지"} >
+              유저를 검색해 팔로우 해보세요!
+            </Empty>
+          </>
+        )}
       </FeedWrap>
     </>
   );
 }
 
 export default function Home() {
-  const [showHome, setShowHome] = useState(false);
-
-  const changeHome = () => {
-    if (!showHome) {
-      console.log("아니야!");
-      setShowHome(true);
-    } else {
-      console.log("맞아!");
-      setShowHome(false);
-    }
-  };
 
   return (
     <LayoutStyle>
       <MainHeader />
       <LayoutInsideStyle>
-      {/* <Header>
-        <p className="feedname">감귤마켓 피드</p>
-        <button onClick={changeHome}>
-          <img src={IconSearch} alt="피드" />
-        </button>
-      </Header> */}
       
-      <HomeContents showHome={showHome} />
-      <HomeContents showHome={showHome} />
-      <HomeContents showHome={showHome} />
-
+      <HomeContents />
 
       </LayoutInsideStyle>
       <Footer />
     </LayoutStyle>
   );
 }
-
-const HomeWrap = styled.section`
-  max-width: 390px;
-  border: 1px solid #dbdbdb;
-  margin: auto auto;
-  
-`;
-const Header = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #dbdbdb;
-  .feedname {
-    display: inline-block;
-    font-size: 18px;
-    margin: 13px 0 13px 16px;
-  }
-
-  & img {
-    margin-right: 16px;
-    cursor: pointer;
-  }
-`;
 
 export const FeedWrap = styled.div`
   display: flex;
@@ -136,12 +100,12 @@ export const FeedWrap = styled.div`
     margin: 20px 0;
   }
 
-  & button {
+  /* & button {
     background: #f26e22;
     border-radius: 44px;
     padding: 13px 33px;
     margin-bottom: 294px;
-  }
+  } */
 
   & .user-timeline {
     display: flex;
@@ -219,3 +183,29 @@ export const FeedWrap = styled.div`
     margin-top: 16px;
   }
 `;
+
+// const HomeWrap = styled.section`
+//   max-width: 390px;
+//   border: 1px solid #dbdbdb;
+//   margin: auto auto;
+  
+// `;
+// const Header = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   border-bottom: 1px solid #dbdbdb;
+//   .feedname {
+//     display: inline-block;
+//     font-size: 18px;
+//     margin: 13px 0 13px 16px;
+//   }
+
+//   & img {
+//     margin-right: 16px;
+//     cursor: pointer;
+//   }
+// `;
+
+

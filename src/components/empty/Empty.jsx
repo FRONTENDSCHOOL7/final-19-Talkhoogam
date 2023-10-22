@@ -1,13 +1,19 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import Button from "../common/button/Button";
 import { EmptyLayout, LogoImg, EmptyText } from "../../styles/EmptyStyled";
 
 function Empty({image, alt, children, navigatePath}) {
     const navigate = useNavigate();
-
+    const location = useLocation();
     const onClickHandler = () => {
-        navigate(navigatePath)
+        console.log("페이지 경로 : ",location)
+        if(location.pathname === "/home"){
+            navigate("/searchPage")
+        }else{
+            navigate(navigatePath)
+        }
+        
     }
     return (
     <>

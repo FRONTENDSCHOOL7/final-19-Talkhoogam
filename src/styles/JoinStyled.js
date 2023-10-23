@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Btn } from "../components/common/button/Button";
 
-export const JoinPage = styled.article`
+export const PageArticle = styled.article`
   height: 100vh;
   max-width: 390px;
   margin: 0 auto;
@@ -9,7 +9,7 @@ export const JoinPage = styled.article`
   box-sizing: border-box;
 `;
 
-export const JoinTitle = styled.h1`
+export const Title = styled.h1`
   font-size: 23px;
   font-weight: bold;
   margin-top: 50px;

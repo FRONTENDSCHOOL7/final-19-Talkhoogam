@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ErrorText,
   InforText,
   JoinForm,
   JoinInput,
   JoinLabel,
-  JoinPage,
-  JoinTitle,
   NextBtn,
+  PageArticle,
+  Title,
 } from "../styles/JoinStyled";
-import JoinApi from "../api/JoinApi";
+import { useNavigate } from "react-router-dom";
 
 export default function Join() {
   const [email, setEmail] = useState("");
@@ -19,6 +19,7 @@ export default function Join() {
   const [pwErr, setPwErr] = useState("");
   const [pwCheckErr, setPwCheckErr] = useState("");
   const [btnState, SetBtnState] = useState(true);
+  const navigate = useNavigate();
 
   const EmailValue = (e) => {
     setEmail(e.target.value);
@@ -45,6 +46,7 @@ export default function Join() {
     } else {
       setEmailErr("");
     }
+    handleValid();
   };
 
   const PasswordValid = (e) => {
@@ -55,6 +57,7 @@ export default function Join() {
     } else {
       setPwErr("");
     }
+    handleValid();
   };
 
   const PwCheckValid = (e) => {
@@ -63,19 +66,30 @@ export default function Join() {
     } else if (password !== pwCheck) {
       setPwCheckErr("비밀번호가 일치하지 않습니다.");
     } else {
-      setPwCheck("");
+      setPwCheckErr("");
+    }
+    handleValid();
+  };
+
+  const handleValid = () => {
+    if (!emailErr && !pwErr && !pwCheckErr && email && password && pwCheck) {
       SetBtnState(false);
+    } else {
+      SetBtnState(true);
     }
   };
 
-  const handleValid = (e) => {
-    const isValid = !emailErr && !pwErr && !pwCheckErr;
-    SetBtnState(isValid);
+  useEffect(() => {
+    handleValid();
+  }, [email, password, pwCheck]);
+
+  const MoveSetProfile = () => {
+    navigate("/setProfile");
   };
 
   return (
-    <JoinPage>
-      <JoinTitle>회원가입</JoinTitle>
+    <PageArticle>
+      <Title>회원가입</Title>
       <JoinForm>
         <JoinLabel htmlFor="email">이메일</JoinLabel>
         <JoinInput
@@ -111,10 +125,10 @@ export default function Join() {
         />
         <ErrorText>{pwCheckErr}</ErrorText>
 
-        <NextBtn onClick={handleValid} disabled={btnState}>
+        <NextBtn onClick={MoveSetProfile} disabled={btnState}>
           다음
         </NextBtn>
       </JoinForm>
-    </JoinPage>
+    </PageArticle>
   );
 }

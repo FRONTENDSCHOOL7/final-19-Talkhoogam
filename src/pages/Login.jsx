@@ -17,8 +17,6 @@ import loginCheck from "../recoil/loginCheck";
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
 
-
-
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +26,7 @@ export default function Login() {
   const [isLogin, setIsLogin] = useRecoilState(loginCheck);
   const [isAccountname, setIsAccountname] = useRecoilState(accountname);
 
-    const EmailValue = (e) => {
+  const EmailValue = (e) => {
     setEmail(e.target.value);
   };
 
@@ -47,7 +45,7 @@ export default function Login() {
     } else {
       setError("");
       const loginRes = await LoginApi(email, password);
-      
+
       if (loginRes.status !== 422) {
         console.log(loginRes);
         const newToken = loginRes.user.token;
@@ -74,7 +72,7 @@ export default function Login() {
           type="password"
           placeholder="비밀번호"
           minLength="6"
-          maxLength="14"
+          maxLength="20"
           onChange={PasswordValue}
         />
         <ErrorText>{error}</ErrorText>

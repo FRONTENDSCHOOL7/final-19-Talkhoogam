@@ -18,23 +18,33 @@ export const JoinTitle = styled.h1`
 
 export const JoinForm = styled.form`
   color: #767676;
-  font-size: 15px;
+  font-size: 13px;
   margin-top: 40px;
+`;
+
+export const JoinLabel = styled.label`
+  font-size: 18px;
+  font-weight: bold;
+  color: #3d3d3d;
+`;
+
+export const InforText = styled.p`
+  margin: 10px 0;
 `;
 
 export const JoinInput = styled.input`
   margin-top: 5px;
-  margin-bottom: 20px;
   box-sizing: border-box;
   width: 100%;
   padding: 10px 10px;
   border-bottom: 2.5px solid #56b77869;
   font-family: "Pretendard", sans-serif;
   font-size: 16px;
-  color: #414141;
+  color: #767676;
 
   &::placeholder {
     font-size: 14px;
+    color: #767676a3;
   }
 
   &:focus {
@@ -46,4 +56,10 @@ export const JoinInput = styled.input`
 export const NextBtn = styled(Btn)`
   margin-top: 10px;
   background-color: #56b77869;
+`;
+
+export const ErrorText = styled.p`
+  margin: 5px 0 25px 0;
+  font-size: 14px;
+  color: red;
 `;

@@ -4,8 +4,12 @@ import styled from "styled-components";
 
 
 export const InputStyledWrap = styled.div`
+    display: flex;
+    flex-direction: column;
     max-width: 322px;
     margin-bottom: 16px;
+
+    
 `
 
 export const LabelStyle = styled.label`
@@ -20,5 +24,9 @@ export const InputStyle = styled.input`
     &:focus{
         outline: none;
         border-bottom: 1px solid var(--color-lightgrey);
+    }
+    &::placeholder{
+        font-size: 14px;
+        color: var(--color-lightgrey);
     }
 `

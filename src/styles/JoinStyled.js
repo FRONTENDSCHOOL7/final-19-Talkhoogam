@@ -56,6 +56,15 @@ export const JoinInput = styled.input`
 export const NextBtn = styled(Btn)`
   margin-top: 10px;
   background-color: #56b77869;
+
+  &:enabled {
+    background-color: var(--color-mainColor);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: #56b77869;
+  }
 `;
 
 export const ErrorText = styled.p`

@@ -10,6 +10,7 @@ import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 import SetProfile from "../pages/SetProfile";
 import AddProduct from "../pages/product/AddProduct";
+import ProductList from "../pages/product/ProductList";
 
 export default function Routers() {
   return (
@@ -23,6 +24,7 @@ export default function Routers() {
       <Route path="/header" element={<Header />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/addproduct" element={<AddProduct />} />
+      <Route path="/sellbook" element={<ProductList />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import iconArrow from '../assets/icons/icon-arrow-left.svg';
 import iconMore from '../assets/icons/s-icon-more-vertical.svg';
+import Btn from '../components/common/button/Button';
 
 export const HeaderMain = styled.header`
   max-width: 100%;
@@ -42,12 +43,9 @@ export const MenuBtn = styled.button`
   background-image: url(${iconMore});
 `;
 
-export const UploadBtn = styled.button`
-  width: 80px;
-  height: 24px;
-  border-radius: 24px;
-  background-color: var(--color-mainColor);
-  color: white;
+export const UploadBtn = styled(Btn)`
+  width: 92px;
+  padding: 7px 31px;
   font-size: 14px;
 `;
 

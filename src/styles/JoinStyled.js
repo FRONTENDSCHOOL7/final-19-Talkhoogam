@@ -23,7 +23,7 @@ export const JoinForm = styled.form`
 `;
 
 export const JoinLabel = styled.label`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #3d3d3d;
 `;

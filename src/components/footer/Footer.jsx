@@ -77,7 +77,7 @@ const FooterLayout = styled.footer`
     align-items: center;
     justify-content: center;
     gap: 5px;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
 `;
 

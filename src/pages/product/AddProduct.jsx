@@ -10,6 +10,7 @@ import ImageUploadAPI from '../../api/Upload/ImageUploadAPI';
 import { validateImage } from '../../utils/imageValidate';
 import ProductUploadAPI from '../../api/product/ProductUploadAPI';
 
+
 export default function AddProduct() {
 
     const [imgSrc, setImgSrc] = useState(defaultImg)
@@ -92,10 +93,7 @@ export default function AddProduct() {
     return (
     <LayoutStyle>
         <h1 className='a11y-hidden'>상품 등록 페이지</h1>
-        {/* <UploadHeader onclick={handleSubmit}>
-            저장
-        </UploadHeader> */}
-        <button onClick={handleSubmit}>저장</button>
+        <UploadHeader onclick={handleSubmit}>저장</UploadHeader>
         <ReLayoutInsideStyle>
             <main>
                 <form>
@@ -126,7 +124,7 @@ export default function AddProduct() {
                     />
                     <Input 
                         labelText="판매 링크"
-                        maxLength={15}
+                        // maxLength={15}
                         placeholder={"URL을 입력해 주세요."}    
                         onChangeHandler={(event) => {
                             setLink(event.target.value);

@@ -7,7 +7,7 @@ export const EmptyLayout = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 20px;
-
+    margin-bottom: 270px;
 `
 
 export const LogoImg = styled.img`

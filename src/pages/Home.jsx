@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import IconMessage from "../assets/icons/icon-message-circle.svg";
 import ImgProfile from "../assets/images/img-profile.png";
@@ -16,13 +16,13 @@ import LogoImg from "../assets/images/Logo.png"
 
 function ShowFeed() {
 
-  const newAccountname = useRecoilValue(accountname);
+  // const newAccountname = useRecoilValue(accountname);
   return (
     <div className="user-timeline">
       <img className="user-profileimg" src={ImgProfile} alt="프로필이미지" />
       <div className="user-contents">
         <div className="timeline-title-wrap">
-          <p className="timeline-title">{newAccountname}</p>
+          <p className="timeline-title"></p>
           <img className="img-dot" src={IconDot} alt="도트이미지" />
         </div>
         <p className="timeline-id">@ weniv_Mandarin</p>
@@ -47,15 +47,39 @@ function ShowFeed() {
 }
 
 export function HomeContents() {
-  const getFeed = GetFollowerFeedListAPI();
-  console.log("피드 데이터 수 " , getFeed.getData.length)
 
+  const [feedData, setFeedData] = useState([]); // 상태를 사용하여 데이터를 저장합니다.
+  // const getFeed = GetFollowerFeedListAPI();
+  // console.log("피드 데이터 수 " , getFeed)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await GetFollowerFeedListAPI(); // 데이터 가져오기
+        setFeedData(data); // 데이터를 상태에 저장
+      } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+      }
+    }
+
+    fetchData(); // 데이터 가져오는 함수를 호출
+  }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출
+  
   return (
-    
     <>
       <FeedWrap>
-        {getFeed.getData.length > 0 ? (
-          <p>팔로우 존재합니다</p>
+        {feedData.length > 0  ? (
+          <>
+            <p>팔로우 존재합니다.</p>
+            {/* {feedData.map((item, index) => (
+              <div key={index}>
+                <p>글 작성자: {item.author.username}</p>
+                <p>내용: {item.content}</p>
+                <p>작성일: {item.createdAt}</p>
+                
+              </div>
+            )} */}
+            {}
+          </>
         ) : (
           <>
             <h1 className='a11y-hidden'>팔로우가 존재하지 않습니다.</h1>

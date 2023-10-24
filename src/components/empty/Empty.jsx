@@ -6,9 +6,30 @@ import { EmptyLayout, LogoImg, EmptyText } from "../../styles/EmptyStyled";
 function Empty({image, alt, children, navigatePath}) {
     const navigate = useNavigate();
     const location = useLocation();
+    const pathName = location.pathname;
+    
+
+    //page 이름 가져오기
+    function getPageName(pathName) {
+        console.log(pathName);
+
+        switch (pathName) {
+        case '/home':
+            return '검색하기';
+        case '/sellbook':
+            return '검색하기';
+        default:
+            return '이전 페이지';
+        }
+    }
+
+    const pageName = getPageName(pathName);
+
     const onClickHandler = () => {
         console.log("페이지 경로 : ",location)
         if(location.pathname === "/home"){
+            navigate("/searchPage")
+        }else if(location.pathname === "/sellbook"){
             navigate("/searchPage")
         }else{
             navigate(navigatePath)
@@ -20,7 +41,7 @@ function Empty({image, alt, children, navigatePath}) {
         <EmptyLayout>
             <LogoImg src={image} alt={alt} />
             <EmptyText>{children}</EmptyText>
-            <Button onClick={onClickHandler}>이전 페이지</Button>
+            <Button onClick={onClickHandler}>{pageName}</Button>
         </EmptyLayout>
     </>
     )

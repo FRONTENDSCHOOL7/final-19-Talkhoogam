@@ -41,6 +41,7 @@ export const MenuBtn = styled.button`
   height: 22px;
 
   background-image: url(${iconMore});
+  background-repeat: no-repeat;
 `;
 
 export const UploadBtn = styled(Btn)`

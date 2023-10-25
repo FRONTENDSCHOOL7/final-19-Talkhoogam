@@ -1,7 +1,7 @@
 import React from "react";
 import { BackBtn, HeaderMain, UploadBtn } from "../../styles/HeaderStyled";
 
-export default function UploadHeader() {
+export default function UploadHeader({onClickHandler}) {
   function goBack(e) {
     e.preventDefault();
     window.history.back();
@@ -9,7 +9,7 @@ export default function UploadHeader() {
   return (
     <HeaderMain>
       <BackBtn onClick={goBack} />
-      <UploadBtn>저장</UploadBtn>
+      <UploadBtn onClick={onClickHandler}>저장</UploadBtn>
     </HeaderMain>
   );
 }

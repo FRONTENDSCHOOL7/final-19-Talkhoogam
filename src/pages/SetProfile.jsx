@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   ImgLabel,
   ImgUploader,
@@ -17,13 +17,27 @@ import {
 } from "../styles/JoinStyled";
 
 export default function SetProfile() {
+  const [Image, setImage] = useState(null);
+  const InputFile = useRef(null);
+
+  const UploadImage = (e) => {
+    e.target.files[0]
+      ? setImage(URL.createObjectURL(e.target.files[0]))
+      : setImage({ profile });
+  };
+
   return (
     <PageArticle>
       <PageTitle>프로필 설정</PageTitle>
       <ImgWrapper>
-        <ProfileImg src={profile} />
+        <ProfileImg src={Image || profile} />
         <ImgLabel htmlFor="img-file" />
-        <ImgUploader type="file" id="img-file" />
+        <ImgUploader
+          type="file"
+          id="img-file"
+          onChange={UploadImage}
+          ref={InputFile}
+        />
       </ImgWrapper>
 
       <SetProfileForm>

@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Button({ children, ...props }) {
+export default function Button({ children, onClick, ...props }) {
   return (
     <div>
-      <Btn {...props}>{children}</Btn>
+      <Btn onClick={onClick} {...props}>
+        {children}
+      </Btn>
     </div>
   );
 }

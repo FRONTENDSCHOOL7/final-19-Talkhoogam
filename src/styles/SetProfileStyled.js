@@ -8,6 +8,7 @@ export const PageTitle = styled(Title)`
 
 export const ImgWrapper = styled.div`
   display: flex;
+  position: relative;
 `;
 
 export const ProfileImg = styled.img`
@@ -16,13 +17,11 @@ export const ProfileImg = styled.img`
   border-radius: 50%;
   display: block;
   margin: 0 auto;
-  position: relative;
 `;
 
 export const ImgLabel = styled.label`
   width: 36px;
   height: 36px;
-  padding: 5px;
   margin: 0 auto;
   cursor: pointer;
 
@@ -30,11 +29,9 @@ export const ImgLabel = styled.label`
   background-size: 36px 36px;
   background-repeat: no-repeat;
   background-position: center center;
-  margin: 0 auto;
   position: absolute;
-  top: 14%;
-  left: 50%;
-  transform: translate(-50%, 50%);
+  top: 62%;
+  left: 57%;
 `;
 
 export const ImgUploader = styled.input`

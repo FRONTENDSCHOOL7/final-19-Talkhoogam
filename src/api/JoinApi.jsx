@@ -11,10 +11,10 @@ const JoinApi = async (username, email, password) => {
         "user": {
           "username": username,
           "email": email,
-          "password": String,
-          "accountname": String,
-          "intro": String,
-          "image": String,
+          "password": password,
+          "accountname": userId,
+          "intro": intro,
+          "image": image,
         },
       }),
     });

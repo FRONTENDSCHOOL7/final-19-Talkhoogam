@@ -10,10 +10,12 @@ import {
   Title,
 } from "../styles/JoinStyled";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { emailState, pwState } from "../recoil/joinData";
 
 export default function Join() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useRecoilState(emailState);
+  const [password, setPassword] = useRecoilState(pwState);
   const [pwCheck, setPwCheck] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [pwErr, setPwErr] = useState("");
@@ -40,7 +42,7 @@ export default function Join() {
 
   const EmailValid = (e) => {
     if (!email) {
-      setEmailErr("필수 입력 사항입니다.");
+      setEmailErr("필수 입력 항목입니다.");
     } else if (!email.includes("@")) {
       setEmailErr("이메일 형식이 올바르지 않습니다.");
     } else {
@@ -51,7 +53,7 @@ export default function Join() {
 
   const PasswordValid = (e) => {
     if (!password) {
-      setPwErr("필수 입력 사항입니다.");
+      setPwErr("필수 입력 항목입니다.");
     } else if (!passwordReg.test(password)) {
       setPwErr("비밀번호 형식이 올바르지 않습니다.");
     } else {
@@ -62,7 +64,7 @@ export default function Join() {
 
   const PwCheckValid = (e) => {
     if (!pwCheck) {
-      setPwCheckErr("필수 입력 사항입니다.");
+      setPwCheckErr("필수 입력 항목입니다.");
     } else if (password !== pwCheck) {
       setPwCheckErr("비밀번호가 일치하지 않습니다.");
     } else {

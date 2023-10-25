@@ -9,8 +9,9 @@ import Header from "../components/header/BasicHeader";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 import SetProfile from "../pages/SetProfile";
-import AddProduct from "../pages/product/AddProduct";
+import ProductAdd from "../pages/product/ProductAdd";
 import ProductList from "../pages/product/ProductList";
+import ProductDetail from "../pages/product/ProductDetail";
 
 export default function Routers() {
   return (
@@ -23,7 +24,8 @@ export default function Routers() {
       <Route path="/gathering" element={<Gathering />} />
       <Route path="/header" element={<Header />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/addproduct" element={<AddProduct />} />
+      <Route path="/productAdd" element={<ProductAdd />} />
+      <Route path="/product/detail/:id" element={<ProductDetail />} />
       <Route path="/sellbook" element={<ProductList />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

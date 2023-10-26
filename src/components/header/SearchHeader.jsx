@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BackBtn, HeaderMain } from '../../styles/HeaderStyled';
+import iconArrow from '../../assets/icons/icon-arrow-left.svg';
 
 export default function SearchHeader() {
   // 처음 헤더의 input에 focus가 오도록
@@ -24,7 +25,9 @@ export default function SearchHeader() {
 
   return (
     <HeaderMain>
-      <BackBtn onClick={goBack} />
+      <BackBtn onClick={goBack}>
+        <img src={iconArrow} alt="뒤로가기 버튼" />
+      </BackBtn>
       <label className="a11y-hidden" htmlFor="headerInp"></label>
       <input
         type="text"

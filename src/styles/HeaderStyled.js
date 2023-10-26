@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import iconArrow from '../assets/icons/icon-arrow-left.svg';
-import iconMore from '../assets/icons/s-icon-more-vertical.svg';
+
 import Btn from '../components/common/button/Button';
 
 export const HeaderMain = styled.header`
@@ -32,15 +31,11 @@ export const HeaderMain = styled.header`
 export const BackBtn = styled.button`
   width: 22px;
   height: 22px;
-
-  background-image: url(${iconArrow});
 `;
 
 export const MenuBtn = styled.button`
   width: 22px;
   height: 22px;
-
-  background-image: url(${iconMore});
 `;
 
 export const UploadBtn = styled(Btn)`
@@ -54,19 +49,19 @@ export const Backdrop = styled.div`
   height: 100%;
   background-color: black;
   opacity: 0.6;
-  z-index: 100;
+  z-index: 200;
   position: absolute;
   top: 0;
   left: 0;
 `;
 
 export const HeaderMoreList = styled.article`
-  width: 80%;
+  width: 252px;
   height: auto;
   background-color: white;
   position: absolute;
+  border: 1px solid #dbdbdb;
   border-radius: 10px;
-  overflow: hidden;
 
   top: 50%;
   left: 50%;
@@ -78,13 +73,19 @@ export const HeaderMoreList = styled.article`
     background-color: white;
     min-height: 24px;
     border-bottom: 1px solid #dbdbdb;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 18px;
     font-weight: bold;
 
     & button {
       font: inherit;
+      color: inherit;
+      padding: 0;
     }
+  }
+
+  & li:first-child {
+    margin-top: 20px;
   }
 
   & li:hover,
@@ -98,5 +99,54 @@ export const HeaderMoreList = styled.article`
     position: absolute;
     top: 0px;
     right: 15px;
+  }
+`;
+
+export const ModalLogoutStyled = styled.article`
+  width: 252px;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 300;
+
+  & .question {
+    margin: 22px 50px;
+    font-weight: bold;
+  }
+
+  & .btn-group {
+    width: 100%;
+    border-top: 1px solid #dbdbdb;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    & button {
+      width: 50%;
+      height: 46px;
+      font: inherit;
+    }
+
+    & button:hover {
+      color: var(--color-mainColor);
+      font-weight: bold;
+    }
+
+    & button:first-child {
+      border-right: 1px solid #dbdbdb;
+    }
   }
 `;

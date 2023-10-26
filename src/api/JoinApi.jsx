@@ -8,13 +8,13 @@ const JoinApi = async (username, email, password) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "user": {
-          "username": username,
-          "email": email,
-          "password": String,
-          "accountname": String,
-          "intro": String,
-          "image": String,
+        user: {
+          username: username,
+          email: email,
+          password: password,
+          accountname: userId,
+          intro: intro,
+          image: image,
         },
       }),
     });

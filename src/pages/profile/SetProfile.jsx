@@ -7,17 +7,17 @@ import {
   PageTitle,
   ProfileImg,
   SetProfileForm,
-} from "../styles/SetProfileStyled";
-import profile from "../assets/images/img-profile.png";
+} from "../../styles/SetProfileStyled";
+import profile from "../../assets/images/img-profile.png";
 import {
   NextBtn,
   PageArticle,
   JoinInput,
   JoinLabel,
   ErrorText,
-} from "../styles/JoinStyled";
-import imgBtn from "../assets/images/img-btn.svg";
-import { emailState, pwState } from "../recoil/joinData";
+} from "../../styles/JoinStyled";
+import imgBtn from "../../assets/images/img-btn.svg";
+import { emailState, pwState } from "../../recoil/joinData";
 import { useRecoilValue } from "recoil";
 
 export default function SetProfile() {

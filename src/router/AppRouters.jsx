@@ -8,7 +8,7 @@ import Gathering from "../pages/Gathering";
 import Header from "../components/header/BasicHeader";
 import Profile from "../pages/profile/Profile";
 import NotFound from "../pages/NotFound";
-import SetProfile from "../pages/SetProfile";
+import SetProfile from "../pages/profile/SetProfile"
 import ProductAdd from "../pages/product/ProductAdd";
 import ProductList from "../pages/product/ProductList";
 import ProductDetail from "../pages/product/ProductDetail";

@@ -10,14 +10,19 @@ import ImageUploadAPI from "../../api/Upload/ImageUploadAPI";
 import { validateImage } from "../../utils/imageValidate";
 import ProductUploadAPI from "../../api/product/ProductUploadAPI";
 
+<<<<<<< HEAD:src/pages/product/AddProduct.jsx
 export default function AddProduct() {
   const [imgSrc, setImgSrc] = useState(defaultImg);
+=======
+export default function ProductAdd() {
+>>>>>>> develop:src/pages/product/ProductAdd.jsx
 
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [link, setLink] = useState("");
   const [itemImage, setItemImage] = useState("");
 
+<<<<<<< HEAD:src/pages/product/AddProduct.jsx
   const productUpload = ProductUploadAPI({
     productName,
     price,
@@ -41,6 +46,18 @@ export default function AddProduct() {
     if (file.size > 10 * 1024 * 1024) {
       console.log("이미지 용량은 10MB를 넘을 수 없습니다.");
       return null;
+=======
+    const [productName, setProductName] = useState("");
+    const [price, setPrice] = useState("");
+    const [link, setLink] = useState("");
+    const [itemImage, setItemImage] = useState("");
+    
+    const productUpload = ProductUploadAPI({productName, price, link, itemImage});
+    const onClickHandler = async (e) => {
+        e.preventDefault();
+        await productUpload();
+        alert("상품 등록 완료!")
+>>>>>>> develop:src/pages/product/ProductAdd.jsx
     }
 
     if (!validateImage(file.name)) {
@@ -93,6 +110,7 @@ export default function AddProduct() {
 
   return (
     <LayoutStyle>
+<<<<<<< HEAD:src/pages/product/AddProduct.jsx
       <h1 className="a11y-hidden">상품 등록 페이지</h1>
       <UploadHeader onclick={handleSubmit}>저장</UploadHeader>
       <ReLayoutInsideStyle>
@@ -152,6 +170,49 @@ export default function AddProduct() {
           </form>
         </main>
       </ReLayoutInsideStyle>
+=======
+        <h1 className='a11y-hidden'>상품 등록 페이지</h1>
+        <UploadHeader onClickHandler={onClickHandler}>저장</UploadHeader>
+        <ReLayoutInsideStyle>
+            <main>
+                <form>
+                    <LabelStyle htmlFor='file-upload'>이미지 등록
+                        <ProductImgWrap>
+                            <img className='addproduct-img' src={imgSrc || defaultImg} alt="상품 이미지" />
+                            <img className='inside-icon' src={addproductIcon} alt="상품 이미지 아이콘" />
+                        </ProductImgWrap>
+                    </LabelStyle>
+                    <input id='file-upload' onChange={handleChangeImage} type="file" accept="image/*" style={{display:"none"}} />
+                    <Input 
+                        labelText="상품명"
+                        maxLength={15}
+                        placeholder={"2~15자 이내여야 합니다."}
+                        onChangeHandler={(event) => {
+                            if(event.target.value.length > 1 && event.target.value.length < 16 ){
+                                setProductName(event.target.value);
+                            }
+                        }}
+                    />
+                    <Input 
+                        labelText="가격"
+                        maxLength={15}
+                        placeholder={"숫자만 입력 가능합니다."}
+                        onChangeHandler={(event) => {
+                            setPrice(event.target.value);
+                        }}
+                    />
+                    <Input 
+                        labelText="판매 링크"
+                        // maxLength={15}
+                        placeholder={"URL을 입력해 주세요."}    
+                        onChangeHandler={(event) => {
+                            setLink(event.target.value);
+                        }}
+                    />
+                </form>
+            </main>
+        </ReLayoutInsideStyle>
+>>>>>>> develop:src/pages/product/ProductAdd.jsx
     </LayoutStyle>
   );
 }

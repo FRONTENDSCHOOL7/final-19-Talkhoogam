@@ -33,6 +33,7 @@ export default function SetProfile() {
 
   const email = useRecoilValue(emailState);
   const password = useRecoilValue(pwState);
+  // 이메일, 패스워드 상태 관리
 
   const NicknameValue = (e) => {
     setNickname(e.target.value);

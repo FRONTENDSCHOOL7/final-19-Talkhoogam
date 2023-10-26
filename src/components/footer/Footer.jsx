@@ -44,10 +44,10 @@ function Footer() {
         </FooterIconWrap>
 
         <FooterIconWrap onClick={() => {
-            handleClickState("addproduct");
+            handleClickState("productadd");
         }}>
-            <IconEdit className="footer-icon" fill={svgColor === "/addproduct" ? "#56b778" : "#767676"}/>
-            <p style={{color:svgColor === "/addproduct" ? "#56b778" : "#767676"}}>게시물 작성</p>
+            <IconEdit className="footer-icon" fill={svgColor === "/productadd" ? "#56b778" : "#767676"}/>
+            <p style={{color:svgColor === "/productadd" ? "#56b778" : "#767676"}}>게시물 작성</p>
         </FooterIconWrap>
 
         <FooterIconWrap onClick={() => {

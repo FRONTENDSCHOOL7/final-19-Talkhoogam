@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import Join from "../pages/Join";
 import Gathering from "../pages/Gathering";
 import Header from "../components/header/BasicHeader";
-import Profile from "../pages/Profile";
+import Profile from "../pages/profile/Profile";
 import NotFound from "../pages/NotFound";
 import SetProfile from "../pages/SetProfile";
 import ProductAdd from "../pages/product/ProductAdd";

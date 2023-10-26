@@ -14,7 +14,6 @@ import ProductUploadAPI from '../../api/product/ProductUploadAPI';
 export default function ProductAdd() {
 
     const [imgSrc, setImgSrc] = useState(defaultImg)
-
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState("");
     const [link, setLink] = useState("");

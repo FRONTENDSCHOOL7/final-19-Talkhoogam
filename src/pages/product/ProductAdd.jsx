@@ -11,20 +11,19 @@ import { validateImage } from '../../utils/imageValidate';
 import ProductUploadAPI from '../../api/product/ProductUploadAPI';
 
 
-export default function AddProduct() {
+export default function ProductAdd() {
 
     const [imgSrc, setImgSrc] = useState(defaultImg)
-
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState("");
     const [link, setLink] = useState("");
     const [itemImage, setItemImage] = useState("");
     
     const productUpload = ProductUploadAPI({productName, price, link, itemImage});
-    const handleSubmit = async (e) => {
+    const onClickHandler = async (e) => {
         e.preventDefault();
         await productUpload();
-        console.log("잘 됐네 ?")
+        alert("상품 등록 완료!")
     }
 
     const handleChangeImage = async (e)=>{
@@ -93,7 +92,7 @@ export default function AddProduct() {
     return (
     <LayoutStyle>
         <h1 className='a11y-hidden'>상품 등록 페이지</h1>
-        <UploadHeader onclick={handleSubmit}>저장</UploadHeader>
+        <UploadHeader onClickHandler={onClickHandler}>저장</UploadHeader>
         <ReLayoutInsideStyle>
             <main>
                 <form>

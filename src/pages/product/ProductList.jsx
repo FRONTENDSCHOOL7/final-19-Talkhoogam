@@ -8,12 +8,14 @@ import ProductListAPI from '../../api/product/ProductListAPI';
 import Footer from '../../components/footer/Footer';
 import Empty from '../../components/empty/Empty';
 import LogoImg from '../../assets/images/Logo.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductList() {
     const newAccountname = useRecoilValue(accountname);
     const { getProductList } = ProductListAPI(newAccountname);
     const [productData, setProductData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,6 +34,7 @@ export default function ProductList() {
         fetchData();
         
     }, []);
+    console.log(productData)
     return (
         <LayoutStyle>
             <BasicHeader></BasicHeader>
@@ -47,9 +50,13 @@ export default function ProductList() {
                                 <p className="timeline-title">{item.itemName}</p>
                                 {/* <img className="img-dot" src={item.link} alt="도트이미지" /> */}
                             </div>
-                            <p className="timeline-id">{item.author.username}</p>
+                            {/* <p>{item.id}</p> */}
+                            {/* <p className="timeline-id">{item.author.username}</p> */}
                             <p className="timeline-main-text">{item.description}</p>
-                            <img className="timelin-img" src={item.itemImage} alt="피드이미지" />
+                            <MoreButton onClick={() => navigate(`/product/detail/${item.id}`) }>
+                                <img className="timelin-img" src={item.itemImage} alt="피드이미지" />
+                            </MoreButton>
+                            
                             <div className="social-wrap">
                                 <p className='social-price'>{item.price}원</p>
                                 <p className='social-desc'>{item.link}</p>
@@ -74,6 +81,10 @@ export default function ProductList() {
         </LayoutStyle>
     )
 }
+
+const MoreButton = styled.button`
+    border: none;
+`
 
 export const FeedWrap = styled.div`
     display: flex;

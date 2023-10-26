@@ -1,36 +1,31 @@
 import styled from "styled-components";
 import { JoinForm, Title } from "./JoinStyled";
-import imgBtn from "../assets/images/img-btn.svg";
 
 export const PageTitle = styled(Title)`
   margin-bottom: 20px;
 `;
 
 export const ImgWrapper = styled.div`
-  display: flex;
   position: relative;
+  display: flex;
 `;
 
 export const ProfileImg = styled.img`
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  display: block;
   margin: 0 auto;
 `;
 
 export const ImgLabel = styled.label`
-  width: 36px;
-  height: 36px;
-  margin: 0 auto;
+  cursor: pointer;
+`;
+
+export const ImgUploadBtn = styled.img`
   cursor: pointer;
 
-  background-image: url(${imgBtn});
-  background-size: 36px 36px;
-  background-repeat: no-repeat;
-  background-position: center center;
   position: absolute;
-  top: 62%;
+  top: 58%;
   left: 57%;
 `;
 

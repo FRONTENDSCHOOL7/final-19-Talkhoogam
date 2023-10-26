@@ -17,11 +17,13 @@ export default function MainHeader({ pageName }) {
   }
 
   return (
-    <HeaderMain>
-      <BackBtn className="btn-goBack" onClick={goBack} />
-      {pageName && <h2>{pageName}</h2>}
-      <MenuBtn className="btn-openMore" onClick={openMore} />
+    <>
+      <HeaderMain>
+        <BackBtn className="btn-goBack" onClick={goBack} />
+        {pageName && <h2>{pageName}</h2>}
+        <MenuBtn className="btn-openMore" onClick={openMore} />
+      </HeaderMain>
       {moreOpen && <MoreList setMoreOpen={setMoreOpen} />}
-    </HeaderMain>
+    </>
   );
 }

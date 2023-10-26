@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import iconArrow from '../assets/icons/icon-arrow-left.svg';
-import iconMore from '../assets/icons/s-icon-more-vertical.svg';
+
 import Btn from '../components/common/button/Button';
 
 export const HeaderMain = styled.header`
@@ -32,17 +31,11 @@ export const HeaderMain = styled.header`
 export const BackBtn = styled.button`
   width: 22px;
   height: 22px;
-
-  background-image: url(${iconArrow});
 `;
 
 export const MenuBtn = styled.button`
   width: 22px;
   height: 22px;
-
-  background-image: url(${iconMore});
-  background-repeat: no-repeat;
-  background-position: center center;
 `;
 
 export const UploadBtn = styled(Btn)`

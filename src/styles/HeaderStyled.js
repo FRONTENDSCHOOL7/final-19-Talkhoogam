@@ -55,7 +55,7 @@ export const Backdrop = styled.div`
   height: 100%;
   background-color: black;
   opacity: 0.6;
-  z-index: 100;
+  z-index: 200;
   position: absolute;
   top: 0;
   left: 0;
@@ -67,7 +67,7 @@ export const HeaderMoreList = styled.article`
   background-color: white;
   position: absolute;
   border-radius: 10px;
-  overflow: hidden;
+  padding: 30px auto 20px;
 
   top: 50%;
   left: 50%;
@@ -79,7 +79,7 @@ export const HeaderMoreList = styled.article`
     background-color: white;
     min-height: 24px;
     border-bottom: 1px solid #dbdbdb;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 18px;
     font-weight: bold;
 

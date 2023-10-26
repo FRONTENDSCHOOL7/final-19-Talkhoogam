@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
 import UploadHeader from '../../components/header/UploadHeader';
@@ -8,23 +8,39 @@ import defaultImg from '../../assets/images/addproduct.png'
 import addproductIcon from '../../assets/icons/addproduct-icon.svg'
 import ImageUploadAPI from '../../api/upload/ImageUploadAPI';
 import { validateImage } from '../../utils/imageValidate';
-import ProductUploadAPI from '../../api/product/ProductUploadAPI';
+import ProductModifyAPI from '../../api/product/ProductModifyAPI';
+import { useParams } from 'react-router-dom';
+import ProductDetailAPI from '../../api/product/ProductDetailAPI';
 
 
-export default function ProductAdd() {
-
+export default function ProductModify() {
+    
+    const [productDetail, setProductDetail] = useState(() => {});
+    const params = useParams();
+    const id = params.id;
+    const getProductDetail = ProductDetailAPI(params.id);
     const [imgSrc, setImgSrc] = useState(defaultImg)
-    const [productName, setProductName] = useState("");
+    const [productName, setProductName] = useState();
     const [price, setPrice] = useState("");
     const [link, setLink] = useState("");
     const [itemImage, setItemImage] = useState("");
     
-    const productUpload = ProductUploadAPI({productName, price, link, itemImage});
+    const productModify = ProductModifyAPI({productName, price, link, itemImage, id});
     const onClickHandler = async (e) => {
         e.preventDefault();
-        await productUpload();
-        alert("상품 등록 완료!")
+        await productModify();
+        alert("상품 수정 완료!")
     }
+
+    useEffect(() => {
+        const detailList = async () => {
+            const list = await getProductDetail();
+            
+            setProductDetail(list.product);
+        };
+        detailList();
+    }, [getProductDetail])
+    console.log(productDetail ? productDetail.itemImage : defaultImg);
 
     const handleChangeImage = async (e)=>{
         // 파일 가져오기
@@ -45,7 +61,7 @@ export default function ProductAdd() {
         }
 
         const imageURL = await ImageUploadAPI(file);
-
+        
          // 이미지 최적화 및 크기 조정
         // const resizeImageURL = await optimizeAndResizeImage(file, 800, 600); // 원하는 크기로 조정
         // setImgSrc(imageURL)
@@ -94,11 +110,12 @@ export default function ProductAdd() {
         <h1 className='a11y-hidden'>상품 등록 페이지</h1>
         <UploadHeader onClickHandler={onClickHandler}>저장</UploadHeader>
         <ReLayoutInsideStyle>
+            {productDetail ? (
             <main>
                 <form>
                     <LabelStyle htmlFor='file-upload'>이미지 등록
                         <ProductImgWrap>
-                            <img className='addproduct-img' src={imgSrc || defaultImg} alt="상품 이미지" />
+                            <img className='addproduct-img' src="" alt="상품 이미지" />
                             <img className='inside-icon' src={addproductIcon} alt="상품 이미지 아이콘" />
                         </ProductImgWrap>
                     </LabelStyle>
@@ -112,6 +129,7 @@ export default function ProductAdd() {
                                 setProductName(event.target.value);
                             }
                         }}
+                        value={productDetail.itemName}
                     />
                     <Input 
                         labelText="가격"
@@ -120,6 +138,7 @@ export default function ProductAdd() {
                         onChangeHandler={(event) => {
                             setPrice(event.target.value);
                         }}
+                        value={productDetail.price}
                     />
                     <Input 
                         labelText="판매 링크"
@@ -128,9 +147,13 @@ export default function ProductAdd() {
                         onChangeHandler={(event) => {
                             setLink(event.target.value);
                         }}
+                        value={productDetail.link}
                     />
                 </form>
-            </main>
+            </main>)
+            : (
+                <p>로딩 중..</p>
+            )}
         </ReLayoutInsideStyle>
     </LayoutStyle>
     )

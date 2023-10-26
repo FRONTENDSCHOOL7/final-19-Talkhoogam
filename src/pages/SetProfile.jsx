@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   ImgLabel,
-  ImgUploadBtn,
   ImgUploader,
   ImgWrapper,
   PageTitle,
@@ -16,27 +15,32 @@ import {
   JoinLabel,
   ErrorText,
 } from "../styles/JoinStyled";
-import imgBtn from "../assets/images/img-btn.svg";
-import { emailState, pwState } from "../recoil/joinData";
-import { useRecoilValue } from "recoil";
+import { emailState, newToken, userData, pwState } from "../recoil/joinData";
+import { useRecoilState, useRecoilValue } from "recoil";
+import JoinApi from "../api/JoinApi";
+import { useNavigate } from "react-router-dom";
 
 export default function SetProfile() {
-  const [nickname, setNickname] = useState("");
+  const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
   const [intro, setIntro] = useState("");
-  const [nicknameErr, setNicknameErr] = useState("");
+  const [usernameErr, setUsernameErr] = useState("");
   const [userIdErr, setUserIdErr] = useState("");
   const [introErr, setIntroErr] = useState("");
-  const [Image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
   const [btnState, SetBtnState] = useState(true);
   const InputFile = useRef(null);
 
   const email = useRecoilValue(emailState);
   const password = useRecoilValue(pwState);
   // 이메일, 패스워드 상태 관리
+  const [token, setToken] = useRecoilState(newToken);
+  const [user, setUser] = useRecoilState(userData);
 
-  const NicknameValue = (e) => {
-    setNickname(e.target.value);
+  const navigate = useNavigate();
+
+  const UsernameValue = (e) => {
+    setUsername(e.target.value);
   };
 
   const UserIdValue = (e) => {
@@ -47,13 +51,12 @@ export default function SetProfile() {
     setIntro(e.target.value);
   };
 
-  const NicknameValid = () => {
-    if (!nickname) {
-      setNicknameErr("필수 입력 항목입니다.");
+  const UsernameValid = () => {
+    if (!username) {
+      setUsernameErr("필수 입력 항목입니다.");
     } else {
-      setNicknameErr("");
+      setUsernameErr("");
     }
-    handleValid();
   };
 
   const UserIdValid = () => {
@@ -62,7 +65,6 @@ export default function SetProfile() {
     } else {
       setUserIdErr("");
     }
-    handleValid();
   };
 
   const IntroValid = () => {
@@ -71,15 +73,14 @@ export default function SetProfile() {
     } else {
       setIntroErr("");
     }
-    handleValid();
   };
 
   const handleValid = () => {
     if (
-      !nicknameErr &&
+      !usernameErr &&
       !userIdErr &&
       !introErr &&
-      nickname &&
+      username &&
       userId &&
       intro
     ) {
@@ -89,42 +90,64 @@ export default function SetProfile() {
     }
   };
 
+  const handleJoin = async (e) => {
+    e.preventDefault();
+    console.log("handleJoin");
+    const JoinRes = await JoinApi(
+      username,
+      email,
+      password,
+      userId,
+      intro,
+      image
+    );
+    if (JoinRes.status !== 422) {
+      console.log(JoinRes);
+      const createToken = JoinRes.user.token;
+      const joinData = JoinRes.user;
+      setToken(createToken);
+      setUser(joinData);
+      navigate("/login");
+    } else {
+      setUserIdErr("이미 사용 중인 아이디입니다.");
+      SetBtnState(true);
+    }
+  };
+
   useEffect(() => {
     handleValid();
-  }, [nickname, userId, intro]);
+  }, [username, userId, intro]);
 
   const UploadImage = (e) => {
     e.target.files[0]
       ? setImage(URL.createObjectURL(e.target.files[0]))
-      : setImage({ profile });
+      : setImage(profile);
   };
 
   return (
     <PageArticle>
       <PageTitle>프로필 설정</PageTitle>
       <SetProfileForm>
-        <ImgLabel>
-          <ImgWrapper>
-            <ProfileImg src={Image || profile} />
-            <ImgUploadBtn src={imgBtn} />
-            <ImgUploader
-              type="file"
-              id="img-file"
-              onChange={UploadImage}
-              ref={InputFile}
-            />
-          </ImgWrapper>
-        </ImgLabel>
+        <ImgWrapper>
+          <ProfileImg src={image || profile} />
+          <ImgLabel htmlFor="img-file" />
+          <ImgUploader
+            type="file"
+            id="img-file"
+            onChange={UploadImage}
+            ref={InputFile}
+          />
+        </ImgWrapper>
 
         <JoinLabel htmlFor="nickname">닉네임</JoinLabel>
         <JoinInput
           type="text"
           id="nickname"
           placeholder="닉네임"
-          onChange={NicknameValue}
-          onBlur={NicknameValid}
+          onChange={UsernameValue}
+          onBlur={UsernameValid}
         />
-        <ErrorText>{nicknameErr}</ErrorText>
+        <ErrorText>{usernameErr}</ErrorText>
 
         <JoinLabel htmlFor="id">아이디</JoinLabel>
         <JoinInput
@@ -145,7 +168,9 @@ export default function SetProfile() {
           onBlur={IntroValid}
         />
         <ErrorText>{introErr}</ErrorText>
-        <NextBtn disabled={btnState}>가입하기</NextBtn>
+        <NextBtn onClick={handleJoin} disabled={btnState}>
+          가입하기
+        </NextBtn>
       </SetProfileForm>
     </PageArticle>
   );

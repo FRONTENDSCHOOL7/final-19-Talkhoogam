@@ -17,12 +17,12 @@ import FeedImg from "../assets/images/너굴맨.jfif";
 import IconHeart from "../assets/icons/heart.svg";
 import IconMessage from "../assets/icons/icon-message-circle.svg";
 import { useRecoilValue } from "recoil";
-import loginToken from "../recoil/loginToken.js";
-import ProfileInfoAPI from "../api/profile/ProfileInfoAPI";
-import BasicHeader from "../components/header/BasicHeader";
-import { LayoutStyle } from "../styles/LayoutStyled.js";
-import Footer from "../components/footer/Footer";
-import GetFollowerFeedListAPI from "../api/Post/GetFollowerFeedListAPI";
+import loginToken from "../../recoil/loginToken.js";
+import ProfileInfoAPI from "../../api/profile/ProfileInfoAPI";
+import BasicHeader from "../../components/header/BasicHeader";
+import { LayoutStyle } from "../../styles/LayoutStyled.js";
+import Footer from "../../components/footer/Footer";
+import GetFollowerFeedListAPI from "../../api/Post/GetFollowerFeedListAPI";
 
 //Modal.setAppElemnet("#root");
 

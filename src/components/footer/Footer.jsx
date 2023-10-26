@@ -72,13 +72,14 @@ export default Footer
 
 const FooterLayout = styled.footer`
     border-top: 1px solid #dbdbdb;
-    width: 100%;
+    max-width: 390px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    /* position: absolute; */
+    position: fixed;
     bottom: 0;
+    background-color: white;
 `;
 
 const FooterIconWrap = styled.button`

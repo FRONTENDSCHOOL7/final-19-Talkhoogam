@@ -9,8 +9,9 @@ import {
   SnsLoginText,
   SnsLoginBtn,
   ErrorText,
+  LogoImage,
 } from "../styles/LoginStyled";
-import Logo from "../components/common/Logo.jsx";
+import LogoImg from "../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import LoginApi from "../api/LoginApi";
 import loginCheck from "../recoil/loginCheck";
@@ -65,7 +66,7 @@ export default function Login() {
   return (
     <LoginPage>
       <h1 className="a11y-hidden">로그인 페이지</h1>
-      <Logo />
+      <LogoImg></LogoImg>
       <EmailLoginForm>
         <InputBox type="email" placeholder="이메일" onChange={EmailValue} />
         <InputBox

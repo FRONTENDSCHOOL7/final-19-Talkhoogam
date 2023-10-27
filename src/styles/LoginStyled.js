@@ -3,6 +3,7 @@ import iconKakao from "../assets/images/icon_kakao.png";
 import iconFacebook from "../assets/images/icon_facebook.png";
 import iconGoogle from "../assets/images/icon_google.png";
 import { Btn } from "../components/common/button/Button";
+import LogoImg from "../assets/images/Logo.png";
 
 export const LoginPage = styled.article`
   height: 100vh;

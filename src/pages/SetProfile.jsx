@@ -14,6 +14,7 @@ import {
   JoinInput,
   JoinLabel,
   ErrorText,
+  InforText,
 } from "../styles/JoinStyled";
 import { emailState, newToken, userData, pwState } from "../recoil/joinData";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -21,24 +22,33 @@ import JoinApi from "../api/JoinApi";
 import { useNavigate } from "react-router-dom";
 
 export default function SetProfile() {
+  // 닉네임, 아이디, 소개, 이미지 파일 상태 관리
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
   const [intro, setIntro] = useState("");
+  const [image, setImage] = useState(null);
+  const InputFile = useRef(null);
+
+  // 닉네임 에러, 아이디 에러, 소개 에러 상태 관리
   const [usernameErr, setUsernameErr] = useState("");
   const [userIdErr, setUserIdErr] = useState("");
   const [introErr, setIntroErr] = useState("");
-  const [image, setImage] = useState(null);
-  const [btnState, SetBtnState] = useState(true);
-  const InputFile = useRef(null);
 
+  // 버튼 비활성화 상태 관리
+  const [btnState, SetBtnState] = useState(true);
+
+  // 이메일, 패스워드 상태 관리(리코일)
   const email = useRecoilValue(emailState);
   const password = useRecoilValue(pwState);
-  // 이메일, 패스워드 상태 관리
+
+  // 토큰, 유저 데이터 상태 관리(리코일)
   const [token, setToken] = useRecoilState(newToken);
   const [user, setUser] = useRecoilState(userData);
 
+  // useNavigate 사용
   const navigate = useNavigate();
 
+  // input value 값을 useState에 저장
   const UsernameValue = (e) => {
     setUsername(e.target.value);
   };
@@ -51,17 +61,27 @@ export default function SetProfile() {
     setIntro(e.target.value);
   };
 
+  // 각 input 유효성 검사
   const UsernameValid = () => {
     if (!username) {
       setUsernameErr("필수 입력 항목입니다.");
+    } else if (username.length < 2) {
+      setUsernameErr("2자 이상 닉네임을 입력해 주세요.");
+    } else if (username.length > 10) {
+      setUsernameErr("10자 이하 닉네임을 입력해 주세요.");
     } else {
       setUsernameErr("");
     }
   };
 
+  // 아이디 조건(정규 표현식)
+  const userIdReg = /^[A-Za-z0-9_.]{5,}$/;
+
   const UserIdValid = () => {
     if (!userId) {
       setUserIdErr("필수 입력 항목입니다.");
+    } else if (!userIdReg.test(userId)) {
+      setUserIdErr("아이디 형식이 올바르지 않습니다.");
     } else {
       setUserIdErr("");
     }
@@ -75,7 +95,8 @@ export default function SetProfile() {
     }
   };
 
-  const handleValid = () => {
+  // 버튼 활성화
+  const btnActive = () => {
     if (
       !usernameErr &&
       !userIdErr &&
@@ -90,6 +111,12 @@ export default function SetProfile() {
     }
   };
 
+  // input창이 바뀔 때마다 btnActive로 확인 후 버튼 활성화
+  useEffect(() => {
+    btnActive();
+  }, [username, userId, intro]);
+
+  // api 호출, 성공 시 로그인 페이지로 이동
   const handleJoin = async (e) => {
     e.preventDefault();
     console.log("handleJoin");
@@ -114,10 +141,7 @@ export default function SetProfile() {
     }
   };
 
-  useEffect(() => {
-    handleValid();
-  }, [username, userId, intro]);
-
+  // 이미지 업로드
   const UploadImage = (e) => {
     e.target.files[0]
       ? setImage(URL.createObjectURL(e.target.files[0]))
@@ -140,6 +164,7 @@ export default function SetProfile() {
         </ImgWrapper>
 
         <JoinLabel htmlFor="nickname">닉네임</JoinLabel>
+        <InforText>(2~10자)</InforText>
         <JoinInput
           type="text"
           id="nickname"
@@ -150,6 +175,9 @@ export default function SetProfile() {
         <ErrorText>{usernameErr}</ErrorText>
 
         <JoinLabel htmlFor="id">아이디</JoinLabel>
+        <InforText>
+          5글자 이상의 영문, 숫자, 특수기호(_), (.)만 사용 가능합니다.
+        </InforText>
         <JoinInput
           type="text"
           id="id"

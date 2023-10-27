@@ -13,8 +13,8 @@ export default function Logo() {
 
 const LogoImg = styled.img`
   display: block;
-  width: auto;
-  height: 150px;
+  width: 120px;
+  height: 120px;
 
   margin: 0 auto;
 `;
@@ -26,6 +26,6 @@ const LogoText = styled.p`
   font-size: 20px;
   text-align: center;
   font-weight: lighter;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.4rem;
   color: var(--color-mainColor);
 `;

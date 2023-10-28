@@ -10,6 +10,7 @@ import Empty from '../../components/empty/Empty';
 import LogoImg from '../../assets/images/Logo.png';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function ProductList() {
     const newAccountname = useRecoilValue(accountname);
     const { getProductList } = ProductListAPI(newAccountname);
@@ -51,7 +52,7 @@ export default function ProductList() {
                                 {/* <img className="img-dot" src={item.link} alt="도트이미지" /> */}
                             </div>
                             {/* <p>{item.id}</p> */}
-                            {/* <p className="timeline-id">{item.author.username}</p> */}
+                            <p className="timeline-id">{item.author.username}</p>
                             <p className="timeline-main-text">{item.description}</p>
                             <MoreButton onClick={() => navigate(`/product/detail/${item.id}`) }>
                                 <img className="timelin-img" src={item.itemImage} alt="피드이미지" />
@@ -77,12 +78,14 @@ export default function ProductList() {
             )} 
                         
             </LayoutInsideStyle>
+            
             <Footer></Footer>
         </LayoutStyle>
     )
 }
 
-const MoreButton = styled.button`
+const MoreButton = styled.div`
+    cursor: pointer;
     border: none;
 `
 
@@ -165,6 +168,7 @@ export const FeedWrap = styled.div`
         & .social-price{
             color: #F26E22;
             font-size: 12px;
+            margin-bottom: 10px;
         }
         & .social-desc{
             color: #000;

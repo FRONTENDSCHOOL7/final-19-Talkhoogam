@@ -10,7 +10,7 @@ import MainHeader from "../components/header/MainHeader";
 import Footer from "../components/footer/Footer";
 import { useRecoilValue } from "recoil";
 import accountname from "../recoil/accountname";
-import GetFollowerFeedListAPI from "../api/Post/GetFollowerFeedListAPI";
+import GetFollowerFeedListAPI from "../api/post/GetFollowerFeedListAPI";
 import Empty from '../components/empty/Empty';
 import LogoImg from "../assets/images/Logo.png"
 

@@ -1,20 +1,43 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components';
 import {LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
 import { useParams } from 'react-router-dom';
 import ProductDetailAPI from '../../api/product/ProductDetailAPI';
 import BasicHeader from '../../components/header/BasicHeader';
-import styled from 'styled-components';
+import IconDot from "../../assets/icons/s-icon-more-vertical.svg";
+import CommonModal from '../../components/modal/CommonModal';
+import { useRecoilValue } from 'recoil';
+import newAaccountname from "../../recoil/accountname";
+// import IconHeart from "../../assets/icons/heart.svg";
+// import IconHeartActive from "../../assets/icons/heart-avtive.svg"
+// import IconMessage from "../../assets/icons/icon-message-circle.svg";
 
 export default function ProductDetail() {
 
     const params = useParams();
     const getProductDetail = ProductDetailAPI(params.id);
     const [productDetail, setProductDetail] = useState(() => {});
+    const accountname = useRecoilValue(newAaccountname);
+    const [modalOpen, setModalOpen ] = useState(false);
+    const isMine = productDetail ? productDetail.author.accountname === accountname ? true : false : false;
+    // const [iconColor, setIconColor] = useState(IconHeart);
+
+    // const colorChangeHandler = () => {
+    //     if(iconColor === IconHeart){
+    //         setIconColor(IconHeartActive);
+    //     }else{
+    //         setIconColor(IconHeart)
+    //     }
+    // }
+
+    const showModal = () => {
+        modalOpen ? setModalOpen(false) : setModalOpen(true)
+    }
 
     useEffect(() => {
         const detailList = async () => {
             const list = await getProductDetail();
-            // console.log(list);
+            
             setProductDetail(list.product);
         };
         detailList();
@@ -36,7 +59,18 @@ export default function ProductDetail() {
                     
                     <div className='product-price-wrap'>
                         <p className='product-price'>{productDetail.price}원</p>
-                        <p className="wr-date">{productDetail.updatedAt}</p>
+                        {/* <div className="social-wrap">
+                            <div>
+                                <img onClick={colorChangeHandler} className="social-icon" src={iconColor} alt="하트아이콘" />
+                            </div>
+                            <div>
+                                <img className="social-icon" src={IconMessage} alt="댓글아이콘" />
+                            </div>
+                        </div> */}
+                        <div className='setting-wrap'>
+                            <p className="wr-date">{productDetail.updatedAt}</p>
+                            <img className="img-dot" src={IconDot} alt="도트이미지" onClick={showModal}/>
+                        </div>
                     </div>
 
                     <div className='profile-wrap'>
@@ -45,14 +79,25 @@ export default function ProductDetail() {
                     </div>
                     
                     <div className="product-desc-wrap">
+                        
                         <p>{productDetail.link}</p>
                     </div>
+                    
                 </ProductDetailWrap>
                 )
                 : (
                     <p>Loading..</p>
                 ) }
+                
             </LayoutInsideStyle>
+            { modalOpen && 
+                <CommonModal 
+                    isMine={isMine}
+                    setModalOpen={setModalOpen}
+                    id={params.id}
+                ></CommonModal>
+            }
+            
         </LayoutStyle>
     )
 }
@@ -87,13 +132,24 @@ export const ProductDetailWrap = styled.div`
     .product-sell-text{
         color: #F26E22;
     }
+    
+    .product-price{
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
     .product-price-wrap{
         margin-bottom: 10px;
     }
 
-    .product-price{
-        margin-bottom: 10px;
+    .setting-wrap{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .img-dot{
+        cursor: pointer;
     }
 
     .wr-date{
@@ -116,5 +172,35 @@ export const ProductDetailWrap = styled.div`
         height: 42px;
         border-radius: 42px;
     }
+
+/*
+    .social-wrap{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--color-darkgrey);
+        font-size: 12px;
+        line-height: 12px;
+        margin: 10px 0;
+        .social-icon{
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            object-fit: cover;
+        }
+    }
+*/
+    /* .social-wrap div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-wrap div::after {
+        margin-left: 6px;
+        content: "55";
+    } */
+
+    
     
 `;

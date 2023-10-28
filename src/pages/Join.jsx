@@ -38,8 +38,6 @@ export default function Join() {
     setPwCheckErr("");
   };
 
-  const passwordReg = /^(?=.*[a-z])(?=.*\d).{6,}$/;
-
   const EmailValid = (e) => {
     if (!email) {
       setEmailErr("필수 입력 항목입니다.");
@@ -50,6 +48,8 @@ export default function Join() {
     }
     handleValid();
   };
+
+  const passwordReg = /^(?=.*[a-z])(?=.*\d).{6,}$/;
 
   const PasswordValid = (e) => {
     if (!password) {

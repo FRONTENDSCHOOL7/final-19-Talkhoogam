@@ -19,6 +19,7 @@ import {
 import { emailState, newToken, userData, pwState } from "../recoil/joinData";
 import { useRecoilState, useRecoilValue } from "recoil";
 import JoinApi from "../api/JoinApi";
+import EmailValid from "../api/EmailValid";
 import { useNavigate } from "react-router-dom";
 
 export default function SetProfile() {
@@ -48,7 +49,7 @@ export default function SetProfile() {
   // useNavigate 사용
   const navigate = useNavigate();
 
-  // input value 값을 useState에 저장
+  // username, userId, intro 값을 useState에 저장
   const UsernameValue = (e) => {
     setUsername(e.target.value);
   };
@@ -62,7 +63,7 @@ export default function SetProfile() {
   };
 
   // 각 input 유효성 검사
-  const UsernameValid = () => {
+  const UsernameValid = async () => {
     if (!username) {
       setUsernameErr("필수 입력 항목입니다.");
     } else if (username.length < 2) {
@@ -70,7 +71,8 @@ export default function SetProfile() {
     } else if (username.length > 10) {
       setUsernameErr("10자 이하 닉네임을 입력해 주세요.");
     } else {
-      setUsernameErr("");
+      const emailValidRes = await EmailValid(email);
+      setUsernameErr(emailValidRes);
     }
   };
 

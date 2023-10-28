@@ -1,4 +1,4 @@
-const EmailValid = async (email) => {
+const EmailValidApi = async (email) => {
   const url = "https://api.mandarin.weniv.co.kr";
 
   try {
@@ -14,14 +14,12 @@ const EmailValid = async (email) => {
       }),
     });
 
-    if (res.statue === 200) {
-      const resJson = await res.json();
-      return resJson.message;
-    }
+    const resJson = await res.json();
+    return resJson.message;
   } catch (error) {
     console.error(error);
-    return "네트워크 오류가 발생했습니다";
+    return error;
   }
 };
 
-export default EmailValid;
+export default EmailValidApi;

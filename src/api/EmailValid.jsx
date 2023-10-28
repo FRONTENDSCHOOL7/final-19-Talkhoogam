@@ -1,4 +1,4 @@
-const JoinApi = async (email) => {
+const EmailValid = async (email) => {
   const url = "https://api.mandarin.weniv.co.kr";
 
   try {
@@ -24,4 +24,4 @@ const JoinApi = async (email) => {
   }
 };
 
-export default JoinApi;
+export default EmailValid;

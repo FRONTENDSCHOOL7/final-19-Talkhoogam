@@ -1,5 +1,5 @@
 ---
-name: 기능 구현
+name: "✨ feat: 기능 구현"
 about: 기능 구현을 위한 이슈 템플릿 입니다.
 title: "✨ feat: 제목을 입력해주세요"
 labels: 기능구현

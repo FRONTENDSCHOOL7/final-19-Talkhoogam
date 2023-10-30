@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PostInsertModal from '../modal/PostInsertModal';
 import { useLocation ,useNavigate } from 'react-router-dom';
 import { ReactComponent as IconHome} from "../../assets/icons/home.svg";
 import { ReactComponent as IconHand} from "../../assets/icons/handshake.svg";
@@ -8,13 +9,16 @@ import { ReactComponent as IconusersAlt} from "../../assets/icons/users-alt.svg"
 import { ReactComponent as IconUser} from "../../assets/icons/user.svg";
 
 
-
 function Footer() {
 
     const navigate = useNavigate();
     const uselocation = useLocation();
     const [svgColor, setSvgColor] = useState(uselocation.pathname.toLowerCase());
-    
+    const [modalOpen, setModalOpen ] = useState(false);
+
+    const showModal = () => {
+        modalOpen ? setModalOpen(false) : setModalOpen(true)
+    }
     
     const handleClickState = (pageName) => {
         navigate(`/${pageName}`);
@@ -43,9 +47,7 @@ function Footer() {
             <p style={{color:svgColor === "/sellbook" ? "#56b778" : "#767676"}}>거래</p>
         </FooterIconWrap>
 
-        <FooterIconWrap onClick={() => {
-            handleClickState("productadd");
-        }}>
+        <FooterIconWrap onClick={showModal}>
             <IconEdit className="footer-icon" fill={svgColor === "/productadd" ? "#56b778" : "#767676"}/>
             <p style={{color:svgColor === "/productadd" ? "#56b778" : "#767676"}}>게시물 작성</p>
         </FooterIconWrap>
@@ -63,6 +65,12 @@ function Footer() {
             <IconUser className="footer-icon" fill={svgColor === "/profile" ? "#56b778" : "#767676"}/>
             <p style={{color:svgColor === "/profile" ? "#56b778" : "#767676"}}>프로필</p>
         </FooterIconWrap>
+
+        { modalOpen && 
+            <PostInsertModal 
+                setModalOpen={setModalOpen}
+            ></PostInsertModal>
+        }
     </FooterLayout>
     </>
     )

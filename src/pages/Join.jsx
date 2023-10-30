@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { emailState, pwState } from "../recoil/joinData";
+import EmailValidApi from "../api/EmailValidApi";
 
 export default function Join() {
   const [email, setEmail] = useRecoilState(emailState);
@@ -38,18 +39,19 @@ export default function Join() {
     setPwCheckErr("");
   };
 
-  const passwordReg = /^(?=.*[a-z])(?=.*\d).{6,}$/;
-
-  const EmailValid = (e) => {
+  const EmailValid = async (e) => {
     if (!email) {
       setEmailErr("필수 입력 항목입니다.");
     } else if (!email.includes("@")) {
       setEmailErr("이메일 형식이 올바르지 않습니다.");
     } else {
-      setEmailErr("");
+      const emailValidRes = await EmailValidApi(email);
+      setEmailErr(emailValidRes);
     }
     handleValid();
   };
+
+  const passwordReg = /^(?=.*[a-z])(?=.*\d).{6,}$/;
 
   const PasswordValid = (e) => {
     if (!password) {

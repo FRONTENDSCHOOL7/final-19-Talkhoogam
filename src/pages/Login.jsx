@@ -10,7 +10,7 @@ import {
   SnsLoginBtn,
   ErrorText,
 } from "../styles/LoginStyled";
-import Logo from "../components/common/Logo.jsx";
+import LogoImg from "../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import LoginApi from "../api/LoginApi";
 import loginCheck from "../recoil/loginCheck";
@@ -18,14 +18,22 @@ import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
 
 export default function Login() {
+  // 이메일, 패스워드 상태 관리
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // 에러 메시지 상태 관리
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+
+  // recoil을 이용하여 token, login, account name 상태 관리
   const [token, setToken] = useRecoilState(loginToken);
   const [isLogin, setIsLogin] = useRecoilState(loginCheck);
   const [isAccountname, setIsAccountname] = useRecoilState(accountname);
 
+  // useNavigate 사용
+  const navigate = useNavigate();
+
+  // email, password 값을 useState에 저장
   const EmailValue = (e) => {
     setEmail(e.target.value);
   };
@@ -34,6 +42,7 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
+  // 로그인 유효성 검사
   const LoginValid = async (e) => {
     e.preventDefault();
     if (!email && !password) {
@@ -42,10 +51,13 @@ export default function Login() {
       setError("이메일을 입력해 주세요.");
     } else if (!password) {
       setError("비밀번호를 입력해 주세요.");
+    } else if (!email.includes("@")) {
+      setError("이메일 형식이 올바르지 않습니다.");
     } else {
       setError("");
-      const loginRes = await LoginApi(email, password);
 
+      // api 호출
+      const loginRes = await LoginApi(email, password);
       if (loginRes.status !== 422) {
         console.log(loginRes);
         const newToken = loginRes.user.token;
@@ -65,7 +77,7 @@ export default function Login() {
   return (
     <LoginPage>
       <h1 className="a11y-hidden">로그인 페이지</h1>
-      <Logo />
+      <LogoImg></LogoImg>
       <EmailLoginForm>
         <InputBox type="email" placeholder="이메일" onChange={EmailValue} />
         <InputBox

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import Modal from "react-modal";
 import styled from "styled-components";
 import ImgProfile from  "../../assets/images/img-profile.png";
@@ -30,7 +31,7 @@ export default function Profile() {
   //const token = useRecoilValue(loginToken)
   //팔로우/언팔로우 버튼
     const [isFollowing, setIsFollowing] = useState(false);
-    const handleClick = () => {
+    const handleClick = () => { 
         setIsFollowing(!isFollowing);
     };
 
@@ -51,12 +52,14 @@ export default function Profile() {
     };
 
     //팔로워 목록
-    const [isFollowers, setIsFollowers] = useState(false);
+    const navigate = useNavigate();
+    const [isFollowers, setIsFollowers] = useState("");
     const onClickFollower = () => {
-        setIsFollowers(!isFollowers);
+        navigate("../welcome")  //나중에 팔로워/팔로잉 목록으로 교체
     };
-
-  //팔로잉 목록
+    const onClickFollowing = () => {
+        navigate("../welcome")
+    }
 
   //유저 정보 불러오기
     const [profileInfo, setProfileInfo] = useState(() => {});
@@ -105,7 +108,7 @@ export default function Profile() {
         }
         fetchData();
     }, []);
-
+console.log(profileInfo)
     
     return (
         <>
@@ -114,12 +117,12 @@ export default function Profile() {
             <ProfilePage>
             <ProfileMain>
                 <ProfileHead>
-                <div className="followerText">
+                <div className="followerText" onClick={onClickFollower}>
                     {loading ? (
                     <button className="followersNum">Loading...</button>
                     ) : (
                     <button className="followersNum">
-                        {profileInfo.followercount}0
+                        {profileInfo?.followerCount}
                     </button>
                     )}
                     <p className="profilehead-text">followers</p>
@@ -127,7 +130,7 @@ export default function Profile() {
                 <div>
                     <img
                     className="profileImg"
-                    src={ImgProfile}
+                    src={profileInfo?.image} 
                     alt="프로필이미지"
                     onClick={() => openImg({ ImgProfile })}
                     />
@@ -137,23 +140,19 @@ export default function Profile() {
                     contentLabel="프로필 이미지"
                     >
                     {selectedImg && (
-                        <img
-                        src={ImgProfile}
-                        alt="프로필 이미지"
-                        className="profileImg-modal"
-                        ></img>
+                        <img src={profileInfo?.image} alt="프로필 이미지" className="profileImg-modal"></img>
                     )}
                     <button className="close" onClick={closeImg}>
                         &times;
                     </button>
                     </ChangeModal>
                 </div>
-                <div className="followingText">
+                <div className="followingText" onClick={onClickFollowing}>
                     {loading ? (
                     <button className="followingsNum">Loading...</button>
                     ) : (
                     <button className="followingsNum">
-                        {profileInfo.followercount}0
+                        {profileInfo?.followerCount}
                     </button>
                     )}
                     <p className="profilehead-text">followings</p>
@@ -164,7 +163,7 @@ export default function Profile() {
                     <p className="userName">Loading...</p>
                 ) : (
                     <p className="userName">{profileInfo.username}</p>
-                )}
+                )}  
                 {loading ? (
                     <p className="id">Loading...</p>
                 ) : (
@@ -185,7 +184,9 @@ export default function Profile() {
                     <button className="follow-btn">팔로우</button>
                     )}
                 </button>
-                <img src={ImgShare} alt="공유구현X"></img>
+                    <img src={ImgShare} alt="공유구현X"></img> 
+                    {/*<button className="unfollow-btn">프로필 수정</button>
+                    <button className="unfollow-btn">상품 등록</button>*/}
                 </Follow>
             </ProfileMain>
             </ProfilePage>
@@ -343,6 +344,12 @@ const ProfileHead = styled.div`
         font-weight: bold;
         color: black;
     }
+    .followerText:hover {
+        cursor: pointer;
+    }
+    .followingText:hover {
+        cursor: pointer;
+    }
 `;
 
 const ProfileMid = styled.div`
@@ -371,20 +378,18 @@ const Follow = styled.div`
     .follow-btn { 
         border-radius: 30px;
         padding: 8px 40px;
-        margin: auto 10px;
         font-weight: 500;
         border: 1px Solid #F26E22;
         background-color: #F26E22;
         color: white;
     }
     .unfollow-btn {  //언팔로우 버튼
-        
         padding: 8px 40px;
-        margin: auto 10px;
         font-weight: 500;
         border: 1px Solid #DBDBDB;
         border-radius: 30px;
         color:#767676;
+        margin: auto 5px;
     }
     .follow-btn:hover{
         box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.2);
@@ -396,6 +401,7 @@ const Follow = styled.div`
         border: 1px solid #DBDBDB;
         border-radius: 30px;
         padding: 7px;
+        margin: auto 5px;
     }
     img:hover {
         cursor: pointer;
@@ -451,6 +457,7 @@ const Layer = styled.div`
     }
     .bookImg:hover {
         box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
     }
 `;
 

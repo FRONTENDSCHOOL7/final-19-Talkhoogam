@@ -136,12 +136,12 @@ export const FeedWrap = styled.div`
     }
 
     .timeline-title {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .timeline-id {
         color: #767676;
-        font-size: 12px;
+        font-size: 14px;
         margin-top: 5px;
     }
 
@@ -167,8 +167,9 @@ export const FeedWrap = styled.div`
         margin-top: 12px;
         & .social-price{
             color: #F26E22;
-            font-size: 12px;
+            font-size: 14px;
             margin-bottom: 10px;
+            font-weight: bold;
         }
         & .social-desc{
             color: #000;

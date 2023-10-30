@@ -48,13 +48,13 @@ function ShowFeed() {
 
 export function HomeContents() {
 
-  const [feedData, setFeedData] = useState([]); // 상태를 사용하여 데이터를 저장합니다.
-  // const getFeed = GetFollowerFeedListAPI();
+  const [feedData, setFeedData] = useState(() => {}); // 상태를 사용하여 데이터를 저장합니다.
+  const {getFeedListAPI} = GetFollowerFeedListAPI();
   // console.log("피드 데이터 수 " , getFeed)
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await GetFollowerFeedListAPI(); // 데이터 가져오기
+        const data = await getFeedListAPI(); // 데이터 가져오기
         setFeedData(data); // 데이터를 상태에 저장
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
@@ -63,11 +63,11 @@ export function HomeContents() {
 
     fetchData(); // 데이터 가져오는 함수를 호출
   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출
-  
+  console.log(feedData)
   return (
     <>
       <FeedWrap>
-        {feedData.length > 0  ? (
+        {feedData ? (
           <>
             <p>팔로우 존재합니다.</p>
             {/* {feedData.map((item, index) => (

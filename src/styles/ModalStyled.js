@@ -46,11 +46,19 @@ export const ModalHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     & div{
         width: 50px;
         height: 4px;
         border-radius: 5px;
         background: var(--color-lightgrey);
+    }
+
+    & img {
+        position: absolute;
+        right: 10px;
+        width: 18px;
+        cursor: pointer;
     }
     `
 

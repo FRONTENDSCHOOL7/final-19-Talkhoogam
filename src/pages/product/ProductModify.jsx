@@ -19,17 +19,17 @@ export default function ProductModify() {
     const params = useParams();
     const id = params.id;
     const getProductDetail = ProductDetailAPI(params.id);
-    const [imgSrc, setImgSrc] = useState(defaultImg)
-    const [productName, setProductName] = useState();
-    const [price, setPrice] = useState("");
-    const [link, setLink] = useState("");
+    const [imgSrc, setImgSrc] = useState("")
+    // const [productName, setProductName] = useState("");
+    // const [price, setPrice] = useState("");
+    // const [link, setLink] = useState("");
     const [itemImage, setItemImage] = useState("");
     
-    const productModify = ProductModifyAPI({productName, price, link, itemImage, id});
+    
+    const {productModify} = ProductModifyAPI(productDetail, itemImage, id);
     const onClickHandler = async (e) => {
         e.preventDefault();
         await productModify();
-        alert("상품 수정 완료!")
     }
 
     useEffect(() => {
@@ -40,8 +40,8 @@ export default function ProductModify() {
         };
         detailList();
     }, [getProductDetail])
-    console.log(productDetail ? productDetail.itemImage : defaultImg);
 
+    
     const handleChangeImage = async (e)=>{
         // 파일 가져오기
         const file = e.target.files[0];
@@ -61,14 +61,14 @@ export default function ProductModify() {
         }
 
         const imageURL = await ImageUploadAPI(file);
-        
+        console.log(imageURL)
          // 이미지 최적화 및 크기 조정
         // const resizeImageURL = await optimizeAndResizeImage(file, 800, 600); // 원하는 크기로 조정
         // setImgSrc(imageURL)
         setImgSrc(imageURL)
         setItemImage(imageURL);
     }
-
+    console.log(productDetail)
     /*
     * 이미지 최적화 및 크기 조정 함수 대략 !! 대략 2초 빨라지지만 upload시 전달 값이 수정되어 확인 필요
     * 
@@ -115,7 +115,7 @@ export default function ProductModify() {
                 <form>
                     <LabelStyle htmlFor='file-upload'>이미지 등록
                         <ProductImgWrap>
-                            <img className='addproduct-img' src="" alt="상품 이미지" />
+                            <img className='addproduct-img' src={imgSrc ? imgSrc : productDetail.itemImage} alt="상품 이미지" />
                             <img className='inside-icon' src={addproductIcon} alt="상품 이미지 아이콘" />
                         </ProductImgWrap>
                     </LabelStyle>
@@ -125,9 +125,7 @@ export default function ProductModify() {
                         maxLength={15}
                         placeholder={"2~15자 이내여야 합니다."}
                         onChangeHandler={(event) => {
-                            if(event.target.value.length > 1 && event.target.value.length < 16 ){
-                                setProductName(event.target.value);
-                            }
+                            setProductDetail({...productDetail , itemName : event.target.value});
                         }}
                         value={productDetail.itemName}
                     />
@@ -136,16 +134,17 @@ export default function ProductModify() {
                         maxLength={15}
                         placeholder={"숫자만 입력 가능합니다."}
                         onChangeHandler={(event) => {
-                            setPrice(event.target.value);
+                            setProductDetail({...productDetail , price : event.target.value});
                         }}
                         value={productDetail.price}
                     />
                     <Input 
                         labelText="판매 링크"
                         // maxLength={15}
+                        type={"text"}
                         placeholder={"URL을 입력해 주세요."}    
                         onChangeHandler={(event) => {
-                            setLink(event.target.value);
+                            setProductDetail({...productDetail , link : event.target.value});
                         }}
                         value={productDetail.link}
                     />

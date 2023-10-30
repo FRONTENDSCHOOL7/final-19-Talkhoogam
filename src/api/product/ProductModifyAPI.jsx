@@ -1,10 +1,11 @@
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
+import { useNavigate } from "react-router-dom";
 
 
-function ProductModifyAPI(products){
+function ProductModifyAPI(productDetail, itemImage ,id){
     const token = useRecoilValue(loginToken);
-    const {productName, price, link, itemImage, id} = products
+    const navegate = useNavigate();
 
     const productModify = async () => {
         const url = "https://api.mandarin.weniv.co.kr";
@@ -18,13 +19,15 @@ function ProductModifyAPI(products){
                 },
                 body: JSON.stringify({
                     product:{
-                        itemName :productName,
-                        price: parseInt(price),
-                        link: link,
-                        itemImage: itemImage,
+                        itemName : productDetail.itemName,
+                        price: parseInt(productDetail.price),
+                        link: productDetail.link,
+                        itemImage: itemImage? itemImage : productDetail.itemImage,
                     },
                 }),
             });
+            alert("상품 수정 완료!")
+            navegate(`/product/detail/${id}`)
         } catch (error) {
             console.log("API 응답에 실패하였습니다." ,error);
         };

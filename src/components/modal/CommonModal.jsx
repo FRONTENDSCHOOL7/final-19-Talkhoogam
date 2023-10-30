@@ -1,6 +1,7 @@
 import React from 'react'
 import { ModalLayout, ModalHeader, ModalInsideLayout, ModalButton } from '../../styles/ModalStyled'
 import { useNavigate } from 'react-router-dom';
+import IconClose from "../../assets/icons/icon-delete.svg"
 
 export default function CommonModal({isMine, setModalOpen , onClick , id , ...props}) {
 
@@ -15,6 +16,7 @@ export default function CommonModal({isMine, setModalOpen , onClick , id , ...pr
         <ModalLayout >
             <ModalHeader onClick={closeModal}>
                 <div className='separator' ></div>
+                <img src={IconClose} alt="닫기 아이콘" />
             </ModalHeader>
             
             <ModalInsideLayout >

@@ -13,6 +13,7 @@ import ProductAdd from "../pages/product/ProductAdd";
 import ProductList from "../pages/product/ProductList";
 import ProductDetail from "../pages/product/ProductDetail";
 import ProductModify from "../pages/product/ProductModify";
+import PostUpload from "../pages/post/PostUpload";
 
 export default function Routers() {
   return (
@@ -29,6 +30,7 @@ export default function Routers() {
       <Route path="/product/detail/:id" element={<ProductDetail />} />
       <Route path="/sellbook" element={<ProductList />} />
       <Route path="/productmodify/:id" element={<ProductModify />} />
+      <Route path="/postupload" element={<PostUpload />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

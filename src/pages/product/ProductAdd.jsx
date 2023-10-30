@@ -52,7 +52,7 @@ export default function ProductAdd() {
         setImgSrc(imageURL)
         setItemImage(imageURL);
     }
-
+    
     /*
     * 이미지 최적화 및 크기 조정 함수 대략 !! 대략 2초 빨라지지만 upload시 전달 값이 수정되어 확인 필요
     * 

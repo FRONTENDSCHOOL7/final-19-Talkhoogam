@@ -55,9 +55,9 @@ export default function Login() {
       setError("이메일 형식이 올바르지 않습니다.");
     } else {
       setError("");
-      const loginRes = await LoginApi(email, password);
 
       // api 호출
+      const loginRes = await LoginApi(email, password);
       if (loginRes.status !== 422) {
         console.log(loginRes);
         const newToken = loginRes.user.token;

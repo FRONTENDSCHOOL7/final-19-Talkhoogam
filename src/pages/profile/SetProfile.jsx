@@ -6,8 +6,8 @@ import {
   PageTitle,
   ProfileImg,
   SetProfileForm,
-} from "../styles/SetProfileStyled";
-import profile from "../assets/images/img-profile.png";
+} from "../../styles/SetProfileStyled";
+import profile from "../../assets/images/img-profile.png";
 import {
   NextBtn,
   PageArticle,
@@ -15,11 +15,12 @@ import {
   JoinLabel,
   ErrorText,
   InforText,
-} from "../styles/JoinStyled";
-import { emailState, newToken, userData, pwState } from "../recoil/joinData";
+} from "../../styles/JoinStyled";
+import { emailState, newToken, userData, pwState } from "../../recoil/joinData";
 import { useRecoilState, useRecoilValue } from "recoil";
-import JoinApi from "../api/JoinApi";
+import JoinApi from "../../api/JoinApi";
 import { useNavigate } from "react-router-dom";
+import IdValidApi from "../../api/IdValidApi";
 
 export default function SetProfile() {
   // 닉네임, 아이디, 소개, 이미지 파일 상태 관리
@@ -77,13 +78,14 @@ export default function SetProfile() {
   // 아이디 조건(정규 표현식)
   const userIdReg = /^[A-Za-z0-9_.]{5,}$/;
 
-  const UserIdValid = () => {
+  const UserIdValid = async () => {
     if (!userId) {
       setUserIdErr("필수 입력 항목입니다.");
     } else if (!userIdReg.test(userId)) {
       setUserIdErr("아이디 형식이 올바르지 않습니다.");
     } else {
-      setUserIdErr("");
+      const idValidRes = await IdValidApi(userId);
+      setUserIdErr(idValidRes);
     }
   };
 

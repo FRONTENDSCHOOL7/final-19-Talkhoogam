@@ -20,20 +20,19 @@ export const ProfileImg = styled.img`
 `;
 
 export const ImgLabel = styled.label`
-  width: 120px; // ProfileImg 와 사이즈 동일하게
-  height: 120px; // ProfileImg 와 사이즈 동일하게
+  width: 120px;
+  height: 120px;
   margin: 0 auto;
   cursor: pointer;
 
-  background-image: url(${imgBtn}); // background로 이미지 버튼 추가하고
+  background-image: url(${imgBtn});
   background-size: 36px 36px;
   background-repeat: no-repeat;
   background-position: center center;
-  /* background-position, transform, translate, absolute 작동원리를 아셔야 합니다. */
-  background-position: 78px 74px; // background로 position으로 위치 조정
+  background-position: 78px 74px;
   margin: 0 auto;
   position: absolute;
-  top: -5px; // 세부 위치 조정 (오른쪽 아래)
+  top: -5px;
   left: 115px;
 `;
 

@@ -20,6 +20,7 @@ import IdValidApi from "../../api/IdValidApi";
 import EditProfileApi from "../../api/EditProfileApi";
 import { useRecoilState } from "recoil";
 import loginToken from "../../recoil/loginToken";
+import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 
 export default function EditProfile() {
   const [data, setData] = useState({});
@@ -49,9 +50,11 @@ export default function EditProfile() {
     fetchData();
   }, []);
 
-  const UploadImage = (e) => {
-    if (e.target.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
+  const UploadImage = async (e) => {
+    const image = e.target.files[0];
+    const imageRes = await ImageUploadAPI(image);
+    if (imageRes) {
+      setImage(imageRes);
     } else {
       setImage(data.image);
     }

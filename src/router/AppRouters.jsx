@@ -8,12 +8,13 @@ import Gathering from "../pages/Gathering";
 import Header from "../components/header/BasicHeader";
 import Profile from "../pages/profile/Profile";
 import NotFound from "../pages/NotFound";
-import SetProfile from "../pages/profile/SetProfile"
+import SetProfile from "../pages/profile/SetProfile";
 import ProductAdd from "../pages/product/ProductAdd";
 import ProductList from "../pages/product/ProductList";
 import ProductDetail from "../pages/product/ProductDetail";
 import ProductModify from "../pages/product/ProductModify";
 import PostUpload from "../pages/post/PostUpload";
+import EditProfile from "../pages/profile/EditProfile";
 
 export default function Routers() {
   return (
@@ -26,6 +27,7 @@ export default function Routers() {
       <Route path="/gathering" element={<Gathering />} />
       <Route path="/header" element={<Header />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/editprofile" element={<EditProfile />} />
       <Route path="/productAdd" element={<ProductAdd />} />
       <Route path="/product/detail/:id" element={<ProductDetail />} />
       <Route path="/sellbook" element={<ProductList />} />

@@ -21,6 +21,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import JoinApi from "../../api/JoinApi";
 import { useNavigate } from "react-router-dom";
 import IdValidApi from "../../api/IdValidApi";
+import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 
 export default function SetProfile() {
   // 닉네임, 아이디, 소개, 이미지 파일 상태 관리
@@ -144,10 +145,14 @@ export default function SetProfile() {
   };
 
   // 이미지 업로드
-  const UploadImage = (e) => {
-    e.target.files[0]
-      ? setImage(URL.createObjectURL(e.target.files[0]))
-      : setImage(profile);
+  const UploadImage = async (e) => {
+    const image = e.target.files[0];
+    const imageRes = await ImageUploadAPI(image);
+    if (imageRes) {
+      setImage(imageRes);
+    } else {
+      setImage(profile);
+    }
   };
 
   return (

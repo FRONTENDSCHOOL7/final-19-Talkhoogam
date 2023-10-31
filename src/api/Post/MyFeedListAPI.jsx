@@ -1,18 +1,20 @@
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
+import accountname from "../../recoil/accountname";
 
-function GetFollowerFeedListAPI(){
+function MyFeedListAPI(){
     const token = useRecoilValue(loginToken);
+    const accountName = useRecoilValue(accountname);
     
-    const getFeedListAPI = async () => {
+    const getMyFeedListAPI = async () => {
             const url = "https://api.mandarin.weniv.co.kr";
 
             try {
-                const res = await fetch(`${url}/post/feed`, {
+                const res = await fetch(`${url}/post/${accountName}/userpost`, {
                     method: "GET",
                     headers: {
                         Authorization : `Bearer ${token}`,
-                        "Content-type": "application/json",
+                        "Content-type" : "application/json"
                     },
                 });
                 const data = await res.json()
@@ -21,7 +23,7 @@ function GetFollowerFeedListAPI(){
                 return error;
             };
         };
-        return {getFeedListAPI}
+        return {getMyFeedListAPI}
 };
 
-export default GetFollowerFeedListAPI;
+export default MyFeedListAPI;

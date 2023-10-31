@@ -21,6 +21,7 @@ import EditProfileApi from "../../api/EditProfileApi";
 import { useRecoilState } from "recoil";
 import loginToken from "../../recoil/loginToken";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
+import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
   const [data, setData] = useState({});
@@ -29,6 +30,7 @@ export default function EditProfile() {
   const [intro, setIntro] = useState("");
   const [image, setImage] = useState(null);
   const InputFile = useRef(null);
+  const navigate = useNavigate();
 
   // 닉네임 에러, 아이디 에러, 소개 에러 상태 관리
   const [usernameErr, setUsernameErr] = useState("");
@@ -135,6 +137,7 @@ export default function EditProfile() {
     e.preventDefault();
     const res = await EditProfileApi(token, username, userId, intro, image);
     if (res.statue !== 422) {
+      navigate("/profile");
       console.log("수정 성공");
     } else {
       console.error("수정 실패");

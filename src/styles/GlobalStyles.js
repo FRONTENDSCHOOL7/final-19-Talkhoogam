@@ -9,6 +9,7 @@ ${reset}
 :root {
     /* 색 */
     --color-mainColor: #56b778;
+    --color-dark-mainColor: #4b9f68;
     --color-navy: #132644;
     --color-lime: #E1FF67;
     --color-blue: #1643DB;

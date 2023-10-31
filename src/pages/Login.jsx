@@ -67,6 +67,7 @@ export default function Login() {
         setIsAccountname(newAccountname);
 
         localStorage.setItem("userToken", newToken);
+        // sessionStorage.setItem("userToken", newToken);
         navigate("/home");
       } else {
         setError("이메일 또는 비밀번호가 일치하지 않습니다.");

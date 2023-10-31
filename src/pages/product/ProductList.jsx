@@ -35,6 +35,11 @@ export default function ProductList() {
         fetchData();
         
     }, []);
+
+    function onClickProfile(id){
+        navigate(`/profile/${id}`);
+    }
+
     console.log(productData)
     return (
         <LayoutStyle>
@@ -45,7 +50,7 @@ export default function ProductList() {
                 <h1 className='a11y-hidden'>상품 게시물 목록</h1>
                 {productData.map((item, index) => (
                     <div key={index} className="user-timeline">
-                        <img className="user-profileimg" src={item.author.image} alt="프로필이미지" />
+                        <img className="user-profileimg" onClick={() => {onClickProfile(item.author.accountname)}} src={item.author.image} alt="프로필이미지" />
                         <div className="user-contents">
                             <div className="timeline-title-wrap">
                                 <p className="timeline-title">{item.itemName}</p>
@@ -123,6 +128,7 @@ export const FeedWrap = styled.div`
         border-radius: 42px;
         width: 42px;
         height: 42px;
+        cursor: pointer;
     }
 
     .user-contents {

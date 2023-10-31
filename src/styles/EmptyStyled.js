@@ -1,21 +1,26 @@
 import styled from "styled-components";
-
+import Button from "../components/common/button/Button";
 
 export const EmptyLayout = styled.div`
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-`
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+`;
 
 export const LogoImg = styled.img`
-    width: 158px;
-    height: 158px;
-`
+  width: 110px;
+  height: 110px;
+`;
 
 export const EmptyText = styled.p`
-    font-size: 14px;
-    color: var(--color-darkgrey);
-`
+  font-size: 14px;
+  color: var(--color-darkgrey);
+`;
+
+export const SearchBtn = styled(Button)`
+  padding: 10px 15px;
+  font-size: 15px;
+`;

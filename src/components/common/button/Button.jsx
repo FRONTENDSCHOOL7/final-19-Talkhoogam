@@ -21,4 +21,9 @@ export const Btn = styled.button`
   color: white;
   font-size: 18px;
   font-weight: bold;
+  font-family: "Pretendard", sans-serif;
+
+  &:active {
+    background-color: #4b9f68;
+  }
 `;

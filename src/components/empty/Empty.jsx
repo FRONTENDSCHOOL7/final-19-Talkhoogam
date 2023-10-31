@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Button from "../common/button/Button";
 import {
   EmptyLayout,
   LogoImg,
@@ -15,7 +14,7 @@ function Empty({ image, alt, children, navigatePath }) {
 
   //page 이름 가져오기
   function getPageName(pathName) {
-    console.log(pathName);
+    // console.log(pathName);
 
     switch (pathName) {
       case "/home":

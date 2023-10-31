@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import {LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ProductDetailAPI from '../../api/product/ProductDetailAPI';
 import BasicHeader from '../../components/header/BasicHeader';
 import IconDot from "../../assets/icons/s-icon-more-vertical.svg";
@@ -11,6 +11,7 @@ import newAaccountname from "../../recoil/accountname";
 
 export default function ProductDetail() {
 
+    const navigate = useNavigate();
     const params = useParams();
     const getProductDetail = ProductDetailAPI(params.id);
     const [productDetail, setProductDetail] = useState(() => {});
@@ -31,6 +32,10 @@ export default function ProductDetail() {
         detailList();
     }, [getProductDetail])
     console.log(productDetail)
+
+    function onClickProfile(id){
+        navigate(`/profile/${id}`);
+    }
     return (
         <LayoutStyle>
             <BasicHeader></BasicHeader>
@@ -54,7 +59,7 @@ export default function ProductDetail() {
                     </div>
 
                     <div className='profile-wrap'>
-                        <img className="user-profile-img" src={productDetail.author.image} alt="프로필이미지" />
+                        <img className="user-profile-img" onClick={() => {onClickProfile(productDetail.author.accountname)}} src={productDetail.author.image} alt="프로필이미지" />
                         <p className="user-profile-name">{productDetail.author.username}</p>
                     </div>
                     
@@ -75,7 +80,7 @@ export default function ProductDetail() {
                     isMine={isMine}
                     setModalOpen={setModalOpen}
                     id={params.id}
-                    isLocation={"/product"}
+                    isLocation={"product"}
                 ></CommonModal>
             }
             
@@ -152,5 +157,6 @@ export const ProductDetailWrap = styled.div`
         width: 42px;
         height: 42px;
         border-radius: 42px;
+        cursor: pointer;
     }
 `;

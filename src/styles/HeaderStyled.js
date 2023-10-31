@@ -103,7 +103,7 @@ export const HeaderMoreList = styled.article`
 `;
 
 export const ModalLogoutStyled = styled.article`
-  width: 252px;
+  width: 270px;
   border: 1px solid #dbdbdb;
   border-radius: 10px;
   background-color: white;

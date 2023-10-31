@@ -30,7 +30,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
     
     fetchData(); // 데이터 가져오는 함수를 호출
   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출
-  console.log(feedData)
+  // console.log(feedData)
   
 
   const [iconColor, setIconColor] = useState(IconHeart);
@@ -42,6 +42,10 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
           setIconColor(IconHeart)
       }
   }
+
+  function moveProfile(accountname){
+    navigate(`/profile/${accountname}`)
+  }
   
   return (
     <>
@@ -51,7 +55,9 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
             {feedData.posts.map((item, index) => {
               return (
                 <div key={index} className="user-timeline">
-                  <img className="user-profileimg" src={item.author.image} alt="프로필이미지" />
+                  <img className="user-profileimg" onClick={()=> {
+                    moveProfile(item.author.accountname)
+                  }} src={item.author.image} alt="프로필이미지" />
                   <div className="user-contents">
                     <div className="timeline-title-wrap">
                       <p className="timeline-title">{item.author.username}</p>
@@ -142,6 +148,7 @@ export const FeedWrap = styled.div`
     border-radius: 42px;
     width: 42px;
     height: 42px;
+    cursor: pointer;
   }
 
   .user-contents {

@@ -22,7 +22,7 @@ export const JoinForm = styled.form`
   margin-top: 40px;
 `;
 
-export const JoinLabel = styled.label`
+export const InputLabel = styled.label`
   font-size: 16px;
   font-weight: bold;
   color: #3d3d3d;
@@ -32,7 +32,7 @@ export const InforText = styled.p`
   margin: 10px 0;
 `;
 
-export const JoinInput = styled.input`
+export const UnderInput = styled.input`
   margin-top: 5px;
   box-sizing: border-box;
   width: 100%;

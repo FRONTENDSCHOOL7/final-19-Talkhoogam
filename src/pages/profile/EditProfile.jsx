@@ -1,29 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  ImgLabel,
-  ImgUploader,
-  ImgWrapper,
-  PageTitle,
-  ProfileImg,
-  SetProfileForm,
-} from "../../styles/SetProfileStyled";
-import profile from "../../assets/images/img-profile.png";
-import {
-  NextBtn,
+  InforText,
+  InputLabel,
   PageArticle,
   UnderInput,
-  InputLabel,
   ErrorText,
-  InforText,
 } from "../../styles/JoinStyled";
-import { emailState, newToken, userData, pwState } from "../../recoil/joinData";
-import { useRecoilState, useRecoilValue } from "recoil";
-import JoinApi from "../../api/JoinApi";
-import { useNavigate } from "react-router-dom";
+import {
+  SetProfileForm,
+  PageTitle,
+  ImgWrapper,
+  ProfileImg,
+  ImgLabel,
+  ImgUploader,
+} from "../../styles/SetProfileStyled";
+import ProfileInfoAPI from "../../api/profile/ProfileInfoAPI";
+import Button from "../../components/common/button/Button";
 import IdValidApi from "../../api/IdValidApi";
+import EditProfileApi from "../../api/EditProfileApi";
+import { useRecoilState } from "recoil";
+import loginToken from "../../recoil/loginToken";
 
-export default function SetProfile() {
-  // 닉네임, 아이디, 소개, 이미지 파일 상태 관리
+export default function EditProfile() {
+  const [data, setData] = useState({});
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
   const [intro, setIntro] = useState("");
@@ -35,19 +34,28 @@ export default function SetProfile() {
   const [userIdErr, setUserIdErr] = useState("");
   const [introErr, setIntroErr] = useState("");
 
-  // 버튼 비활성화 상태 관리
+  const [token, setToken] = useRecoilState(loginToken);
+
   const [btnState, SetBtnState] = useState(true);
 
-  // 이메일, 패스워드 상태 관리(리코일)
-  const email = useRecoilValue(emailState);
-  const password = useRecoilValue(pwState);
+  useEffect(() => {
+    async function fetchData() {
+      const userRes = await ProfileInfoAPI();
+      setUsername(userRes.username);
+      setUserId(userRes.accountname);
+      setIntro(userRes.intro);
+      setImage(userRes.image);
+    }
+    fetchData();
+  }, []);
 
-  // 토큰, 유저 데이터 상태 관리(리코일)
-  const [token, setToken] = useRecoilState(newToken);
-  const [user, setUser] = useRecoilState(userData);
-
-  // useNavigate 사용
-  const navigate = useNavigate();
+  const UploadImage = (e) => {
+    if (e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    } else {
+      setImage(data.image);
+    }
+  };
 
   // username, userId, intro 값을 useState에 저장
   const UsernameValue = (e) => {
@@ -101,7 +109,7 @@ export default function SetProfile() {
   const btnActive = () => {
     if (
       !usernameErr &&
-      userIdErr === "사용 가능한 계정ID 입니다." &&
+      !userIdErr &&
       !introErr &&
       username &&
       userId &&
@@ -118,50 +126,30 @@ export default function SetProfile() {
     btnActive();
   }, [username, userId, intro]);
 
-  // api 호출, 성공 시 로그인 페이지로 이동
-  const handleJoin = async (e) => {
-    e.preventDefault();
-    console.log("handleJoin");
-    const JoinRes = await JoinApi(
-      username,
-      email,
-      password,
-      userId,
-      intro,
-      image
-    );
-    if (JoinRes.status !== 422) {
-      console.log(JoinRes);
-      const createToken = JoinRes.user.token;
-      const joinData = JoinRes.user;
-      setToken(createToken);
-      setUser(joinData);
-      navigate("/login");
-    } else {
-      setUserIdErr("이미 사용 중인 아이디입니다.");
-      SetBtnState(true);
-    }
-  };
+  // 프로필 수정 api
 
-  // 이미지 업로드
-  const UploadImage = (e) => {
-    e.target.files[0]
-      ? setImage(URL.createObjectURL(e.target.files[0]))
-      : setImage(profile);
+  const EditData = async (e) => {
+    e.preventDefault();
+    const res = await EditProfileApi(token, username, userId, intro, image);
+    if (res.statue !== 422) {
+      console.log("수정 성공");
+    } else {
+      console.error("수정 실패");
+    }
   };
 
   return (
     <PageArticle>
-      <PageTitle>프로필 설정</PageTitle>
+      <PageTitle>프로필 수정</PageTitle>
       <SetProfileForm>
         <ImgWrapper>
-          <ProfileImg src={image || profile} />
+          <ProfileImg src={image} />
           <ImgLabel htmlFor="img-file" />
           <ImgUploader
             type="file"
             id="img-file"
             accept="image/*"
-            onChange={(e) => UploadImage}
+            onChange={UploadImage}
             ref={InputFile}
           />
         </ImgWrapper>
@@ -172,8 +160,9 @@ export default function SetProfile() {
           type="text"
           id="nickname"
           placeholder="닉네임"
-          onChange={UsernameValue}
+          value={username}
           onBlur={UsernameValid}
+          onChange={UsernameValue}
         />
         <ErrorText>{usernameErr}</ErrorText>
 
@@ -185,8 +174,9 @@ export default function SetProfile() {
           type="text"
           id="id"
           placeholder="아이디"
-          onChange={UserIdValue}
+          value={userId}
           onBlur={UserIdValid}
+          onChange={UserIdValue}
         />
         <ErrorText>{userIdErr}</ErrorText>
 
@@ -195,13 +185,14 @@ export default function SetProfile() {
           type="text"
           id="intro"
           placeholder="소개"
-          onChange={IntroValue}
+          value={intro}
           onBlur={IntroValid}
+          onChange={IntroValue}
         />
         <ErrorText>{introErr}</ErrorText>
-        <NextBtn onClick={handleJoin} disabled={btnState}>
-          가입하기
-        </NextBtn>
+        <Button onClick={EditData} disabled={btnState}>
+          수정하기
+        </Button>
       </SetProfileForm>
     </PageArticle>
   );

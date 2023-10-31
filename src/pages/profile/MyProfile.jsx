@@ -14,7 +14,7 @@ import Footer from "../../components/footer/Footer";
 import GetFollowerFeedListAPI from "../../api/post/GetFollowerFeedListAPI";
 import ListFeed from "../profile/ListFeed.jsx";
 import GreedFeed from "../profile/GreedFeed";
-import ProductDetail from "../product/ProductDetail";
+import MyProduct from "../../components/profile/MyProduct.jsx";
 
 //Modal.setAppElemnet("#root");
 export default function Profile() {
@@ -45,10 +45,10 @@ export default function Profile() {
     const navigate = useNavigate();
     const [isFollowers, setIsFollowers] = useState("");
     const onClickFollower = () => {
-        navigate("../welcome")  //나중에 팔로워/팔로잉 목록으로 교체
+        navigate("../profile/Followers") 
     };
     const onClickFollowing = () => {
-        navigate("../welcome")
+        navigate("../profile/Followings")
     }
 
     //프로필 설정, 상품 등록
@@ -56,7 +56,7 @@ export default function Profile() {
         navigate("../setprofile")
     }
     const onClickProductAdd = () => {
-        navigate("../../product/productadd")
+        navigate("../product/productadd")
     }
   
     //유저 정보 불러오기
@@ -178,6 +178,7 @@ export default function Profile() {
                 </Follow>
             </ProfileMain>
             </ProfilePage>
+            <MyProduct></MyProduct>
             <Feed>
             <LayerNav>
                 {/* 격자 형식이 기본 리스트 형식은 선택 -- 그리드를 누르면 */}

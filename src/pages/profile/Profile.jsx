@@ -5,25 +5,20 @@ import styled from "styled-components";
 import ImgProfile from "../../assets/images/img-profile.png";
 import ImgShare from "../../assets/icons/icon-share.svg";
 import ImgMessage from "../../assets/icons/icon-message-circle.svg";
-import ImgLayes from "../../assets/icons/icon-img-layers.svg";
-import ImgExample from "../../assets/images/슈독.jfif";
 import ImgFeedListOff from "../../assets/icons/icon-post-list-off.svg";
 import ImgFeedListOn from "../../assets/icons/icon-post-list-on.svg";
 import ImgFeedGridOff from "../../assets/icons/icon-post-album-off.svg";
 import ImgFeedGridOn from "../../assets/icons/icon-post-album-on.svg";
-import ImgVertical from "../../assets/icons/s-icon-more-vertical.svg";
-import IconHeart from "../../assets/icons/heart.svg";
-import IconMessage from "../../assets/icons/icon-message-circle.svg";
-import { useRecoilValue } from "recoil";
-import loginToken from "../../recoil/loginToken.js";
 import ProfileInfoAPI from "../../api/profile/ProfileInfoAPI";
 import BasicHeader from "../../components/header/BasicHeader";
 import { LayoutStyle } from "../../styles/LayoutStyled.js";
 import Footer from "../../components/footer/Footer";
 import GetFollowerFeedListAPI from "../../api/post/GetFollowerFeedListAPI";
+import ListFeed from "../profile/ListFeed.jsx";
+import GreedFeed from "../profile/GreedFeed";
+import MyProduct from "../../components/profile/MyProduct.jsx";
 
 //Modal.setAppElemnet("#root");
-
 export default function Profile() {
   //const token = useRecoilValue(loginToken)
   //팔로우/언팔로우 버튼
@@ -52,10 +47,18 @@ export default function Profile() {
   const navigate = useNavigate();
   const [isFollowers, setIsFollowers] = useState("");
   const onClickFollower = () => {
-    navigate("../welcome"); //나중에 팔로워/팔로잉 목록으로 교체
+    navigate("../profile/Followers");
   };
   const onClickFollowing = () => {
-    navigate("../welcome");
+    navigate("../profile/Followings");
+  };
+
+  //프로필 설정, 상품 등록
+  const onClickSetProfile = () => {
+    navigate("../setprofile");
+  };
+  const onClickProductAdd = () => {
+    navigate("../product/productadd");
   };
 
   //유저 정보 불러오기
@@ -77,8 +80,8 @@ export default function Profile() {
 
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   //피드 스타일 선택
-  const [gridStyle, setGridStyle] = useState(false);
-  const [listStyle, setListstyle] = useState(true);
+  const [gridStyle, setGridStyle] = useState(false); //켜짐
+  const [listStyle, setListstyle] = useState(true); //꺼짐
   //리스트 형식 피드 받아오기
   const [feedData, setFeedData] = useState([]); // 상태를 사용하여 데이터를 저장합니다.
 
@@ -177,17 +180,18 @@ export default function Profile() {
             </ProfileMid>
             <Follow>
               <img src={ImgMessage} alt="메세지구현X"></img>
-              <button onClick={handleClick}>
+              <div onClick={handleClick}>
                 {isFollowing ? (
                   <button className="unfollow-btn">언팔로우</button>
                 ) : (
                   <button className="follow-btn">팔로우</button>
                 )}
-              </button>
+              </div>
               <img src={ImgShare} alt="공유구현X"></img>
             </Follow>
           </ProfileMain>
         </ProfilePage>
+        <MyProduct></MyProduct>
         <Feed>
           <LayerNav>
             {/* 격자 형식이 기본 리스트 형식은 선택 -- 그리드를 누르면 */}
@@ -204,76 +208,8 @@ export default function Profile() {
               className="feedgrid"
             ></img>
           </LayerNav>
-          <Layer>
-            <div className="feedlayer">
-              <div className="content">
-                {" "}
-                {/*피드가 추가될때마다 content div 추가*/}
-                <img src={ImgExample} alt="예시 사진" className="bookImg"></img>
-                <img
-                  src={ImgLayes}
-                  alt="이미지 2장 이상일 경우 나타나는 아이콘"
-                  className="bookMultiple"
-                ></img>
-              </div>
-              <div className="content">
-                <img src={ImgExample} alt="예시 사진" className="bookImg"></img>
-                <img
-                  src={ImgLayes}
-                  alt="이미지 2장 이상일 경우 나타나는 아이콘"
-                  className="bookMultiple"
-                ></img>
-              </div>
-              <div className="content">
-                <img src={ImgExample} alt="예시 사진" className="bookImg"></img>
-                <img
-                  src={ImgLayes}
-                  alt="이미지 2장 이상일 경우 나타나는 아이콘"
-                  className="bookMultiple"
-                ></img>
-              </div>
-              <div className="content">
-                <img src={ImgExample} alt="예시 사진" className="bookImg"></img>
-                <img
-                  src={ImgLayes}
-                  alt="이미지 2장 이상일 경우 나타나는 아이콘"
-                  className="bookMultiple"
-                ></img>
-              </div>
-            </div>
-          </Layer>
         </Feed>
-        <List>
-          <img
-            className="list-profileimg"
-            src={ImgProfile}
-            alt="프로필이미지"
-          />
-          <div className="feedlist">
-            <img
-              className="list-vertical"
-              src={ImgVertical}
-              alt="vertical 탭"
-            />
-            <p className="list-name">이름이름이르밍르밍름</p>
-            <p className="list-id">@아이디</p>
-            <img className="list-img" src={ImgExample} alt="피드 사진" />
-            <p className="list-text">
-              옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여,
-              뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할
-              넣는 풍부하게 뛰노는 인생의 힘있다.
-            </p>
-            <div className="list-icon">
-              <img src={IconHeart} alt="좋아요" />
-              <p>333</p>
-              <img src={IconMessage} alt="댓글" />
-              <p>333</p>
-            </div>
-            <div className="list-date">
-              <p>2020년 10월 21일</p>
-            </div>
-          </div>
-        </List>
+        {listStyle ? <GreedFeed></GreedFeed> : <ListFeed></ListFeed>}
         <Footer></Footer>
       </LayoutStyle>
     </>
@@ -383,8 +319,8 @@ const Follow = styled.div`
     margin: auto 5px;
   }
   .follow-btn {
-    border: 1px Solid var(--color-mainColor);
-    background-color: var(--color-mainColor);
+    border: 1px Solid #f26e22;
+    background-color: #f26e22;
     color: white;
   }
   .unfollow-btn {
@@ -478,16 +414,13 @@ const List = styled.div`
     border-radius: 30px;
   }
   .feedlist {
-    line-height: 1.1;
     margin-top: 4px;
     margin-left: 12px;
   }
   .list-name {
-    font-size: 15px;
     font-weight: 500;
   }
   .list-id {
-    font-size: 13px;
     color: #767676;
     margin-top: 4px;
   }

@@ -2,73 +2,75 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import styled from "styled-components";
-import ImgProfile from "../../assets/images/img-profile.png";
-import ImgExample from "../../assets/images/슈독.jfif";
 import ImgVertical from "../../assets/icons/s-icon-more-vertical.svg";
 import IconHeart from "../../assets/icons/heart.svg";
 import IconMessage from "../../assets/icons/icon-message-circle.svg";
+import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
+import accountname from "../../recoil/accountname";
 
 export default function ListFeed() {
+  const [loading, setLoading] = useState(false);
+  const { getMyFeedListAPI } = MyFeedListAPI();
+  const [myFeedData, setMyFeedData] = useState(() => {});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const list = await getMyFeedListAPI();
+        setMyFeedData(list);
+        setLoading(false);
+      } catch (error) {
+        console.error("데이터 가져오기 오류:", error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log("myFeedData : ", myFeedData);
+
   return (
     <UlStyled>
-      <List>
-        <img className="list-profileimg" src={ImgProfile} alt="프로필이미지" />
-        <div className="feedlist">
-          <div>
+      {myFeedData ? (
+        myFeedData.post.map((item, index) => (
+          <List key={item.id}>
             <img
-              className="list-vertical"
-              src={ImgVertical}
-              alt="vertical 탭"
+              className="list-profileimg"
+              src={item.author.image}
+              alt="프로필이미지"
             />
-            <p className="list-name">이름이름이르밍르밍름</p>
-            <p className="list-id">@아이디</p>
-          </div>
-          <img className="list-img" src={ImgExample} alt="피드 사진" />
-          <p className="list-text">
-            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다.
-            이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는
-            풍부하게 뛰노는 인생의 힘있다.
-          </p>
-          <div className="list-icon">
-            <img src={IconHeart} alt="좋아요" />
-            <p>333</p>
-            <img src={IconMessage} alt="댓글" />
-            <p>333</p>
-          </div>
-          <div className="list-date">
-            <p>2020년 10월 21일</p>
-          </div>
-        </div>
-      </List>
-      <List>
-        <img className="list-profileimg" src={ImgProfile} alt="프로필이미지" />
-        <div className="feedlist">
-          <div>
-            <img
-              className="list-vertical"
-              src={ImgVertical}
-              alt="vertical 탭"
-            />
-            <p className="list-name">이름이름이르밍르밍름</p>
-            <p className="list-id">@아이디</p>
-          </div>
-          <img className="list-img" src={ImgExample} alt="피드 사진" />
-          <p className="list-text">
-            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다.
-            이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는
-            풍부하게 뛰노는 인생의 힘있다.
-          </p>
-          <div className="list-icon">
-            <img src={IconHeart} alt="좋아요" />
-            <p>333</p>
-            <img src={IconMessage} alt="댓글" />
-            <p>333</p>
-          </div>
-          <div className="list-date">
-            <p>2020년 10월 21일</p>
-          </div>
-        </div>
-      </List>
+            <div className="feedlist">
+              <div>
+                <img
+                  className="list-vertical"
+                  src={ImgVertical}
+                  alt="vertical 탭"
+                />
+                <p className="list-name">{item.author.username}</p>
+                <p className="list-id">{item.author.accountname}</p>
+              </div>
+              <img
+                onClick={myFeedData}
+                className="list-img"
+                src={item.image}
+                alt="피드 사진"
+              />
+              <p className="list-text">{item.content}</p>
+              <div className="list-icon">
+                <img src={IconHeart} alt="좋아요" />
+                <p>{item.heartCount}</p>
+                <img src={IconMessage} alt="댓글" />
+                <p>{item.comments}</p>
+              </div>
+              <div className="list-date">
+                <p>{item.createdAt}</p>
+              </div>
+            </div>
+          </List>
+        ))
+      ) : (
+        <p>오류</p>
+      )}
     </UlStyled>
   );
 }
@@ -81,7 +83,6 @@ const List = styled.li`
   margin: 4px auto;
   font-size: 14px;
   padding: 16px 21px;
-
   .list-profileimg {
     width: 42px;
     height: 42px;
@@ -89,11 +90,13 @@ const List = styled.li`
     border-radius: 30px;
   }
   .feedlist {
+    line-height: 1.1;
     margin-top: 4px;
     margin-left: 12px;
+    flex-grow: 1;
   }
-
   .list-name {
+    font-size: 15px;
     font-weight: 500;
     max-width: 300px;
   }
@@ -111,7 +114,6 @@ const List = styled.li`
     display: flex;
     margin: 12px auto;
   }
-
   .list-icon img {
     width: 20px;
     height: 20px;

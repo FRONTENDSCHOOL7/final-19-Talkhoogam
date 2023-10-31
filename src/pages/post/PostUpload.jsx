@@ -136,7 +136,7 @@ const InputWrap = styled.div`
     width: 304px;
     height: 228px;
     border-radius: 10px;
-    object-fit: cover;
+    object-fit: contain;
     margin-bottom: 16px;
   }
 `

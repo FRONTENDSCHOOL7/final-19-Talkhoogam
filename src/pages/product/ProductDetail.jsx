@@ -8,9 +8,6 @@ import IconDot from "../../assets/icons/s-icon-more-vertical.svg";
 import CommonModal from '../../components/modal/CommonModal';
 import { useRecoilValue } from 'recoil';
 import newAaccountname from "../../recoil/accountname";
-// import IconHeart from "../../assets/icons/heart.svg";
-// import IconHeartActive from "../../assets/icons/heart-avtive.svg"
-// import IconMessage from "../../assets/icons/icon-message-circle.svg";
 
 export default function ProductDetail() {
 
@@ -20,15 +17,6 @@ export default function ProductDetail() {
     const accountname = useRecoilValue(newAaccountname);
     const [modalOpen, setModalOpen ] = useState(false);
     const isMine = productDetail ? productDetail.author.accountname === accountname ? true : false : false;
-    // const [iconColor, setIconColor] = useState(IconHeart);
-
-    // const colorChangeHandler = () => {
-    //     if(iconColor === IconHeart){
-    //         setIconColor(IconHeartActive);
-    //     }else{
-    //         setIconColor(IconHeart)
-    //     }
-    // }
 
     const showModal = () => {
         modalOpen ? setModalOpen(false) : setModalOpen(true)
@@ -59,14 +47,6 @@ export default function ProductDetail() {
                     
                     <div className='product-price-wrap'>
                         <p className='product-price'>{productDetail.price}원</p>
-                        {/* <div className="social-wrap">
-                            <div>
-                                <img onClick={colorChangeHandler} className="social-icon" src={iconColor} alt="하트아이콘" />
-                            </div>
-                            <div>
-                                <img className="social-icon" src={IconMessage} alt="댓글아이콘" />
-                            </div>
-                        </div> */}
                         <div className='setting-wrap'>
                             <p className="wr-date">{productDetail.updatedAt}</p>
                             <img className="img-dot" src={IconDot} alt="도트이미지" onClick={showModal}/>
@@ -95,6 +75,7 @@ export default function ProductDetail() {
                     isMine={isMine}
                     setModalOpen={setModalOpen}
                     id={params.id}
+                    isLocation={"/product"}
                 ></CommonModal>
             }
             
@@ -172,35 +153,4 @@ export const ProductDetailWrap = styled.div`
         height: 42px;
         border-radius: 42px;
     }
-
-/*
-    .social-wrap{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--color-darkgrey);
-        font-size: 12px;
-        line-height: 12px;
-        margin: 10px 0;
-        .social-icon{
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            object-fit: cover;
-        }
-    }
-*/
-    /* .social-wrap div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .social-wrap div::after {
-        margin-left: 6px;
-        content: "55";
-    } */
-
-    
-    
 `;

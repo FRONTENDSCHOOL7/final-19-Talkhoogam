@@ -3,12 +3,20 @@ import { ModalLayout, ModalHeader, ModalInsideLayout, ModalButton } from '../../
 import { useNavigate } from 'react-router-dom';
 import IconClose from "../../assets/icons/icon-delete.svg"
 
-export default function CommonModal({isMine, setModalOpen , onClick , id , ...props}) {
+export default function CommonModal({isMine, setModalOpen , onClick , id , isLocation ,...props}) {
 
     const navigate = useNavigate();
 
     const closeModal = () => {
         setModalOpen(false);
+    }
+
+    const onClickHandler = () => {
+        if(isLocation === "/post"){
+            navigate(`/postmodify/${id}`);
+        }else if(isLocation === "/product"){
+            navigate(`/productmodify/${id}`)
+        }
     }
     
     return (
@@ -23,7 +31,7 @@ export default function CommonModal({isMine, setModalOpen , onClick , id , ...pr
                 {isMine ? (
                     <>
                     <ModalButton>삭제</ModalButton>
-                    <ModalButton onClick={() => {navigate(`/productmodify/${id}`)}}>수정</ModalButton>
+                    <ModalButton onClick={onClickHandler}>수정</ModalButton>
                     </>
                 ) : (
                     <ModalButton>신고하기</ModalButton>

@@ -17,6 +17,8 @@ import PostUpload from "../pages/post/PostUpload";
 import Followings from "../pages/profile/Followings";
 import Followers from "../pages/profile/Followers";
 import EditProfile from "../pages/profile/EditProfile";
+import PostDetail from "../pages/post/PostDetail";
+import PostModify from "../pages/post/PostModify";
 
 export default function Routers() {
   return (
@@ -37,6 +39,8 @@ export default function Routers() {
       <Route path="/sellbook" element={<ProductList />} />
       <Route path="/productmodify/:id" element={<ProductModify />} />
       <Route path="/postupload" element={<PostUpload />} />
+      <Route path="/post/detail/:id" element={<PostDetail />} />
+      <Route path="/postmodify/:id" element={<PostModify />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -16,7 +16,7 @@ function GetFollowerFeedListAPI(){
                     },
                 });
                 const data = await res.json()
-                return data;
+                return data.post;
             } catch (error) {
                 return error;
             };

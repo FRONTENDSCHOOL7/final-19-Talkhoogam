@@ -6,6 +6,7 @@ import ImgVertical from "../../assets/icons/s-icon-more-vertical.svg";
 import IconHeart from "../../assets/icons/heart.svg";
 import IconMessage from "../../assets/icons/icon-message-circle.svg";
 import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
+import accountname from "../../recoil/accountname";
 
 export default function ListFeed(){
     const [loading, setLoading] = useState(false);
@@ -53,7 +54,7 @@ export default function ListFeed(){
                 <img src={IconHeart} alt="좋아요" />
                 <p>{item.heartCount}</p>
                 <img src={IconMessage} alt="댓글" />
-                <p>{item.comments.length}</p>
+                <p>{item.comments}</p>
                 </div>
                 <div className="list-date">
                 <p>{item.createdAt}</p>

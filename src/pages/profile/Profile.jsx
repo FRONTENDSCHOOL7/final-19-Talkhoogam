@@ -17,6 +17,9 @@ import GetFollowerFeedListAPI from "../../api/post/GetFollowerFeedListAPI";
 import ListFeed from "../profile/ListFeed.jsx";
 import GreedFeed from "../profile/GreedFeed";
 import MyProduct from "../../components/profile/MyProduct.jsx";
+import AccountNameProfileAPI from "../../api/post/AcountNameProfileAPI";
+import accountname from "../../recoil/accountname";
+import { useParams } from 'react-router-dom';
 
 //Modal.setAppElemnet("#root");
 export default function Profile() {
@@ -40,7 +43,6 @@ export default function Profile() {
   };
   const onClickHandler = async () => {
     const info = await ProfileInfoAPI();
-    console.log(info);
   };
 
   //팔로워 목록
@@ -62,7 +64,7 @@ export default function Profile() {
   };
 
   //유저 정보 불러오기
-  const [profileInfo, setProfileInfo] = useState(() => {});
+  {/*const [profileInfo, setProfileInfo] = useState(() => {});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchUserData = async () => {
@@ -76,7 +78,7 @@ export default function Profile() {
       }
     };
     fetchUserData();
-  }, []);
+  }, []);*/}
 
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   //피드 스타일 선택
@@ -109,6 +111,27 @@ export default function Profile() {
     fetchData();
   }, []);
 
+  //유저 프로필 불러오기
+  const params = useParams();
+  const {getAccountNameProfile} = AccountNameProfileAPI(params.accountname);
+  const [userInfo, setUserInfo] = useState([]);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchData(){
+        try {
+            const data = await getAccountNameProfile();
+            setUserInfo(data.profile);
+        } catch (error){
+            console.error("데이터 가져오기 오류:", error);
+        } finally {
+            setLoading(false)
+        }
+    }
+    fetchData();
+  }, []);
+  console.log(userInfo)
+  
   return (
     <>
       <LayoutStyle>
@@ -121,7 +144,7 @@ export default function Profile() {
                   <button className="followersNum">Loading...</button>
                 ) : (
                   <button className="followersNum">
-                    {profileInfo?.followerCount}
+                    {userInfo?.followerCount}
                   </button>
                 )}
                 <p className="profilehead-text">followers</p>
@@ -129,7 +152,7 @@ export default function Profile() {
               <div>
                 <img
                   className="profileImg"
-                  src={profileInfo?.image}
+                  src={userInfo?.image}
                   alt="프로필이미지"
                   onClick={() => openImg({ ImgProfile })}
                 />
@@ -140,7 +163,7 @@ export default function Profile() {
                 >
                   {selectedImg && (
                     <img
-                      src={profileInfo?.image}
+                      src={userInfo?.image}
                       alt="프로필 이미지"
                       className="profileImg-modal"
                     ></img>
@@ -155,7 +178,7 @@ export default function Profile() {
                   <button className="followingsNum">Loading...</button>
                 ) : (
                   <button className="followingsNum">
-                    {profileInfo?.followerCount}
+                    {userInfo?.followerCount}
                   </button>
                 )}
                 <p className="profilehead-text">followings</p>
@@ -165,17 +188,17 @@ export default function Profile() {
               {loading ? (
                 <p className="userName">Loading...</p>
               ) : (
-                <p className="userName">{profileInfo.username}</p>
+                <p className="userName">{userInfo.username}</p>
               )}
               {loading ? (
                 <p className="id">Loading...</p>
               ) : (
-                <p className="id">{profileInfo.accountname}</p>
+                <p className="id">{userInfo.accountname}</p>
               )}
               {loading ? (
                 <p className="profileIntro">Loading...</p>
               ) : (
-                <p className="profileIntro">{profileInfo.intro}</p>
+                <p className="profileIntro">{userInfo.intro}</p>
               )}
             </ProfileMid>
             <Follow>
@@ -209,7 +232,7 @@ export default function Profile() {
             ></img>
           </LayerNav>
         </Feed>
-        {listStyle ? <GreedFeed></GreedFeed> : <ListFeed></ListFeed>}
+        {listStyle ? <GreedFeed accountname = {params.accountname}></GreedFeed> : <ListFeed accountname = {params.accountname}></ListFeed>}
         <Footer></Footer>
       </LayoutStyle>
     </>
@@ -238,14 +261,10 @@ const ProfilePage = styled.article`
   max-width: 390px;
   height: 40vh;
   margin-bottom: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-top: 30px;
 `;
 
 const ProfileMain = styled.div`
-  margin: 30px auto;
   display: flex;
   flex-direction: column;
   align-items: center;

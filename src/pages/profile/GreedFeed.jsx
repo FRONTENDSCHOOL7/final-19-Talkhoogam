@@ -5,10 +5,10 @@ import styled from "styled-components";
 import ImgLayes from "../../assets/icons/icon-img-layers.svg";
 import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
 
-export default function LayerFeed(){
+export default function LayerFeed(accountname){
 
     const [loading, setLoading] = useState(false);
-    const {getMyFeedListAPI} = MyFeedListAPI();
+    const {getMyFeedListAPI} = MyFeedListAPI(accountname);
     const [myFeedData, setMyFeedData] = useState(() => {});
 
     useEffect(() => {
@@ -27,17 +27,17 @@ export default function LayerFeed(){
     fetchData();
     }, []);
     console.log('myFeedData : ', myFeedData)
+    console.log(accountname.accountname)
 
     //썸네일 클릭
     const onClickThumbnail = () => {
         alert("구현 X")
     }
-
     return(
         <Layer>
             {myFeedData ? (
             myFeedData.post.map((item, index) => (
-                <div className="feedlayer">
+                <div className="feedlayer" key={index}>
                 <button className="content" onClick={onClickThumbnail}>
                     {" "}
                     {/*피드가 추가될때마다 content div 추가*/}
@@ -57,7 +57,7 @@ const Layer = styled.div`
     grid-template-rows: repeat(3, 1fr);
     gap: 12px;
     margin: 16px;
-    margin-bottom: 70px;
+    margin-bottom: 80px;
     .content {
         position: relative;
         padding: 0;

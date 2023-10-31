@@ -8,9 +8,9 @@ import IconMessage from "../../assets/icons/icon-message-circle.svg";
 import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
 import accountname from "../../recoil/accountname";
 
-export default function ListFeed() {
+export default function ListFeed(accountname) {
   const [loading, setLoading] = useState(false);
-  const { getMyFeedListAPI } = MyFeedListAPI();
+  const { getMyFeedListAPI } = MyFeedListAPI(accountname);
   const [myFeedData, setMyFeedData] = useState(() => {});
 
   useEffect(() => {

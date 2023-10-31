@@ -6,7 +6,7 @@ export const MyProductWrap = styled.article`
   min-height: 200;
   margin: 6px auto;
   padding: 20px 12px 10px;
-
+  border: 0.5px solid #DBDBDB; 
   & .sub-title {
     display: inline-block;
     font-size: 16px;

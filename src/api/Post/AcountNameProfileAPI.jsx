@@ -1,13 +1,14 @@
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
 
-function MyFeedListAPI({accountname}){
+function AccountNameProfileAPI(accountName){
     const token = useRecoilValue(loginToken);
-    const getMyFeedListAPI = async () => {
+    
+    const getAccountNameProfile = async () => {
             const url = "https://api.mandarin.weniv.co.kr";
 
             try {
-                const res = await fetch(`${url}/post/${accountname}/userpost`, {
+                const res = await fetch(`${url}/profile/${accountName}`, {
                     method: "GET",
                     headers: {
                         Authorization : `Bearer ${token}`,
@@ -20,7 +21,7 @@ function MyFeedListAPI({accountname}){
                 return error;
             };
         };
-        return {getMyFeedListAPI}
+        return {getAccountNameProfile}
 };
 
-export default MyFeedListAPI;
+export default AccountNameProfileAPI;

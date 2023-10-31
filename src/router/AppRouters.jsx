@@ -30,7 +30,7 @@ export default function Routers() {
       <Route path="/setprofile" element={<SetProfile />} />
       <Route path="/gathering" element={<Gathering />} />
       <Route path="/header" element={<Header />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/:accountname" element={<Profile />} />
       <Route path="/editprofile" element={<EditProfile />} />
       <Route path="/profile/followings" element={<Followings />} />
       <Route path="/profile/followers" element={<Followers />} />

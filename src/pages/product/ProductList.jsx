@@ -40,7 +40,7 @@ export default function ProductList() {
         navigate(`/profile/${id}`);
     }
 
-    console.log(productData)
+    // console.log(productData)
     return (
         <LayoutStyle>
             <BasicHeader></BasicHeader>

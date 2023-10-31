@@ -7,12 +7,15 @@ import { ReactComponent as IconHand } from "../../assets/icons/handshake.svg";
 import { ReactComponent as IconEdit } from "../../assets/icons/edit.svg";
 import { ReactComponent as IconusersAlt } from "../../assets/icons/users-alt.svg";
 import { ReactComponent as IconUser } from "../../assets/icons/user.svg";
+import accountname from "../../recoil/accountname";
+import { useRecoilValue } from "recoil";
 
 function Footer() {
     const navigate = useNavigate();
     const uselocation = useLocation();
     const [svgColor, setSvgColor] = useState(uselocation.pathname.toLowerCase());
     const [modalOpen, setModalOpen] = useState(false);
+    const accountName = useRecoilValue(accountname);
 
     const showModal = () => {
         modalOpen ? setModalOpen(false) : setModalOpen(true);
@@ -21,10 +24,10 @@ function Footer() {
     const handleClickState = (pageName) => {
         navigate(`/${pageName}`);
         setSvgColor(pageName);
-        console.log(`페이지 이름 : /${pageName}`);
+        // console.log(`페이지 이름 : /${pageName}`);
         if (`/${pageName}` === "/home") {
         setSvgColor(`/${pageName}`);
-        } else if (`/${pageName}` === "/profile") {
+        } else if (`/${pageName}` === `/profile/${accountName}`) {
         setSvgColor(`/${pageName}`);
         } else if(`/${pageName}` === "/sellbook"){
             setSvgColor(`/${pageName}`)
@@ -97,14 +100,14 @@ function Footer() {
 
             <FooterIconWrap
             onClick={() => {
-                handleClickState("profile");
+                handleClickState(`profile/${accountName}`);
             }}
             >
             <IconUser
                 className="footer-icon"
-                fill={svgColor === "/profile" ? "#56b778" : "#979797"}
+                fill={svgColor === `/profile/${accountName}` ? "#56b778" : "#979797"}
             />
-            <p style={{ color: svgColor === "/profile" ? "#56b778" : "#767676" }}>
+            <p style={{ color: svgColor === `/profile/${accountName}` ? "#56b778" : "#767676" }}>
                 프로필
             </p>
             </FooterIconWrap>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import PostDetailAPI from '../../api/post/PostDetailAPI';
 import {LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
@@ -9,13 +9,18 @@ import IconMessage from "../../assets/icons/icon-message-circle.svg";
 import IconHeart from "../../assets/icons/heart.svg";
 import CommonModal from '../../components/modal/CommonModal';
 import IconHeartActive from "../../assets/icons/heart-avtive.svg";
+import accountname from '../../recoil/accountname';
+import { useRecoilValue } from 'recoil';
 
 export default function PostDetail() {
-
+  
+  const navigate = useNavigate();
+  const loginAccountName = useRecoilValue(accountname);
   const params = useParams();
   const getPostDetail = PostDetailAPI(params.id);
   const [postDetail, setPostDetail] = useState(() => {});
   const [modalOpen, setModalOpen ] = useState(false);
+  const isMine = postDetail ? postDetail.author.accountname === loginAccountName ? true : false : false;
 
   useEffect(() => {
     const detailList = async () => {
@@ -25,7 +30,7 @@ export default function PostDetail() {
     detailList();
   }, []);
 
-  console.log(postDetail);
+  // console.log(postDetail);
 
   const showModal = () => {
       modalOpen ? setModalOpen(false) : setModalOpen(true)
@@ -41,6 +46,10 @@ export default function PostDetail() {
       }
   }
 
+  function onClickProfile(id){
+      navigate(`/profile/${id}`);
+  }
+
   return (
     <LayoutStyle>
       <h1 className='a11y-hidden'>피드 상세보기 페이지</h1>
@@ -49,7 +58,7 @@ export default function PostDetail() {
         <PostDetailWrap>
           {postDetail ? (
             <div className="user-timeline">
-                <img className="user-profileimg" src={postDetail.author.image} alt="프로필이미지" />
+                <img className="user-profileimg" onClick={() => {onClickProfile(postDetail.author.accountname)}} src={postDetail.author.image} alt="프로필이미지" />
                 <div className="user-contents">
                   <div className="timeline-title-wrap">
                     <p className="timeline-title">{postDetail.author.username}</p>
@@ -77,10 +86,10 @@ export default function PostDetail() {
       </LayoutInsideStyle>
       { modalOpen && 
         <CommonModal 
-        isMine={false}
+        isMine={isMine}
         id={params.id}
         setModalOpen={setModalOpen}
-        isLocation={`/post`}
+        isLocation={`post`}
         ></CommonModal>
       }
     </LayoutStyle>
@@ -115,6 +124,7 @@ export const PostDetailWrap = styled.div`
     border-radius: 42px;
     width: 42px;
     height: 42px;
+    cursor: pointer;
   }
 
   .user-contents {

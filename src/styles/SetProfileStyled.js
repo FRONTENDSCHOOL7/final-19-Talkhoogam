@@ -34,6 +34,19 @@ export const ImgLabel = styled.label`
   position: absolute;
   top: -5px;
   left: 115px;
+
+  &::after {
+    content: "";
+    width: 90px;
+    height: 90px;
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: -1;
+  }
 `;
 
 export const ImgUploader = styled.input`

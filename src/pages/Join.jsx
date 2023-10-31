@@ -3,8 +3,8 @@ import {
   ErrorText,
   InforText,
   JoinForm,
-  JoinInput,
-  JoinLabel,
+  UnderInput,
+  InputLabel,
   NextBtn,
   PageArticle,
   Title,
@@ -40,6 +40,7 @@ export default function Join() {
   };
 
   const EmailValid = async (e) => {
+    e.preventDefault();
     if (!email) {
       setEmailErr("필수 입력 항목입니다.");
     } else if (!email.includes("@")) {
@@ -76,7 +77,14 @@ export default function Join() {
   };
 
   const handleValid = () => {
-    if (!emailErr && !pwErr && !pwCheckErr && email && password && pwCheck) {
+    if (
+      emailErr === "사용 가능한 이메일 입니다." &&
+      !pwErr &&
+      !pwCheckErr &&
+      email &&
+      password &&
+      pwCheck
+    ) {
       SetBtnState(false);
     } else {
       SetBtnState(true);
@@ -87,7 +95,8 @@ export default function Join() {
     handleValid();
   }, [email, password, pwCheck]);
 
-  const MoveSetProfile = () => {
+  const MoveSetProfile = (e) => {
+    e.preventDefault();
     navigate("/setProfile");
   };
 
@@ -95,8 +104,8 @@ export default function Join() {
     <PageArticle>
       <Title>회원가입</Title>
       <JoinForm>
-        <JoinLabel htmlFor="email">이메일</JoinLabel>
-        <JoinInput
+        <InputLabel htmlFor="email">이메일</InputLabel>
+        <UnderInput
           type="email"
           placeholder="이메일"
           onChange={EmailValue}
@@ -104,11 +113,11 @@ export default function Join() {
         />
         <ErrorText>{emailErr}</ErrorText>
 
-        <JoinLabel htmlFor="password">비밀번호</JoinLabel>
+        <InputLabel htmlFor="password">비밀번호</InputLabel>
         <InforText>
           영어 소문자, 숫자를 포함한 6자 이상의 비밀번호를 입력해 주세요.
         </InforText>
-        <JoinInput
+        <UnderInput
           type="password"
           placeholder="비밀번호"
           minLength="6"
@@ -118,8 +127,8 @@ export default function Join() {
         />
         <ErrorText>{pwErr}</ErrorText>
 
-        <JoinLabel htmlFor="password">비밀번호 확인</JoinLabel>
-        <JoinInput
+        <InputLabel htmlFor="password">비밀번호 확인</InputLabel>
+        <UnderInput
           type="password"
           placeholder="비밀번호 확인"
           minLength="6"

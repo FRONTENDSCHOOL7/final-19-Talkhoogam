@@ -1,11 +1,9 @@
 import { useRecoilValue } from 'recoil';
 import loginToken from '../../recoil/loginToken';
-import accountname from '../../recoil/accountname';
 
-function FollowingListAPI() {
+function FollowingListAPI(accountName) {
   const token = useRecoilValue(loginToken);
   const url = 'https://api.mandarin.weniv.co.kr';
-  const accountName = useRecoilValue(accountname);
 
   const getFollowingList = async () => {
     try {
@@ -22,6 +20,7 @@ function FollowingListAPI() {
       console.error('API 접근에 실패하였습니다.', error);
     }
   };
+
   return { getFollowingList };
 }
 

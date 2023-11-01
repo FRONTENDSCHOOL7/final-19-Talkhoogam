@@ -1,10 +1,8 @@
 import { useRecoilValue } from 'recoil';
 import loginToken from '../../recoil/loginToken';
-import accountname from '../../recoil/accountname';
 
-function FollowerListAPI() {
+function FollowerListAPI(accountName) {
   const token = useRecoilValue(loginToken);
-  const accountName = useRecoilValue(accountname);
   const url = 'https://api.mandarin.weniv.co.kr';
 
   const getFollowerList = async () => {

@@ -1,0 +1,79 @@
+import React, { useEffect, useRef, useState } from "react";
+import { LayoutStyle } from "../styles/LayoutStyled";
+import { BackBtn, HeaderMain } from "../styles/HeaderStyled";
+import iconArrow from "../assets/icons/icon-arrow-left.svg";
+import { useRecoilValue } from "recoil";
+import loginToken from "../recoil/loginToken";
+import SearchApi from "../api/SearchApi";
+import { SearchList } from "../styles/SearchStyled";
+
+export default function Search() {
+  const [searchData, setSearchData] = useState([]);
+  const [searchId, setSearchId] = useState("");
+  const token = useRecoilValue(loginToken);
+
+  // 처음 헤더의 input에 focus가 오도록
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  // searchInput의 value
+  function searchValue(e) {
+    setSearchId(e.target.value);
+  }
+
+  // 뒤로가기
+  function goBack(e) {
+    e.preventDefault();
+    window.history.back();
+  }
+
+  useEffect(() => {
+    const fetchSearch = async () => {
+      const searchRes = await SearchApi(token, searchId);
+      setSearchData(searchRes);
+      // console.log("Set searchData:", searchRes);
+    };
+    if (searchId) {
+      fetchSearch();
+    }
+  }, [searchId]);
+
+  // console.log("Search Header data:", searchData);
+
+  const SearchResult = () => {
+    return (
+      <>
+        {searchData.map((item) => (
+          <SearchList key={item._id}>
+            <p className="user-name">{item.username}</p>
+            <p className="user-id">{"@ " + item.accountname}</p>
+          </SearchList>
+        ))}
+      </>
+    );
+  };
+
+  return (
+    <LayoutStyle>
+      <HeaderMain>
+        <BackBtn onClick={goBack}>
+          <img src={iconArrow} alt="뒤로가기 버튼" />
+        </BackBtn>
+        <label className="a11y-hidden" htmlFor="headerInp" />
+        <input
+          type="text"
+          placeholder="검색어를 입력해주세요."
+          onChange={searchValue}
+          className="searchInput"
+          id="headerInp"
+          ref={inputRef}
+        />
+      </HeaderMain>
+      {searchId ? <SearchResult /> : null}
+    </LayoutStyle>
+  );
+}

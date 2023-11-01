@@ -31,9 +31,9 @@ function Empty({ image, alt, children, navigatePath }) {
   const onClickHandler = () => {
     console.log("페이지 경로 : ", location);
     if (location.pathname === "/home") {
-      navigate("/searchPage");
+      navigate("/search");
     } else if (location.pathname === "/sellbook") {
-      navigate("/searchPage");
+      navigate("/search");
     } else {
       navigate(navigatePath);
     }

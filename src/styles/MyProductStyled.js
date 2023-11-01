@@ -1,12 +1,15 @@
 import styled from 'styled-components';
+import Button from '../components/common/button/Button';
 
 export const MyProductWrap = styled.article`
   box-sizing: border-box;
   width: 100%;
-  min-height: 200;
+  max-width: 390px;
   margin: 6px auto;
   padding: 20px 12px 10px;
-  border: 0.5px solid #DBDBDB; 
+  border: 0.5px solid #dbdbdb;
+  position: relative;
+
   & .sub-title {
     display: inline-block;
     font-size: 16px;
@@ -15,14 +18,42 @@ export const MyProductWrap = styled.article`
   }
 
   & .error-list {
-    font-size: 16px;
+    display: block;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
+  }
+
+  & .product-ul-wrap {
+    position: relative;
+  }
+`;
+
+export const ScrollHandler = styled.button`
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background-color: black;
+  opacity: 0.3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &.left {
+    left: 0px;
+  }
+
+  &.right {
+    right: 0px;
   }
 `;
 
 export const MyProductUl = styled.ul`
-  width: 100%;
+  max-width: 390px;
   height: 140px;
 
   display: flex;

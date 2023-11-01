@@ -16,12 +16,12 @@ const fadeInUp = keyframes`
 
 export const ModalLayout = styled.div`
     width: 390px;
-    border-top: 1px solid var(--color-lightgrey);
+    border: 1px solid var(--color-lightgrey);
     position: fixed;
     bottom: 0;
     border-radius: 10px 10px 0 0 ;
     background-color: white;
-
+    z-index: 200;
     /* @keyframes fadeInUp {
         0%{
             opacity: 0;

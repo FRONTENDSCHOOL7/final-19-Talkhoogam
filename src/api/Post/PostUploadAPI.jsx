@@ -27,7 +27,7 @@ function PostUploadAPI(info){
             const postId = res;
             console.log(res)
             alert("피드 등록 완료!")
-            navigate(`/profile`)
+            navigate(`/home`)
         } catch (error) {
             console.log("API 응답에 실패하였습니다." ,error);
         }

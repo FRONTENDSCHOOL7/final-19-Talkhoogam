@@ -23,7 +23,6 @@ export default function ProductAdd() {
     const onClickHandler = async (e) => {
         e.preventDefault();
         await productUpload();
-        alert("상품 등록 완료!")
     }
 
     const handleChangeImage = async (e)=>{

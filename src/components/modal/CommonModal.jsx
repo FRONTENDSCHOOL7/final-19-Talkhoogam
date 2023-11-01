@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ModalLayout, ModalHeader, ModalInsideLayout, ModalButton } from '../../styles/ModalStyled';
 import {
+    Backdrop,
     ModalLogoutStyled,
 } from '../../styles/HeaderStyled';
 import { useNavigate } from 'react-router-dom';
@@ -8,12 +9,14 @@ import IconClose from "../../assets/icons/icon-delete.svg";
 import styled from 'styled-components';
 import ProductDeleteAPI from '../../api/product/ProductDeleteAPI';
 import PostDeleteAPI from '../../api/post/PostDeleteAPI';
+import CommentDeleteAPI from '../../api/comment/CommentDeleteAPI';
 
-function ShowDeleteModal({setShowModal, isLocation, id}){
+function ShowDeleteModal({setShowModal, isLocation, id, postId}){
 
     const [isVisible, setIsVisible] = useState(false);
     const {productDelete} = ProductDeleteAPI(id);
     const {postDelete} = PostDeleteAPI(id);
+    const {commentDelete} = CommentDeleteAPI(id, postId);
     // 스크롤 잠금
     const scrollLock = () => {
         document.body.style.overflow = 'hidden';
@@ -30,20 +33,24 @@ function ShowDeleteModal({setShowModal, isLocation, id}){
         return () => scrollUnlock();
     }, []);
 
+    
     const deleteHandler = async (e) => {
         e.preventDefault();
         if(isLocation === "product"){
             await productDelete();
         }else if(isLocation === "post"){
             await postDelete();
+        }else if(isLocation === "comment"){
+            await commentDelete();
         }
 
     }
 
     return(
         <>
+        <Backdrop></Backdrop>
         <ReModalLogoutStyled className={isVisible ? 'appear' : ""}>
-            <strong className="question">상품을 삭제 하시겠습니까?</strong>
+            <strong className="question">삭제 하시겠습니까?</strong>
             <div className="btn-group">
             <button
                 onClick={() => {
@@ -60,7 +67,7 @@ function ShowDeleteModal({setShowModal, isLocation, id}){
 }
 
 
-export default function CommonModal({isMine, setModalOpen , onClick , id , isLocation , ...props}) {
+export default function CommonModal({isMine, setModalOpen , onClick , id , isLocation , postId ,...props}) {
 
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -100,7 +107,7 @@ export default function CommonModal({isMine, setModalOpen , onClick , id , isLoc
                 )}
             </ModalInsideLayout>
         </ModalLayout>
-        {showModal && <ShowDeleteModal setShowModal={setShowModal} isLocation={isLocation} id={id}></ShowDeleteModal>}
+        {showModal && <ShowDeleteModal setShowModal={setShowModal} isLocation={isLocation} id={id} postId={postId}></ShowDeleteModal>}
         </>
     )
 }

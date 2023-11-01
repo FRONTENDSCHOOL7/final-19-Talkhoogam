@@ -17,12 +17,14 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
 
   const navigate = useNavigate();
   const {getFeedListAPI} = GetFollowerFeedListAPI();
-  
+  const [loding, setLoding] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getFeedListAPI(); // 데이터 가져오기
         setFeedData(data); // 데이터를 상태에 저장
+        setLoding(true);
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
       }
@@ -30,7 +32,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
     
     fetchData(); // 데이터 가져오는 함수를 호출
   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출
-  // console.log(feedData)
+  console.log(feedData)
   
 
   const [iconColor, setIconColor] = useState(IconHeart);
@@ -50,46 +52,49 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
   return (
     <>
       <FeedWrap>
-        {feedData ? (
-          <>
-            {feedData.posts.map((item, index) => {
-              return (
-                <div key={index} className="user-timeline">
-                  <img className="user-profileimg" onClick={()=> {
-                    moveProfile(item.author.accountname)
-                  }} src={item.author.image} alt="프로필이미지" />
-                  <div className="user-contents">
-                    <div className="timeline-title-wrap">
-                      <p className="timeline-title">{item.author.username}</p>
-                      <img className="img-dot" src={IconDot} alt="도트이미지" onClick={showModal}/>
-                    </div>
-                    <p className="timeline-id">{item.author.accountname}</p>
-                    <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
-                      <img className="timelin-img" src={item.image} alt="피드이미지" />
-                    </MoreButton>
-                    <p className="timeline-main-text">{item.content}</p>
-                    <div className="social-wrap">
-                      <div>
-                          <img onClick={colorChangeHandler} className="social-icon" src={iconColor} alt="하트아이콘" />
-                      </div>
-                      <div>
-                          <img className="social-icon" src={IconMessage} alt="댓글아이콘" />
-                      </div>
-                    </div>
-                    <p className="wr-date">{item.updatedAt}</p>
-                  </div>
-                </div>
-              )
-            })}
-          </>
-        ) : (
+        {loding && feedData.posts.length === 0 ? (
+        (
           <>
             <h1 className='a11y-hidden'>팔로우가 존재하지 않습니다.</h1>
             <Empty image={LogoImg} alt={"404페이지"} >
               유저를 검색해 팔로우 해보세요!
             </Empty>
           </>
-        )}
+        )
+        ) : loding &&
+        <>
+            {feedData.posts.map((item, index) => {
+                return (
+                  <div key={index} className="user-timeline">
+                    <img className="user-profileimg" onClick={()=> {
+                      moveProfile(item.author.accountname)
+                    }} src={item.author.image} alt="프로필이미지" />
+                    <div className="user-contents">
+                      <div className="timeline-title-wrap">
+                        <p className="timeline-title">{item.author.username}</p>
+                        <img className="img-dot" src={IconDot} alt="도트이미지" onClick={showModal}/>
+                      </div>
+                      <p className="timeline-id">{item.author.accountname}</p>
+                      <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
+                        <img className="timelin-img" src={item.image} alt="피드이미지" />
+                      </MoreButton>
+                      <p className="timeline-main-text">{item.content}</p>
+                      <div className="social-wrap">
+                        <div>
+                            <img onClick={colorChangeHandler} className="social-icon" src={iconColor} alt="하트아이콘" />
+                        </div>
+                        <div>
+                            <img className="social-icon" onClick={() => navigate(`/post/detail/${item.id}`)} src={IconMessage} alt="댓글아이콘" />
+                            <p>{item.comments.length}</p>
+                        </div>
+                      </div>
+                      <p className="wr-date">{item.updatedAt}</p>
+                    </div>
+                  </div>
+                )
+              })}
+          </>
+        }
       </FeedWrap>
     </>
   );
@@ -124,9 +129,10 @@ export default function Home() {
 export const FeedWrap = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
-
+  
+  
   & .symbol-logo {
     margin-top: 220px;
   }
@@ -200,6 +206,7 @@ export const FeedWrap = styled.div`
           width: 20px;
           height: 20px;
           object-fit: cover;
+          margin-right: 6px;
       }
   }
 
@@ -209,10 +216,10 @@ export const FeedWrap = styled.div`
       justify-content: center;
   }
 
-  .social-wrap div::after {
+  /* .social-wrap div::after {
       margin-left: 6px;
       content: "55";
-  }
+  } */
 
   .wr-date {
     color: #767676;

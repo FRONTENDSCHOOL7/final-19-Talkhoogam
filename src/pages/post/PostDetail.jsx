@@ -11,16 +11,22 @@ import CommonModal from '../../components/modal/CommonModal';
 import IconHeartActive from "../../assets/icons/heart-avtive.svg";
 import accountname from '../../recoil/accountname';
 import { useRecoilValue } from 'recoil';
+import Comment from '../../components/comment/Comment';
+import CommentInput from '../../components/comment/CommentInput';
 
 export default function PostDetail() {
   
-  const navigate = useNavigate();
-  const loginAccountName = useRecoilValue(accountname);
+  
   const params = useParams();
+  const navigate = useNavigate();
   const getPostDetail = PostDetailAPI(params.id);
+  const loginAccountName = useRecoilValue(accountname);
   const [postDetail, setPostDetail] = useState(() => {});
   const [modalOpen, setModalOpen ] = useState(false);
-  const isMine = postDetail ? postDetail.author.accountname === loginAccountName ? true : false : false;
+  const [isMine, setIsMine] = useState(false);
+  const [createName, setCreateName] = useState("");
+  const [idState, setIdState] = useState("");
+  const [isLocation, setIsLocation] = useState("");
 
   useEffect(() => {
     const detailList = async () => {
@@ -32,9 +38,36 @@ export default function PostDetail() {
 
   // console.log(postDetail);
 
-  const showModal = () => {
+  const showModalInComment = (id, name, location) => {
+    showModal(id, name, location);
+  };
+
+  const showModal = (id, name, location) => {
       modalOpen ? setModalOpen(false) : setModalOpen(true)
+      if(name === loginAccountName){
+        setIsMine(true);
+        setIdState(id);
+        setIsLocation(location);
+      }else{
+        setIsMine(false);
+        setIdState(id);
+        setIsLocation(location);
+      }
   }
+  // 콜백 함수 1: setCreateName 업데이트
+  const handleCreateName = (value) => {
+    setCreateName(value);
+  };
+
+  // 콜백 함수 2: setIdState 업데이트
+  const handleIdState = (value) => {
+    setIdState(value);
+  };
+
+  // 콜백 함수 3: setIsLocation 업데이트
+  const handleIsLocation = (value) => {
+    setIsLocation(value);
+  };
 
   const [iconColor, setIconColor] = useState(IconHeart);
 
@@ -62,7 +95,9 @@ export default function PostDetail() {
                 <div className="user-contents">
                   <div className="timeline-title-wrap">
                     <p className="timeline-title">{postDetail.author.username}</p>
-                    <img className="img-dot" src={IconDot} alt="도트이미지" onClick={showModal}/>
+                    <img className="img-dot" src={IconDot} alt="도트이미지" onClick={() => {
+                      showModal(params.id, postDetail.author.accountname, "post")
+                    }}/>
                   </div>
                   <p className="timeline-id">{postDetail.author.accountname}</p>
                     <img className="timelin-img" src={postDetail.image} alt="피드이미지" />
@@ -73,6 +108,7 @@ export default function PostDetail() {
                     </div>
                     <div>
                         <img className="social-icon" src={IconMessage} alt="댓글아이콘" />
+                        <p>{postDetail.commentCount}</p>
                     </div>
                   </div>
                   <p className="wr-date">{postDetail.updatedAt}</p>
@@ -83,15 +119,26 @@ export default function PostDetail() {
               <p>Loading..</p>
           )}
         </PostDetailWrap>
+        
+        <Comment 
+          postId={params.id} 
+          createName={handleCreateName}
+          idState={handleIdState}
+          isLocation={handleIsLocation}
+          showModalInComment={showModalInComment} // 넘겨줄 콜백 함수 추가
+        ></Comment>
+
       </LayoutInsideStyle>
       { modalOpen && 
         <CommonModal 
         isMine={isMine}
-        id={params.id}
+        id={idState}
         setModalOpen={setModalOpen}
-        isLocation={`post`}
+        isLocation={isLocation}
+        postId={postDetail.id}
         ></CommonModal>
       }
+      <CommentInput id={params.id}></CommentInput>
     </LayoutStyle>
   )
 }
@@ -183,11 +230,6 @@ export const PostDetailWrap = styled.div`
     justify-content: center;
   }
 
-  .social-wrap div::after {
-    margin-left: 6px;
-    content: "55";
-  }
-
   .wr-date {
     color: #767676;
     font-size: 10px;
@@ -210,6 +252,7 @@ export const PostDetailWrap = styled.div`
           width: 20px;
           height: 20px;
           object-fit: cover;
+          margin-right: 6px;
       }
   }
 
@@ -219,8 +262,4 @@ export const PostDetailWrap = styled.div`
       justify-content: center;
   }
 
-  .social-wrap div::after {
-      margin-left: 6px;
-      content: "55";
-  }
 `;

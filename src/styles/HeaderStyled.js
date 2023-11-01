@@ -50,7 +50,7 @@ export const Backdrop = styled.div`
   background-color: black;
   opacity: 0.6;
   z-index: 200;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 `;
@@ -114,7 +114,7 @@ export const ModalLogoutStyled = styled.article`
   align-items: center;
   font-size: 16px;
 
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

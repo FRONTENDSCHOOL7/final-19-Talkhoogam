@@ -23,6 +23,10 @@ ${reset}
 
 body {
     font-family: 'Pretendard', sans-serif;
+    overflow: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }
 
 input {

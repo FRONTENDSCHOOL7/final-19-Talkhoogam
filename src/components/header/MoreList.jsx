@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Backdrop,
   HeaderMoreList,
   ModalLogoutStyled,
-} from '../../styles/HeaderStyled';
-import { Link, useNavigate } from 'react-router-dom';
-import iconX from '../../assets/icons/x.svg';
-import { useRecoilState } from 'recoil';
-import loginToken from '../../recoil/loginToken';
-import loginCheck from '../../recoil/loginCheck';
-import accountname from '../../recoil/accountname';
+} from "../../styles/HeaderStyled";
+import { Link, useNavigate } from "react-router-dom";
+import iconX from "../../assets/icons/x.svg";
+import { useRecoilState } from "recoil";
+import loginToken from "../../recoil/loginToken";
+import loginCheck from "../../recoil/loginCheck";
+import accountname from "../../recoil/accountname";
 
 export default function MoreList({ setMoreOpen }) {
   // 로그인 확인
@@ -29,12 +29,12 @@ export default function MoreList({ setMoreOpen }) {
 
   // 스크롤 잠금
   const scrollLock = () => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   // 스크롤 잠금 해제
   const scrollUnlock = () => {
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   };
 
   // 모달 끄기
@@ -46,11 +46,11 @@ export default function MoreList({ setMoreOpen }) {
   function funcLogout() {
     setIsLogin(false);
     setToken(null);
-    setAccountName('');
-    console.log('login : ' + isLogin);
-    console.log('token : ' + token);
-    console.log('accountName : ' + accountName);
-    navigate('../login');
+    setAccountName("");
+    console.log("login : " + isLogin);
+    console.log("token : " + token);
+    console.log("accountName : " + accountName);
+    navigate("../login");
     setShowLogout(false);
     setMoreOpen(false);
   }
@@ -61,10 +61,10 @@ export default function MoreList({ setMoreOpen }) {
         <ul>
           {isLogin ? (
             <li>
-              <Link to="../setprofile">설정 및 개인정보</Link>
+              <Link to="../editprofile">설정 및 개인정보</Link>
             </li>
           ) : (
-            ''
+            ""
           )}
           <li>
             <BtnLogout>로그아웃</BtnLogout>
@@ -80,14 +80,14 @@ export default function MoreList({ setMoreOpen }) {
       if (isLogin) {
         setShowLogout(true);
       } else {
-        console.log('login : ' + isLogin);
-        navigate('../login');
+        console.log("login : " + isLogin);
+        navigate("../login");
       }
     }
 
     return (
       <>
-        <button onClick={logout}>{isLogin ? '로그아웃' : '로그인'}</button>
+        <button onClick={logout}>{isLogin ? "로그아웃" : "로그인"}</button>
       </>
     );
   }

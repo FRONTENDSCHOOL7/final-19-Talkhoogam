@@ -22,6 +22,7 @@ import { useRecoilState } from "recoil";
 import loginToken from "../../recoil/loginToken";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 import { useNavigate } from "react-router-dom";
+import accountname from "../../recoil/accountname";
 
 export default function EditProfile() {
   const [data, setData] = useState({});
@@ -31,6 +32,7 @@ export default function EditProfile() {
   const [image, setImage] = useState(null);
   const InputFile = useRef(null);
   const navigate = useNavigate();
+  const [editId, setEditId] = useRecoilState(accountname);
 
   // 닉네임 에러, 아이디 에러, 소개 에러 상태 관리
   const [usernameErr, setUsernameErr] = useState("");
@@ -41,6 +43,7 @@ export default function EditProfile() {
 
   const [btnState, SetBtnState] = useState(true);
 
+  // 최초 렌더링 시 각 input value에 기존 정보 값 입력
   useEffect(() => {
     async function fetchData() {
       const userRes = await ProfileInfoAPI();
@@ -53,6 +56,9 @@ export default function EditProfile() {
   }, []);
 
   const UploadImage = async (e) => {
+    if (e.target.files.length === 0) {
+      return;
+    }
     const image = e.target.files[0];
     const imageRes = await ImageUploadAPI(image);
     if (imageRes) {
@@ -111,37 +117,33 @@ export default function EditProfile() {
   };
 
   // 버튼 활성화
-  const btnActive = () => {
+  const BtnActive = () => {
     if (
       !usernameErr &&
-      !userIdErr &&
+      // 아이디를 변경한 경우 아이디 중복 확인, 변경하지 않은 경우 에러 메시지가 출력되지 않아야 함
+      (userIdErr === "사용 가능한 계정ID 입니다." || !userIdErr) &&
       !introErr &&
       username &&
       userId &&
       intro
     ) {
+      console.log("활성화");
       SetBtnState(false);
     } else {
+      console.log("비활성화");
       SetBtnState(true);
     }
   };
 
-  // input창이 바뀔 때마다 btnActive로 확인 후 버튼 활성화
-  useEffect(() => {
-    btnActive();
-  }, [username, userId, intro]);
-
   // 프로필 수정 api
-
   const EditData = async (e) => {
     e.preventDefault();
+    console.log("dd");
     const res = await EditProfileApi(token, username, userId, intro, image);
-    if (res.statue !== 422) {
-      navigate("/profile");
-      console.log("수정 성공");
-    } else {
-      console.error("수정 실패");
-    }
+
+    //recoil에서 관리하는 accountname에도 값 저장
+    setEditId(userId);
+    navigate(`/profile/${userId}`);
   };
 
   return (
@@ -155,7 +157,10 @@ export default function EditProfile() {
             type="file"
             id="img-file"
             accept="image/*"
-            onChange={UploadImage}
+            onChange={(e) => {
+              UploadImage(e);
+              BtnActive();
+            }}
             ref={InputFile}
           />
         </ImgWrapper>
@@ -167,7 +172,10 @@ export default function EditProfile() {
           id="nickname"
           placeholder="닉네임"
           value={username}
-          onBlur={UsernameValid}
+          onBlur={(e) => {
+            UsernameValid(e);
+            BtnActive();
+          }}
           onChange={UsernameValue}
         />
         <ErrorText>{usernameErr}</ErrorText>
@@ -181,7 +189,10 @@ export default function EditProfile() {
           id="id"
           placeholder="아이디"
           value={userId}
-          onBlur={UserIdValid}
+          onBlur={(e) => {
+            UserIdValid(e);
+            BtnActive();
+          }}
           onChange={UserIdValue}
         />
         <ErrorText>{userIdErr}</ErrorText>
@@ -192,7 +203,10 @@ export default function EditProfile() {
           id="intro"
           placeholder="소개"
           value={intro}
-          onBlur={IntroValid}
+          onBlur={(e) => {
+            IntroValid(e);
+            BtnActive();
+          }}
           onChange={IntroValue}
         />
         <ErrorText>{introErr}</ErrorText>

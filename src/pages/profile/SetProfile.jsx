@@ -166,7 +166,7 @@ export default function SetProfile() {
             type="file"
             id="img-file"
             accept="image/*"
-            onChange={(e) => UploadImage}
+            onChange={(e) => UploadImage(e)}
             ref={InputFile}
           />
         </ImgWrapper>

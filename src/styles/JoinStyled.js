@@ -37,7 +37,7 @@ export const UnderInput = styled.input`
   box-sizing: border-box;
   width: 100%;
   padding: 10px 10px;
-  border-bottom: 2.5px solid var(--color-mainColor);
+  border-bottom: 2.5px solid #56b77869;
   font-family: "Pretendard", sans-serif;
   font-size: 16px;
   color: var(--color-darkgrey);
@@ -55,7 +55,6 @@ export const UnderInput = styled.input`
 
 export const NextBtn = styled(Btn)`
   margin-top: 10px;
-  background-color: var(--color-mainColor);
 
   &:enabled {
     background-color: var(--color-mainColor);
@@ -63,7 +62,7 @@ export const NextBtn = styled(Btn)`
   }
 
   &:disabled {
-    background-color: var(--color-mainColor);
+    background-color: #56b77869;
   }
 `;
 

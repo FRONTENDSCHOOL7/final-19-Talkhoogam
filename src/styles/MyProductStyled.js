@@ -9,12 +9,24 @@ export const MyProductWrap = styled.article`
   padding: 20px 12px 10px;
   border: 0.5px solid #dbdbdb;
   position: relative;
+  & .sub-title-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    
+    img{
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+  }
 
   & .sub-title {
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
   }
 
   & .error-list {

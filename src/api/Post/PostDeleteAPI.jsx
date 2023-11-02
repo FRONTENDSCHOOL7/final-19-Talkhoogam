@@ -20,7 +20,10 @@ function PostDeleteAPI(postId){
                 },
             });
             alert("피드 삭제 완료!");
-            navigate(`/profile/${accountName}`)
+            navigate(`/home`); // 더미 URL로 이동
+            setTimeout(() => {
+                navigate(`/profile/${accountName}`); // 현재 경로로 다시 이동
+            }, 0);
         } catch (error) {
             console.log("API 응답에 실패하였습니다." ,error);
         }

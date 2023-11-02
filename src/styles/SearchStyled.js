@@ -4,6 +4,7 @@ export const SearchList = styled.article`
   margin: 10px;
   display: flex;
   gap: 10px;
+  cursor: pointer;
 
   & .search-keyword {
     display: flex;
@@ -20,6 +21,7 @@ export const SearchList = styled.article`
 
   & .user-name {
     font-weight: bold;
+    font-size: 16px;
   }
 
   & .user-id {

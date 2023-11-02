@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../components/common/button/Button";
 
 export const EmptyLayout = styled.div`
-  height: 100vh;
+  height: calc(100vh - 160px); // header + footer + margin
   display: flex;
   align-items: center;
   justify-content: center;

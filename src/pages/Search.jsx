@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import loginToken from "../recoil/loginToken";
 import SearchApi from "../api/SearchApi";
 import { SearchList } from "../styles/SearchStyled";
+import profile from "../assets/images/img-profile.png";
 
 export default function Search() {
   const [searchData, setSearchData] = useState([]);
@@ -35,22 +36,29 @@ export default function Search() {
     const fetchSearch = async () => {
       const searchRes = await SearchApi(token, searchId);
       setSearchData(searchRes);
-      // console.log("Set searchData:", searchRes);
     };
     if (searchId) {
       fetchSearch();
     }
   }, [searchId]);
 
-  // console.log("Search Header data:", searchData);
-
   const SearchResult = () => {
     return (
       <>
         {searchData.map((item) => (
           <SearchList key={item._id}>
-            <p className="user-name">{item.username}</p>
-            <p className="user-id">{"@ " + item.accountname}</p>
+            <img
+              src={
+                item.image === "http://146.56.183.55:5050/Ellipse.png"
+                  ? profile
+                  : item.image
+              }
+              alt=""
+            />
+            <div className="search-keyword">
+              <p className="user-name">{item.username}</p>
+              <p className="user-id">{"@ " + item.accountname}</p>
+            </div>
           </SearchList>
         ))}
       </>

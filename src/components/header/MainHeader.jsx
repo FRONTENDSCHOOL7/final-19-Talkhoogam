@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { BackBtn, HeaderMain, MenuBtn } from '../../styles/HeaderStyled';
-import MoreList from './MoreList';
-import iconArrow from '../../assets/icons/icon-arrow-left.svg';
-import iconMore from '../../assets/icons/s-icon-more-vertical.svg';
+import React, { useState } from "react";
+import { BackBtn, HeaderMain, MenuBtn } from "../../styles/HeaderStyled";
+import MoreList from "./MoreList";
+import iconArrow from "../../assets/icons/icon-arrow-left.svg";
+import iconMore from "../../assets/icons/s-icon-more-vertical.svg";
 
 export default function MainHeader({ pageName }) {
   const [moreOpen, setMoreOpen] = useState(false);

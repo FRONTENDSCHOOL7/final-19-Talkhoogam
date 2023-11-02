@@ -4,9 +4,8 @@ import Btn from "../components/common/button/Button";
 
 export const HeaderMain = styled.header`
   max-width: 100%;
-  min-height: 24px;
-  box-sizing: border-box;
-  padding: 10px 15px;
+  min-height: 54px;
+  padding: 0 15px;
   text-align: center;
   border-bottom: 1px solid #dbdbdb;
 
@@ -21,9 +20,10 @@ export const HeaderMain = styled.header`
   }
 
   & .searchInput {
-    width: 100%;
-    padding: 10px 20px;
+    margin: 10px;
+    padding: 8px 18px;
     background-color: #f2f2f2;
+    box-sizing: border-box;
     border-radius: 30px;
     font-family: "Pretendard", sans-serif;
     flex-grow: 1;

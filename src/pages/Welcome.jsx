@@ -12,7 +12,7 @@ export default function Welcome() {
   useEffect(() => {
     const time = setTimeout(() => {
       isLogin ? navigate("/home") : navigate("/login");
-    }, 3000);
+    }, 1200);
 
     return () => clearTimeout(time);
   }, []);

@@ -17,6 +17,7 @@ ${reset}
     --color-maingrey: #C4C4C4;
     --color-darkgrey: #767676;
     --color-lightgrey: #DBDBDB;
+    --color-trans-grey: #f2f2f2;
     --color-red: #EB5757;
     --color-bg: #F2F2F2;
 }

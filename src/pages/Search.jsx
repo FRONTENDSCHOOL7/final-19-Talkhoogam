@@ -7,11 +7,13 @@ import loginToken from "../recoil/loginToken";
 import SearchApi from "../api/SearchApi";
 import { SearchList } from "../styles/SearchStyled";
 import profile from "../assets/images/img-profile.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Search() {
   const [searchData, setSearchData] = useState([]);
   const [searchId, setSearchId] = useState("");
   const token = useRecoilValue(loginToken);
+  const navigate = useNavigate();
 
   // 처음 헤더의 input에 focus가 오도록
   const inputRef = useRef(null);
@@ -46,14 +48,17 @@ export default function Search() {
     return (
       <>
         {searchData.map((item) => (
-          <SearchList key={item._id}>
+          <SearchList
+            key={item._id}
+            onClick={(e) => navigate(`/profile/${item.accountname}`)}
+          >
             <img
               src={
                 item.image === "http://146.56.183.55:5050/Ellipse.png"
                   ? profile
                   : item.image
               }
-              alt=""
+              alt="유저 프로필 이미지"
             />
             <div className="search-keyword">
               <p className="user-name">{item.username}</p>

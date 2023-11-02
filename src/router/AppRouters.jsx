@@ -20,6 +20,7 @@ import EditProfile from "../pages/profile/EditProfile";
 import PostDetail from "../pages/post/PostDetail";
 import PostModify from "../pages/post/PostModify";
 import Search from "../pages/Search";
+import SearchBook from "../pages/post/SearchBook";
 
 export default function Routers() {
   return (
@@ -43,6 +44,7 @@ export default function Routers() {
       <Route path="/post/detail/:id" element={<PostDetail />} />
       <Route path="/postmodify/:id" element={<PostModify />} />
       <Route path="/search" element={<Search />} />
+      <Route path="/searchbook" element={<SearchBook />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

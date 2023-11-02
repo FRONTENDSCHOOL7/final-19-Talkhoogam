@@ -20,7 +20,7 @@ function Empty({ image, alt, children, navigatePath }) {
       case "/home":
         return "검색하기";
       case "/sellbook":
-        return "검색하기";
+        return "판매등록";
       default:
         return "이전 페이지";
     }
@@ -33,7 +33,7 @@ function Empty({ image, alt, children, navigatePath }) {
     if (location.pathname === "/home") {
       navigate("/search");
     } else if (location.pathname === "/sellbook") {
-      navigate("/search");
+      navigate("/productadd");
     } else {
       navigate(navigatePath);
     }

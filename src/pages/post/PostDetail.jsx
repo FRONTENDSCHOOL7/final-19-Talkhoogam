@@ -13,6 +13,7 @@ import accountname from '../../recoil/accountname';
 import { useRecoilValue } from 'recoil';
 import Comment from '../../components/comment/Comment';
 import CommentInput from '../../components/comment/CommentInput';
+import timeFormat from '../../utils/timeFormat';
 
 export default function PostDetail() {
   
@@ -99,7 +100,7 @@ export default function PostDetail() {
                       showModal(params.id, postDetail.author.accountname, "post")
                     }}/>
                   </div>
-                  <p className="timeline-id">{postDetail.author.accountname}</p>
+                  <p className="timeline-id">@ {postDetail.author.accountname}</p>
                     <img className="timelin-img" src={postDetail.image} alt="피드이미지" />
                   <p className="timeline-main-text">{postDetail.content}</p>
                   <div className="social-wrap">
@@ -111,7 +112,7 @@ export default function PostDetail() {
                         <p>{postDetail.commentCount}</p>
                     </div>
                   </div>
-                  <p className="wr-date">{postDetail.updatedAt}</p>
+                  <p className="wr-date">{timeFormat(postDetail.updatedAt)}</p>
                 </div>
               </div>
             )
@@ -207,7 +208,8 @@ export const PostDetailWrap = styled.div`
     width: 304px;
     height: 228px;
     border-radius: 10px;
-    object-fit: contain;
+    object-fit: cover;
+    margin-top: 16px;
   }
 
   .social-wrap {

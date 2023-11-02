@@ -9,6 +9,7 @@ import Footer from '../../components/footer/Footer';
 import Empty from '../../components/empty/Empty';
 import LogoImg from '../../assets/images/Logo.png';
 import { useNavigate } from 'react-router-dom';
+import timeFormat from '../../utils/timeFormat';
 
 
 export default function ProductList() {
@@ -40,7 +41,7 @@ export default function ProductList() {
         navigate(`/profile/${id}`);
     }
 
-    // console.log(productData)
+    console.log(productData)
     return (
         <LayoutStyle>
             <BasicHeader></BasicHeader>
@@ -64,20 +65,20 @@ export default function ProductList() {
                             </MoreButton>
                             
                             <div className="social-wrap">
-                                <p className='social-price'>{item.price}원</p>
+                                <p className='social-price'>{Intl.NumberFormat().format(item.price)}원</p>
                                 <p className='social-desc'>{item.link}</p>
                                 <p>{}</p>
                             </div>
-                            <p className="wr-date">{item.createdAt}</p>
+                            <p className="wr-date">{timeFormat(item.createdAt)}</p>
                         </div>
                     </div>
                 ))}
                 </FeedWrap>
             ) : (
                 <>
-                    <h1 className='a11y-hidden'>팔로우가 존재하지 않습니다.</h1>
+                    <h1 className='a11y-hidden'>판매하는 상품이 존재하지 않습니다.</h1>
                     <Empty image={LogoImg} alt={"404페이지"} >
-                    유저를 검색해 팔로우 해보세요!
+                    상품을 등록해서 중고 서적을 판매해 보세요!
                     </Empty>
                 </>
             )} 
@@ -110,13 +111,6 @@ export const FeedWrap = styled.div`
         margin: 20px 0;
     }
 
-    /* & button {
-        background: #f26e22;
-        border-radius: 44px;
-        padding: 13px 33px;
-        margin-bottom: 294px;
-    } */
-
     & .user-timeline {
         display: flex;
         justify-content: space-between;
@@ -143,6 +137,7 @@ export const FeedWrap = styled.div`
 
     .timeline-title {
         font-size: 16px;
+        font-weight: bold;
     }
 
     .timeline-id {
@@ -172,7 +167,7 @@ export const FeedWrap = styled.div`
         gap: 16px;
         margin-top: 12px;
         & .social-price{
-            color: #F26E22;
+            color: var(--color-mainColor);
             font-size: 14px;
             margin-bottom: 10px;
             font-weight: bold;
@@ -183,16 +178,6 @@ export const FeedWrap = styled.div`
             font-weight: 400;
         }
     }
-
-    /* .social-wrap img {
-        width: 22px;
-        height: 22px;
-    } */
-    /* .social-wrap div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    } */
 
     .social-wrap div::after {
         margin-left: 6px;

@@ -44,6 +44,11 @@ export const MenuBtn = styled.button`
   height: 22px;
 `;
 
+export const SearchBtn = styled.button`
+  width: 22px;
+  height: 22px;
+`
+
 export const UploadBtn = styled(Btn)`
   width: 92px;
   padding: 7px 31px;

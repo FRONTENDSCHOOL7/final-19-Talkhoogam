@@ -24,12 +24,6 @@ import { useParams } from 'react-router-dom';
 //Modal.setAppElemnet("#root");
 export default function Profile() {
   //const token = useRecoilValue(loginToken)
-  //팔로우/언팔로우 버튼
-  const [isFollowing, setIsFollowing] = useState(false);
-  const handleClick = () => {
-    setIsFollowing(!isFollowing);
-  };
-
   //프로필 이미지 모달
   const [isImgOpen, setIsImgOpen] = useState(false);
   const [selectedImg, setSelectedImg] = useState(null);
@@ -45,17 +39,13 @@ export default function Profile() {
     const info = await ProfileInfoAPI();
   };
 
-  //팔로워 목록
-  const navigate = useNavigate();
-  const [isFollowers, setIsFollowers] = useState("");
-  const onClickFollower = () => {
-    navigate("../profile/Followers");
-  };
-  const onClickFollowing = () => {
-    navigate("../profile/Followings");
+  //내 프로필에서 팔로우/언팔로우 버튼
+  const [isFollowing, setIsFollowing] = useState(false);
+  const handleClick = () => {
+    setIsFollowing(!isFollowing);
   };
 
-  //프로필 설정, 상품 등록
+  //다른 사람의 프로필에서 프로필 설정, 상품 등록
   const onClickSetProfile = () => {
     navigate("../setprofile");
   };
@@ -132,6 +122,16 @@ export default function Profile() {
   }, []);
   console.log(userInfo)
   
+  //팔로워 목록
+  const navigate = useNavigate();
+  const [isFollowers, setIsFollowers] = useState("");
+  const onClickFollower = () => {
+    navigate(`../profile/${params.accountname}/Followers`);
+  };
+  const onClickFollowing = () => {
+    navigate(`../profile/${params.accountname}/Followings`);
+  };
+
   return (
     <>
       <LayoutStyle>
@@ -202,6 +202,7 @@ export default function Profile() {
               )}
             </ProfileMid>
             <Follow>
+              {/* 받아온 accountname 에 따라 각각 나타내기 */}
               <img src={ImgMessage} alt="메세지구현X"></img>
               <div onClick={handleClick}>
                 {isFollowing ? (
@@ -211,6 +212,9 @@ export default function Profile() {
                 )}
               </div>
               <img src={ImgShare} alt="공유구현X"></img>
+              {/*}
+              <button onClick={onClickSetProfile}>프로필 수정</button>
+                <button onClick={onClickProductAdd}>상품 등록</button> */}
             </Follow>
           </ProfileMain>
         </ProfilePage>

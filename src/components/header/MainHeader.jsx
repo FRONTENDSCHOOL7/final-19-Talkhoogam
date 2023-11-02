@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { BackBtn, HeaderMain, MenuBtn } from "../../styles/HeaderStyled";
+import { BackBtn, HeaderMain, MenuBtn, SearchBtn } from "../../styles/HeaderStyled";
 import MoreList from "./MoreList";
 import iconArrow from "../../assets/icons/icon-arrow-left.svg";
 import iconMore from "../../assets/icons/s-icon-more-vertical.svg";
+import iconSearch from "../../assets/icons/icon-search.svg";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function MainHeader({ pageName }) {
   const [moreOpen, setMoreOpen] = useState(false);
-
+  const location = useLocation();
+  const navigate = useNavigate()
+  
   // 뒤로가기
   function goBack(e) {
     e.preventDefault();
@@ -25,9 +29,15 @@ export default function MainHeader({ pageName }) {
           <img src={iconArrow} alt="뒤로가기 버튼" />
         </BackBtn>
         {pageName && <h2>{pageName}</h2>}
-        <MenuBtn className="btn-openMore" onClick={openMore}>
-          <img src={iconMore} alt="메뉴 더보기" />
-        </MenuBtn>
+        { 
+        location.pathname === "/home" ?
+          (<SearchBtn onClick={() => {navigate(`/search`)}}>
+            <img src={iconSearch} alt="검색 아이콘" />
+          </SearchBtn>) : 
+          (<MenuBtn className="btn-openMore" onClick={openMore}>
+            <img src={iconMore} alt="메뉴 더보기" />
+          </MenuBtn>)
+        }
       </HeaderMain>
       {moreOpen && <MoreList setMoreOpen={setMoreOpen} />}
     </>

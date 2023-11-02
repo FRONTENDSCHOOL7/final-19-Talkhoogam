@@ -8,6 +8,7 @@ import IconDot from "../../assets/icons/s-icon-more-vertical.svg";
 import CommonModal from '../../components/modal/CommonModal';
 import { useRecoilValue } from 'recoil';
 import newAaccountname from "../../recoil/accountname";
+import timeFormat from '../../utils/timeFormat';
 
 export default function ProductDetail() {
 
@@ -51,9 +52,9 @@ export default function ProductDetail() {
                     </div>
                     
                     <div className='product-price-wrap'>
-                        <p className='product-price'>{productDetail.price}원</p>
+                        <p className='product-price'>{Intl.NumberFormat().format(productDetail.price)}원</p>
                         <div className='setting-wrap'>
-                            <p className="wr-date">{productDetail.updatedAt}</p>
+                            <p className="wr-date">{timeFormat(productDetail.updatedAt)}</p>
                             <img className="img-dot" src={IconDot} alt="도트이미지" onClick={showModal}/>
                         </div>
                     </div>
@@ -122,6 +123,7 @@ export const ProductDetailWrap = styled.div`
     .product-price{
         font-weight: bold;
         margin-bottom: 10px;
+        color: var(--color-mainColor);
     }
 
     .product-price-wrap{

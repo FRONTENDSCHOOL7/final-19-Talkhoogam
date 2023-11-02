@@ -4,7 +4,6 @@ import IconMessage from "../assets/icons/icon-message-circle.svg";
 import IconDot from "../assets/icons/s-icon-more-vertical.svg";
 import IconHeart from "../assets/icons/heart.svg";
 import { LayoutStyle, LayoutInsideStyle } from "../styles/LayoutStyled";
-import MainHeader from "../components/header/MainHeader";
 import Footer from "../components/footer/Footer";
 import GetFollowerFeedListAPI from "../api/post/GetFollowerFeedListAPI";
 import Empty from "../components/empty/Empty";
@@ -12,6 +11,8 @@ import LogoImg from "../assets/images/Logo.png";
 import IconHeartActive from "../assets/icons/heart-avtive.svg";
 import CommonModal from "../components/modal/CommonModal";
 import { useNavigate } from "react-router-dom";
+import timeFormat from "../utils/timeFormat";
+import BasicHeader from "../components/header/BasicHeader";
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                           onClick={showModal}
                         />
                       </div>
-                      <p className="timeline-id">{item.author.accountname}</p>
+                      <p className="timeline-id">@ {item.author.accountname}</p>
                       <MoreButton
                         onClick={() => navigate(`/post/detail/${item.id}`)}
                       >
@@ -111,7 +112,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                           <p>{item.comments.length}</p>
                         </div>
                       </div>
-                      <p className="wr-date">{item.updatedAt}</p>
+                      <p className="wr-date">{timeFormat(item.updatedAt)}</p>
                     </div>
                   </div>
                 );
@@ -134,7 +135,7 @@ export default function Home() {
 
   return (
     <LayoutStyle>
-      <MainHeader />
+      <BasicHeader />
       <LayoutInsideStyle>
         <HomeContents
           feedData={feedData}
@@ -211,7 +212,7 @@ export const FeedWrap = styled.div`
     width: 304px;
     height: 228px;
     border-radius: 10px;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .social-wrap {

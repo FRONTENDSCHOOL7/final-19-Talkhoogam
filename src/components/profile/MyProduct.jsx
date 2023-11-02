@@ -7,11 +7,13 @@ import {
   MyProductWrap,
   ScrollHandler,
 } from '../../styles/MyProductStyled';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import arrowLeft from '../../assets/icons/icon-arrow-white.svg';
 import arrowRight from '../../assets/icons/icon-arrow-right.svg';
+import editIcon from "../../assets/icons/icon-edit.svg";
 
 export default function MyProduct() {
+  const navigate = useNavigate();
   // 유저 정보 가지고오기
   const params = useParams();
   const accountName = params.accountname;
@@ -51,7 +53,11 @@ export default function MyProduct() {
   return (
     <>
       <MyProductWrap>
-        <h3 className="sub-title">판매중인 상품</h3>
+        <div className="sub-title-wrap">
+          <h3 className="sub-title">판매중인 상품</h3>
+          <img onClick={() => {navigate(`/sellbook`)}} src={editIcon} alt="판매목록보기아이콘" />
+        </div>
+        {/* <h3 className="sub-title">판매중인 상품</h3> */}
         {productList.length !== 0 ? (
           <div className="product-ul-wrap">
             <MyProductUl ref={productListRef}>

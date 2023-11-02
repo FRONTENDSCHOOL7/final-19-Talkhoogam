@@ -9,6 +9,7 @@ import {
   SnsLoginText,
   SnsLoginBtn,
   ErrorText,
+  InputWrap,
 } from "../styles/LoginStyled";
 import LogoImg from "../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
@@ -80,14 +81,21 @@ export default function Login() {
       <h1 className="a11y-hidden">로그인 페이지</h1>
       <LogoImg></LogoImg>
       <EmailLoginForm>
-        <InputBox type="email" placeholder="이메일" onChange={EmailValue} />
-        <InputBox
-          type="password"
-          placeholder="비밀번호"
-          minLength="6"
-          maxLength="20"
-          onChange={PasswordValue}
-        />
+        <InputWrap>
+          <InputBox
+            type="email"
+            placeholder="이메일"
+            onChange={EmailValue}
+            className="email-input"
+          />
+          <InputBox
+            type="password"
+            placeholder="비밀번호"
+            minLength="6"
+            maxLength="20"
+            onChange={PasswordValue}
+          />
+        </InputWrap>
         <ErrorText>{error}</ErrorText>
         <LoginBtn onClick={LoginValid}>로그인</LoginBtn>
       </EmailLoginForm>

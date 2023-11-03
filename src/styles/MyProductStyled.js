@@ -8,13 +8,14 @@ export const MyProductWrap = styled.article`
   margin: 6px auto;
   padding: 20px 12px 10px;
   position: relative;
-  & .sub-title-wrap{
+
+  & .sub-title-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
-    
-    img{
+
+    img {
       cursor: pointer;
       width: 18px;
       height: 18px;
@@ -44,6 +45,7 @@ export const ScrollHandler = styled.button`
   width: 22px;
   height: 22px;
   border-radius: 5px;
+
   background-color: black;
   opacity: 0.3;
 
@@ -85,6 +87,7 @@ export const MyProductLi = styled.li`
   flex-shrink: 0;
 
   & button {
+    font-family: inherit;
     text-align: left;
     border-radius: 8px;
 
@@ -101,7 +104,8 @@ export const MyProductLi = styled.li`
   }
 
   & .product-tit {
-    font-size: 14px;
+    font-size: 15px;
+    margin-bottom: 3px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;

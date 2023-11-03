@@ -20,8 +20,8 @@ export default function PostInsertModal({setModalOpen}) {
             </ModalHeader>
             
             <ModalInsideLayout >
-                <ModalButton onClick={() => {navigate(`/productadd`)}}>상품 등록</ModalButton>
                 <ModalButton onClick={() => {navigate(`/postupload`)}}>피드 등록</ModalButton>
+                <ModalButton onClick={() => {navigate(`/productadd`)}}>상품 등록</ModalButton>
             </ModalInsideLayout>
         </ModalLayout>
         </>

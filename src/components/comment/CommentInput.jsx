@@ -44,6 +44,7 @@ export function CommentInput({id}) {
                 type="text" 
                 placeholder="댓글 입력하기..."
                 onChange={handleInputChange}
+                value={commentText}
             />
             <button className="commnt-btn" onClick={handleCommentUpload}>게시</button>
         </CommentForm>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
 import UploadHeader from '../../components/header/UploadHeader';
@@ -24,6 +24,8 @@ export default function ProductModify() {
     // const [price, setPrice] = useState("");
     // const [link, setLink] = useState("");
     const [itemImage, setItemImage] = useState("");
+    const textareaRef = useRef();
+    const [inputValue, setInputValue] = useState("");
     
     
     const {productModify} = ProductModifyAPI(productDetail, itemImage, id);
@@ -31,6 +33,11 @@ export default function ProductModify() {
         e.preventDefault();
         await productModify();
     }
+
+    const hendleResizeHeight = () => {
+        textareaRef.current.style.height = "auto";
+        textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+    };
 
     useEffect(() => {
         const detailList = async () => {
@@ -138,12 +145,24 @@ export default function ProductModify() {
                         }}
                         value={productDetail.price}
                     />
-                    <Input 
+                    {/* <Input 
                         labelText="판매 링크"
                         // maxLength={15}
                         type={"text"}
                         placeholder={"URL을 입력해 주세요."}    
                         onChangeHandler={(event) => {
+                            setProductDetail({...productDetail , link : event.target.value});
+                        }}
+                        value={productDetail.link}
+                    /> */}
+                    <label className='label-desc'>판매 설명</label>
+                    <TextArea
+                        className="book-report"
+                        placeholder="판매 내용을 입력해주세요."
+                        ref={textareaRef}
+                        onChange={(event) => {
+                            hendleResizeHeight();
+                            // setInputValue(event.target.value);
                             setProductDetail({...productDetail , link : event.target.value});
                         }}
                         value={productDetail.link}
@@ -161,7 +180,10 @@ export default function ProductModify() {
 const ReLayoutInsideStyle = styled(LayoutInsideStyle)`
     padding: 30px 34px 25px 34px;
 
-    
+    .label-desc{
+        font-size: 12px;
+        color: var(--color-darkgrey);
+    }
 `
 
 const ProductImgWrap = styled.div`
@@ -184,3 +206,22 @@ const ProductImgWrap = styled.div`
         
     }
 `
+
+const TextArea = styled.textarea`
+    padding: 0;
+    width: 100%;
+    border: none;
+    resize: none;
+    caret-color: var(--color-mainColor);
+    font-family: 'Pretendard',sans-serif;
+    padding-top: 10px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::placeholder{
+        font-size: 14px;
+        color: var(--color-lightgrey);
+    }
+`;

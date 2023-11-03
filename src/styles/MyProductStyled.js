@@ -7,7 +7,6 @@ export const MyProductWrap = styled.article`
   max-width: 390px;
   margin: 6px auto;
   padding: 20px 12px 10px;
-  border: 0.5px solid #dbdbdb;
   position: relative;
   & .sub-title-wrap{
     display: flex;

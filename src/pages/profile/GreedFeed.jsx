@@ -41,7 +41,7 @@ export default function LayerFeed(accountname){
                     {/*피드가 추가될때마다 content div 추가*/}
                     <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
                     <img src={item.image} alt="예시 사진" className="bookImg"></img>
-                    {item.image.length > 1 ? (<img src={ImgLayes} alt="이미지 2장 이상일 경우 나타나는 아이콘" className="bookMultiple"></img>) : (<p className='a11y-hidden'>1장이에용</p>)}
+                    {item.image.length >= 1 ? (<img src={ImgLayes} alt="이미지 2장 이상일 경우 나타나는 아이콘" className="bookMultiple"></img>) : (<p className='a11y-hidden'>1장이에용</p>)}
                     </MoreButton>
                 </button>
                 </div>

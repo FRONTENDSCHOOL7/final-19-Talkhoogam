@@ -20,6 +20,7 @@ import MyProduct from "../../components/profile/MyProduct.jsx";
 import AccountNameProfileAPI from "../../api/post/AcountNameProfileAPI";
 import accountname from "../../recoil/accountname";
 import { useParams } from 'react-router-dom';
+import { useRecoilValue } from "recoil";
 
 //Modal.setAppElemnet("#root");
 export default function Profile() {
@@ -47,10 +48,10 @@ export default function Profile() {
 
   //다른 사람의 프로필에서 프로필 설정, 상품 등록
   const onClickSetProfile = () => {
-    navigate("../setprofile");
+    navigate("../editprofile");
   };
   const onClickProductAdd = () => {
-    navigate("../product/productadd");
+    navigate("../productadd");
   };
 
   //유저 정보 불러오기
@@ -124,13 +125,16 @@ export default function Profile() {
   
   //팔로워 목록
   const navigate = useNavigate();
-  const [isFollowers, setIsFollowers] = useState("");
+  //const [isFollowers, setIsFollowers] = useState("");
   const onClickFollower = () => {
     navigate(`../profile/${params.accountname}/Followers`);
   };
   const onClickFollowing = () => {
     navigate(`../profile/${params.accountname}/Followings`);
   };
+
+  //내 프로필
+  const myAccount = useRecoilValue(accountname);
 
   return (
     <>
@@ -178,7 +182,7 @@ export default function Profile() {
                   <button className="followingsNum">Loading...</button>
                 ) : (
                   <button className="followingsNum">
-                    {userInfo?.followerCount}
+                    {userInfo?.followingCount}
                   </button>
                 )}
                 <p className="profilehead-text">followings</p>
@@ -193,7 +197,7 @@ export default function Profile() {
               {loading ? (
                 <p className="id">Loading...</p>
               ) : (
-                <p className="id">{userInfo.accountname}</p>
+                <p className="id">@ {userInfo.accountname}</p>
               )}
               {loading ? (
                 <p className="profileIntro">Loading...</p>
@@ -202,9 +206,15 @@ export default function Profile() {
               )}
             </ProfileMid>
             <Follow>
-              {/* 받아온 accountname 에 따라 각각 나타내기 */}
-              <img src={ImgMessage} alt="메세지구현X"></img>
-              <div onClick={handleClick}>
+              {myAccount === params.accountname ? (
+              <>
+                <button onClick={onClickSetProfile}>프로필 수정</button>
+                <button onClick={onClickProductAdd}>상품 등록</button>
+              </>) : (
+              <>
+                {/* 받아온 accountname 에 따라 각각 나타내기 */}
+                <img src={ImgMessage} alt="메세지구현X"></img>
+                <div onClick={handleClick}>
                 {isFollowing ? (
                   <button className="unfollow-btn">언팔로우</button>
                 ) : (
@@ -212,9 +222,7 @@ export default function Profile() {
                 )}
               </div>
               <img src={ImgShare} alt="공유구현X"></img>
-              {/*}
-              <button onClick={onClickSetProfile}>프로필 수정</button>
-                <button onClick={onClickProductAdd}>상품 등록</button> */}
+            </>) }
             </Follow>
           </ProfileMain>
         </ProfilePage>
@@ -263,8 +271,7 @@ const ChangeModal = styled(Modal)`
 const ProfilePage = styled.article`
   background-color: white;
   max-width: 390px;
-  height: 40vh;
-  margin-bottom: 6px;
+  margin-bottom: 30px;
   margin-top: 30px;
 `;
 
@@ -342,8 +349,8 @@ const Follow = styled.div`
     margin: auto 5px;
   }
   .follow-btn {
-    border: 1px Solid #f26e22;
-    background-color: #f26e22;
+    border: 1px Solid var(--color-mainColor);
+    background-color: var(--color-mainColor);
     color: white;
   }
   .unfollow-btn {
@@ -365,6 +372,17 @@ const Follow = styled.div`
     cursor: pointer;
     box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.2);
   }
+  button{ 
+        border-radius: 30px;
+        padding: 8px 26px;
+        font-weight: 500;
+        margin: auto 5px;
+        border: 1px Solid #DBDBDB;
+        color:#767676;  
+    }
+    button:hover{
+        box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.2);
+    }
 `;
 
 const Feed = styled.div`
@@ -379,7 +397,6 @@ const Feed = styled.div`
 `;
 
 const LayerNav = styled.div`
-  border: 0.5px solid #dbdbdb;
   display: flex;
   width: 100%;
   flex-direction: row-reverse;

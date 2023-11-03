@@ -1,19 +1,17 @@
 import { useRecoilValue } from 'recoil';
 import loginToken from '../../recoil/loginToken';
-import accountname from '../../recoil/accountname';
 
-function FollowAPI() {
-  const token = useRecoilVal(loginToken);
-  const accountName = useRecoilValue(accountname);
+function UnFollowAPI(accountName) {
+  const token = useRecoilValue(loginToken);
   const url = 'https://api.mandarin.weniv.co.kr';
 
-  const followUser = async (accountName) => {
+  const unFollowUser = async () => {
     try {
-      const res = await fetch(`${url}/profile/:accountname/unfollow`, {
+      const res = await fetch(`${url}/profile/${accountName}/unfollow`, {
         method: 'DELETE',
         headers: {
-          Authorization: 'Bearer {token}',
-          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          // 'Content-type': 'application/json',
         },
       });
       const data = await res.json();
@@ -22,7 +20,7 @@ function FollowAPI() {
       console.error('API 접근에 실패하였습니다.', error);
     }
   };
-  return { followUser };
+  return { unFollowUser };
 }
 
-export default FollowAPI;
+export default UnFollowAPI;

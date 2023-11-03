@@ -1,19 +1,17 @@
 import { useRecoilValue } from 'recoil';
 import loginToken from '../../recoil/loginToken';
-import accountname from '../../recoil/accountname';
 
-function FollowAPI() {
-  const token = useRecoilVal(loginToken);
-  const accountName = useRecoilValue(accountname);
+function FollowAPI(accountName) {
+  const token = useRecoilValue(loginToken);
   const url = 'https://api.mandarin.weniv.co.kr';
 
-  const followUser = async (accountName) => {
+  const followUser = async () => {
     try {
       const res = await fetch(`${url}/profile/${accountName}/follow`, {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer {token}',
-          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          // 'Content-type': 'application/json',
         },
       });
       const data = await res.json();

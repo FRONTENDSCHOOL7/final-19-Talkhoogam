@@ -10,7 +10,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom';
 import arrowLeft from '../../assets/icons/icon-arrow-white.svg';
 import arrowRight from '../../assets/icons/icon-arrow-right.svg';
-import editIcon from "../../assets/icons/icon-edit.svg";
+import pageMoveIcon from "../../assets/icons/sign-in-alt.svg";
 
 export default function MyProduct() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function MyProduct() {
       }
     };
     fetchData();
-  }, []);
+  }, [params.accountname]);
   // console.log('productList : ', productList);
 
   // 스크롤 핸들러
@@ -50,12 +50,17 @@ export default function MyProduct() {
     });
   }
 
+  const handleClick = () => {
+    // 쿼리 문자열을 사용하여 데이터 전달
+    navigate(`/sellbook?data=${params.accountname}`); 
+  };
+
   return (
     <>
       <MyProductWrap>
         <div className="sub-title-wrap">
           <h3 className="sub-title">판매중인 상품</h3>
-          <img onClick={() => {navigate(`/sellbook`)}} src={editIcon} alt="판매목록보기아이콘" />
+          <img onClick={handleClick} src={pageMoveIcon} alt="판매목록보기아이콘" />
         </div>
         {/* <h3 className="sub-title">판매중인 상품</h3> */}
         {productList.length !== 0 ? (

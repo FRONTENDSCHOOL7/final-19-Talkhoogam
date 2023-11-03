@@ -21,6 +21,8 @@ import PostDetail from "../pages/post/PostDetail";
 import PostModify from "../pages/post/PostModify";
 import Search from "../pages/Search";
 import SearchBook from "../pages/post/SearchBook";
+import ChatList from "../pages/chat/ChatList";
+import ChatDetail from "../pages/chat/ChatDetail";
 
 export default function Routers() {
   return (
@@ -45,6 +47,8 @@ export default function Routers() {
       <Route path="/postmodify/:id" element={<PostModify />} />
       <Route path="/search" element={<Search />} />
       <Route path="/searchbook" element={<SearchBook />} />
+      <Route path="/chat" element={<ChatList />}/>
+      <Route path="/chat/:name" element={<ChatDetail />}/>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

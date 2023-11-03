@@ -7,7 +7,7 @@ import {
   SearchBtn,
 } from "../../styles/EmptyStyled";
 
-function Empty({ image, alt, children, navigatePath }) {
+function Empty({ image, alt, children, navigatePath, isMine }) {
   const navigate = useNavigate();
   const location = useLocation();
   const pathName = location.pathname;
@@ -43,7 +43,7 @@ function Empty({ image, alt, children, navigatePath }) {
       <EmptyLayout>
         <LogoImg src={image} alt={alt} />
         <EmptyText>{children}</EmptyText>
-        <SearchBtn onClick={onClickHandler}>{pageName}</SearchBtn>
+        {isMine && <SearchBtn onClick={onClickHandler}>{pageName}</SearchBtn>}
       </EmptyLayout>
     </>
   );

@@ -4,6 +4,7 @@ import CommentListAPI from "../../api/comment/CommentListAPI";
 import IconDot from "../../assets/icons/s-icon-more-vertical.svg";
 import timeGapCalculator from "../../utils/timeGapCalculator";
 
+
 export default function Comment({postId, createName, idState, isLocation, showModalInComment }) {
 
     const getCommentList = CommentListAPI(postId);
@@ -15,9 +16,13 @@ export default function Comment({postId, createName, idState, isLocation, showMo
             const list = await getCommentList();
             setComments(list.comments);
         };
-        dataList();
-    }, [comments, setComments]);
-
+        const interval = setInterval(() => dataList(), 1000)
+        return (() => {
+            clearInterval(interval);
+        })
+        // dataList();
+    }, []);
+        
     const showModal = (id, name, location) => {
         idState(id)
         createName(name);

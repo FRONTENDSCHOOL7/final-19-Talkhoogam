@@ -38,10 +38,6 @@ export default function ProductList() {
         fetchData();
     }, []);
 
-    function onClickProfile(id){
-        navigate(`/profile/${id}`);
-    }
-
     console.log(productData)
     return (
         <LayoutStyle>
@@ -53,7 +49,9 @@ export default function ProductList() {
                 {productData.map((item, index) => (
                     <div key={index} className="product-list-wrap">
                         <MoreButton onClick={() => navigate(`/product/detail/${item.id}`) }>
-                            <img className="product-img" src={item.itemImage} alt="피드이미지" />
+                            <div className='product-img-wrap'>
+                                <img className="product-img" src={item.itemImage} alt="피드이미지" />
+                            </div>
                             <div className="product-desc-wrap">
                                 <p className="product-name">{item.itemName}</p>
                                 <p className="product-price">{Intl.NumberFormat().format(item.price)}원</p>
@@ -95,7 +93,7 @@ const MoreButton = styled.div`
     border: none;
     display: flex;
     margin: 10px 0;
-    
+
     .product-img{
         width: 130px;
         height: 130px;
@@ -110,10 +108,7 @@ const MoreButton = styled.div`
             margin-bottom: 5px;
         }
     }
-    .product-name{
-        /* font-weight: bold; */
-    }
-
+    
     .product-price{
         color: var(--color-mainColor);
         font-weight: bold;

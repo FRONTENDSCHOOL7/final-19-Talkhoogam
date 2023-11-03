@@ -211,6 +211,7 @@ export const PostDetailWrap = styled.div`
     font-size: 15px;
     line-height: normal;
     margin: 16px 0;
+    white-space: pre-line;
   }
 
   .timelin-img {

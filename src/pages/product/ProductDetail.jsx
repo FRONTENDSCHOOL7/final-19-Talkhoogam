@@ -35,7 +35,7 @@ export default function ProductDetail() {
     };
     detailList();
   }, [getProductDetail]);
-  console.log(productDetail);
+  // console.log(productDetail)
 
   function onClickProfile(id) {
     navigate(`/profile/${id}`);
@@ -177,5 +177,13 @@ export const ProductDetailWrap = styled.div`
     height: 42px;
     border-radius: 42px;
     cursor: pointer;
+  }
+
+  .product-desc-wrap p {
+    white-space: pre-line;
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2em;
   }
 `;

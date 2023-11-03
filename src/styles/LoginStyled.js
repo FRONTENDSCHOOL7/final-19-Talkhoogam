@@ -27,16 +27,22 @@ export const EmailLoginForm = styled.form`
   margin-bottom: 20px;
 `;
 
+export const InputWrap = styled.div`
+  border-radius: 15px;
+  background-color: var(--color-trans-grey);
+`;
+
 export const InputBox = styled.input`
+  background-color: var(--color-trans-grey);
   box-sizing: border-box;
   width: 100%;
   padding: 10px 30px;
-  border: 1px solid #aaaaaa;
-  border-radius: 30px;
+  /* border: 1 solid #aaaaaa; */
+  border-radius: 15px;
   margin-bottom: 5px;
   font-family: "Pretendard", sans-serif;
   font-size: 16px;
-  color: #414141;
+  color: #555555;
 
   &::placeholder {
     font-size: 14px;
@@ -44,7 +50,7 @@ export const InputBox = styled.input`
 
   &:focus {
     outline: none;
-    outline: 1px solid var(--color-mainColor);
+    outline: 2px solid var(--color-mainColor);
   }
 `;
 

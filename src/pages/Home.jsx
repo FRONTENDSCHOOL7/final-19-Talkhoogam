@@ -197,6 +197,7 @@ export const FeedWrap = styled.div`
     font-size: 14px;
     line-height: normal;
     margin: 16px 0;
+    white-space: pre-line;
   }
 
   .timelin-img {

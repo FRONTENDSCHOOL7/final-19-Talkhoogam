@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
 import UploadHeader from '../../components/header/UploadHeader';
@@ -18,12 +18,19 @@ export default function ProductAdd() {
     const [price, setPrice] = useState("");
     const [link, setLink] = useState("");
     const [itemImage, setItemImage] = useState("");
+    const textareaRef = useRef();
+    const [inputValue, setInputValue] = useState("");
     
-    const productUpload = ProductUploadAPI({productName, price, link, itemImage});
+    const productUpload = ProductUploadAPI({productName, price, inputValue, itemImage});
     const onClickHandler = async (e) => {
         e.preventDefault();
         await productUpload();
     }
+
+    const hendleResizeHeight = () => {
+        textareaRef.current.style.height = "auto";
+        textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+    };
 
     const handleChangeImage = async (e)=>{
         // 파일 가져오기
@@ -53,7 +60,7 @@ export default function ProductAdd() {
     }
     
     /*
-    * 이미지 최적화 및 크기 조정 함수 대략 !! 대략 2초 빨라지지만 upload시 전달 값이 수정되어 확인 필요
+    * 이미지 최적화 및 크기 조정 함수!! 대략 2초 빨라지지만 upload시 전달 값이 수정되어 확인 필요
     * 
     */
     // const optimizeAndResizeImage = async (file, maxWidth, maxHeight) => {
@@ -111,7 +118,7 @@ export default function ProductAdd() {
                                 setProductName(event.target.value);
                             }
                         }}
-                    />
+                        />
                     <Input 
                         labelText="가격"
                         maxLength={15}
@@ -119,13 +126,23 @@ export default function ProductAdd() {
                         onChangeHandler={(event) => {
                             setPrice(event.target.value);
                         }}
-                    />
-                    <Input 
-                        labelText="판매 링크"
+                        />
+                    {/* <Input 
+                        labelText="판매 내용"
                         // maxLength={15}
-                        placeholder={"URL을 입력해 주세요."}    
+                        placeholder={"판매 내용을 입력해주세요."}    
                         onChangeHandler={(event) => {
                             setLink(event.target.value);
+                        }}
+                    /> */}
+                    <label className='label-desc'>판매 설명</label>
+                    <TextArea
+                        className="book-report"
+                        placeholder="판매 내용을 입력해주세요."
+                        ref={textareaRef}
+                        onChange={(event) => {
+                            hendleResizeHeight();
+                            setInputValue(event.target.value);
                         }}
                     />
                 </form>
@@ -137,9 +154,13 @@ export default function ProductAdd() {
 
 const ReLayoutInsideStyle = styled(LayoutInsideStyle)`
     padding: 30px 34px 25px 34px;
-
     
-`
+    .label-desc{
+        font-size: 12px;
+        color: var(--color-darkgrey);
+    }
+    
+    `
 
 const ProductImgWrap = styled.div`
     max-width: 322px;
@@ -158,6 +179,25 @@ const ProductImgWrap = styled.div`
         bottom: 12px;
         right: 12px;
         display: inline-block;
-        
     }
+
 `
+
+const TextArea = styled.textarea`
+    padding: 0;
+    width: 100%;
+    border: none;
+    resize: none;
+    caret-color: var(--color-mainColor);
+    font-family: 'Pretendard',sans-serif;
+    padding-top: 10px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::placeholder{
+        font-size: 14px;
+        color: var(--color-lightgrey);
+    }
+`;

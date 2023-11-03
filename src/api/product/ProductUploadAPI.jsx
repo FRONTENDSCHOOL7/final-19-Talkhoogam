@@ -7,7 +7,7 @@ const ProductUploadAPI = (products) => {
     const token = useRecoilValue(loginToken);
     const navigate = useNavigate();
     const loginName = useRecoilValue(accountname);
-    const {productName, price, link, itemImage} = products;
+    const {productName, price, inputValue, itemImage} = products;
 
     const productUpload = async () =>{
         const url = "https://api.mandarin.weniv.co.kr";
@@ -23,7 +23,7 @@ const ProductUploadAPI = (products) => {
                     product: {
                         itemName : productName,
                         price: parseInt(price),
-                        link: link,
+                        link: inputValue,
                         itemImage: itemImage,
                     },
                 }),

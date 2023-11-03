@@ -93,13 +93,15 @@ export const CommentForm = styled.form`
         height: 40px;
         margin-right: 16px;
         color: var(--color-maingrey);
+        font-family: "Pretendard",sans-serif;
     }
 `
 
 export const CommentInputStyle = styled.input`
     width: 100%;
     border: none;
-
+    font-family: "Pretendard",sans-serif;
+    
     &:focus{
         outline: none;
     }

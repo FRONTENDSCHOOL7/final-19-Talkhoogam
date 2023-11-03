@@ -6,14 +6,13 @@ import {LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
 import BasicHeader from '../../components/header/BasicHeader';
 import IconDot from "../../assets/icons/s-icon-more-vertical.svg";
 import IconMessage from "../../assets/icons/icon-message-circle.svg";
-import IconHeart from "../../assets/icons/heart.svg";
 import CommonModal from '../../components/modal/CommonModal';
-import IconHeartActive from "../../assets/icons/heart-avtive.svg";
 import accountname from '../../recoil/accountname';
 import { useRecoilValue } from 'recoil';
 import Comment from '../../components/comment/Comment';
 import CommentInput from '../../components/comment/CommentInput';
 import timeFormat from '../../utils/timeFormat';
+import LikeHeart from '../../components/common/LikeHeart';
 
 export default function PostDetail() {
   
@@ -70,16 +69,6 @@ export default function PostDetail() {
     setIsLocation(value);
   };
 
-  const [iconColor, setIconColor] = useState(IconHeart);
-
-  const colorChangeHandler = () => {
-      if(iconColor === IconHeart){
-          setIconColor(IconHeartActive);
-      }else{
-          setIconColor(IconHeart)
-      }
-  }
-
   function onClickProfile(id){
       navigate(`/profile/${id}`);
   }
@@ -105,7 +94,7 @@ export default function PostDetail() {
                   <p className="timeline-main-text">{postDetail.content}</p>
                   <div className="social-wrap">
                     <div>
-                        <img onClick={colorChangeHandler} className="social-icon" src={iconColor} alt="하트아이콘" />
+                        <LikeHeart />
                     </div>
                     <div>
                         <img className="social-icon" src={IconMessage} alt="댓글아이콘" />

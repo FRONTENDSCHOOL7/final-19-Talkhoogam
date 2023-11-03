@@ -8,17 +8,21 @@ import ProductListAPI from '../../api/product/ProductListAPI';
 import Footer from '../../components/footer/Footer';
 import Empty from '../../components/empty/Empty';
 import LogoImg from '../../assets/images/Logo.png';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import timeFormat from '../../utils/timeFormat';
 
 
 export default function ProductList() {
-    const newAccountname = useRecoilValue(accountname);
-    const { getProductList } = ProductListAPI(newAccountname);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search); // URL 쿼리 문자열을 가져옵니다.
+    const data = queryParams.get('data'); // 'data' 파라미터 값을 가져옵니다.
+    
+    const loginAccountname = useRecoilValue(accountname);
+    const { getProductList } = ProductListAPI(data);
     const [productData, setProductData] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
+    console.log(loginAccountname, data)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -41,7 +45,7 @@ export default function ProductList() {
         navigate(`/profile/${id}`);
     }
 
-    console.log(productData)
+    // console.log(productData)
     return (
         <LayoutStyle>
             <BasicHeader></BasicHeader>
@@ -77,9 +81,17 @@ export default function ProductList() {
             ) : (
                 <>
                     <h1 className='a11y-hidden'>판매하는 상품이 존재하지 않습니다.</h1>
-                    <Empty image={LogoImg} alt={"404페이지"} >
+                    {loginAccountname === data ? (
+                    <Empty image={LogoImg} alt={"404페이지"} isMine={true} >
                     상품을 등록해서 중고 서적을 판매해 보세요!
                     </Empty>
+                    ) : (
+                        <>
+                            <Empty image={LogoImg} alt={"404페이지"} isMine={false}>
+                                해당 사용자의 판매 서적이 아직 작성되지 않았습니다.
+                            </Empty>
+                        </>
+                    )}
                 </>
             )} 
                         

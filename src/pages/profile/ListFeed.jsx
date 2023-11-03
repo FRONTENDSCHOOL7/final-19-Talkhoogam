@@ -12,6 +12,7 @@ import Empty from '../../components/empty/Empty';
 import LogoImg from "../../assets/images/Logo.png"
 import CommonModal from '../../components/modal/CommonModal';
 import { useRecoilValue } from "recoil";
+import timeFormat from "../../utils/timeFormat.js";
 
 export default function ListFeed(accountname) {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function ListFeed(accountname) {
       }
     };
     fetchData();
-  }, []);
+  }, [accountname]);
   //console.log("myFeedData : ", myFeedData);
 //더보기 버튼
   const showModal = (name, id) => {
@@ -96,7 +97,7 @@ const colorChangeHandler = () => {
                 <p>{item.commentCount}</p>
               </div>
               <div className="list-date">
-                <p>{item.createdAt}</p>
+                <p>{timeFormat(item.updatedAt)}</p>
               </div>
             </div>
           </List>

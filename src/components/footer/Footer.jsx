@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PostInsertModal from "../modal/PostInsertModal";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as IconHome } from "../../assets/icons/home.svg";
-import { ReactComponent as IconHand } from "../../assets/icons/handshake.svg";
+import { ReactComponent as IconChat } from "../../assets/icons/messages.svg";
 import { ReactComponent as IconEdit } from "../../assets/icons/edit.svg";
 import { ReactComponent as IconusersAlt } from "../../assets/icons/users-alt.svg";
 import { ReactComponent as IconUser } from "../../assets/icons/user.svg";
@@ -11,11 +11,13 @@ import accountname from "../../recoil/accountname";
 import { useRecoilValue } from "recoil";
 
 function Footer() {
+    
     const navigate = useNavigate();
     const uselocation = useLocation();
     const [svgColor, setSvgColor] = useState(uselocation.pathname.toLowerCase());
     const [modalOpen, setModalOpen] = useState(false);
     const accountName = useRecoilValue(accountname);
+    
 
     const showModal = () => {
         modalOpen ? setModalOpen(false) : setModalOpen(true);
@@ -24,17 +26,22 @@ function Footer() {
     const handleClickState = (pageName) => {
         navigate(`/${pageName}`);
         setSvgColor(pageName);
+
         // console.log(`페이지 이름 : /${pageName}`);
         if (`/${pageName}` === "/home") {
-        setSvgColor(`/${pageName}`);
+            setSvgColor(`/${pageName}`);
         } else if (`/${pageName}` === `/profile/${accountName}`) {
-        setSvgColor(`/${pageName}`);
-        } else if(`/${pageName}` === "/sellbook"){
+            setSvgColor(`/${pageName}`);
+            // window.location.reload(); // 페이지 새로 고침
+        } else if(`/${pageName}` === "/chat"){
             setSvgColor(`/${pageName}`)
         } else if(`/${pageName}` === "/gathering"){
             setSvgColor(`/${pageName}`)
         }
+        
     };
+    
+
     return (
         <>
         <FooterLayout>
@@ -54,17 +61,17 @@ function Footer() {
 
             <FooterIconWrap
             onClick={() => {
-                handleClickState("sellbook");
+                handleClickState("gathering");
             }}
             >
-            <IconHand
+            <IconusersAlt
                 className="footer-icon"
-                fill={svgColor === "/sellbook" ? "#56b778" : "#979797"}
+                fill={svgColor === "/gathering" ? "#56b778" : "#979797"}
             />
             <p
-                style={{ color: svgColor === "/sellbook" ? "#56b778" : "#767676" }}
+                style={{ color: svgColor === "/gathering" ? "#56b778" : "#767676" }}
             >
-                거래
+                독서모임
             </p>
             </FooterIconWrap>
 
@@ -84,17 +91,19 @@ function Footer() {
 
             <FooterIconWrap
             onClick={() => {
-                handleClickState("gathering");
+                handleClickState("chat");
             }}
             >
-            <IconusersAlt
+            <IconChat
                 className="footer-icon"
-                fill={svgColor === "/gathering" ? "#56b778" : "#979797"}
+                // fill="#fff"
+                // stroke={svgColor === "/chat" ? "#56b778" : "#767676"}
+                fill={svgColor === `/chat` ? "#56b778" : "#979797"}
             />
             <p
-                style={{ color: svgColor === "/gathering" ? "#56b778" : "#767676" }}
+                style={{ color: svgColor === "/chat" ? "#56b778" : "#767676" }}
             >
-                독서모임
+                채팅
             </p>
             </FooterIconWrap>
 

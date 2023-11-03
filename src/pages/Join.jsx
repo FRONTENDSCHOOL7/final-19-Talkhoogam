@@ -15,15 +15,23 @@ import { emailState, pwState } from "../recoil/joinData";
 import EmailValidApi from "../api/EmailValidApi";
 
 export default function Join() {
+  // 이메일, 패스워드 상태 관리
   const [email, setEmail] = useRecoilState(emailState);
   const [password, setPassword] = useRecoilState(pwState);
   const [pwCheck, setPwCheck] = useState("");
+
+  // 에러 메시지 상태 관리
   const [emailErr, setEmailErr] = useState("");
   const [pwErr, setPwErr] = useState("");
   const [pwCheckErr, setPwCheckErr] = useState("");
+
+  // 버튼 활성화 상태 관리
   const [btnState, SetBtnState] = useState(true);
+
+  // useNavigate 사용
   const navigate = useNavigate();
 
+  // email, password, pwcheck 값을 useState에 저장
   const EmailValue = (e) => {
     setEmail(e.target.value);
     setEmailErr("");
@@ -39,6 +47,7 @@ export default function Join() {
     setPwCheckErr("");
   };
 
+  // 이메일 유효성 검사 => 통과 시 이메일 검증
   const EmailValid = async (e) => {
     e.preventDefault();
     if (!email) {
@@ -52,8 +61,10 @@ export default function Join() {
     handleValid();
   };
 
+  // 비밀번호 조건(정규 표현식)
   const passwordReg = /^(?=.*[a-z])(?=.*\d).{6,}$/;
 
+  // 비밀번호 유효성 검사
   const PasswordValid = (e) => {
     if (!password) {
       setPwErr("필수 입력 항목입니다.");
@@ -65,6 +76,7 @@ export default function Join() {
     handleValid();
   };
 
+  // 비밀번호 확인 유효성 검사
   const PwCheckValid = (e) => {
     if (!pwCheck) {
       setPwCheckErr("필수 입력 항목입니다.");
@@ -76,6 +88,7 @@ export default function Join() {
     handleValid();
   };
 
+  // 전체 필수 값, 에러 메시지 확인 후 버튼 활성화 또는 비활성화
   const handleValid = () => {
     if (
       emailErr === "사용 가능한 이메일 입니다." &&
@@ -91,10 +104,12 @@ export default function Join() {
     }
   };
 
+  // input 값 변할 때마다 버튼 활성화 확인
   useEffect(() => {
     handleValid();
   }, [email, password, pwCheck]);
 
+  // 버튼 활성화일 경우 프로필 설정 페이지로 이동
   const MoveSetProfile = (e) => {
     e.preventDefault();
     navigate("/setProfile");

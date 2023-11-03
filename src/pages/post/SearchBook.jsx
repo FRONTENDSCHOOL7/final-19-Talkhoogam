@@ -66,10 +66,10 @@ export default function SearchBook() {
                 console.log(item);
                 // console.log("썸네일" + item.thumbnail);
                 // console.log("링크" + item.url);
-                setBookTitle(item.title);
+                setBookTitle([item.title]);
                 setBookAuthor(item.authors);
-                setBookThumb(item.thumbnail);
-                setBookLink(item.url);
+                setBookThumb([item.thumbnail]);
+                setBookLink([item.url]);
 
                 window.history.back();
               }}
@@ -89,6 +89,8 @@ export default function SearchBook() {
       return;
     }
   };
+
+  // console.log(bookAuthor, bookTitle, bookThumb);
 
   return (
     <div>

@@ -11,7 +11,6 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { author, link, thumbnail, title } from "../../recoil/bookInfo";
 import bookImg from "../../assets/images/book.png";
-import UploadModal from "../../components/modal/UploadModal";
 
 export default function PostUpload() {
   const [imgSrc, setImgSrc] = useState("");
@@ -19,8 +18,6 @@ export default function PostUpload() {
   const [profileInfo, setProfileInfo] = useState(() => {});
   const [inputValue, setInputValue] = useState("");
   const { postUpload } = PostUploadAPI({ inputValue, itemImage });
-
-  const inputImage = useRef(null);
   const textareaRef = useRef();
 
   // 책 정보 recoil에서 가져오기
@@ -31,8 +28,6 @@ export default function PostUpload() {
   // 책 정보 값 상태 확인
   const [bookInfo, setBookInfo] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false);
-
   const navigate = useNavigate();
 
   const hendleResizeHeight = () => {
@@ -40,14 +35,13 @@ export default function PostUpload() {
     textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
   };
 
-  // 게시물 업로드
   const onClickHandler = async (e) => {
     e.preventDefault();
     await postUpload();
   };
 
-  // 파일 가져오기
   const handleChangeImage = async (e) => {
+    // 파일 가져오기
     const file = e.target.files[0];
 
     if (!file) {
@@ -68,7 +62,6 @@ export default function PostUpload() {
 
     setImgSrc(imageURL);
     setItemImage(imageURL);
-    setOpenModal(false);
   };
 
   useEffect(() => {
@@ -85,37 +78,19 @@ export default function PostUpload() {
 
   // 책 제목, 저자, 썸네일이 전부 있는 경우 책 정보 상태 값 true로 변경
   useEffect(() => {
-    if (bookInfo) {
+    if (bookTitle && bookAuthor && bookThumb) {
       setBookInfo(true);
-      setItemImage(bookThumb);
     }
   }, []);
-
-  // 모달 창 닫기
-  const handleModalClose = (action) => {
-    if (action === "imageUpload") {
-      handleChangeImage();
-    } else if (action === "searchBook") {
-      navigate("/searchbook");
-    }
-    setOpenModal(false);
-  };
-
-  const handleUpload = () => {
-    // 클릭 시 파일 입력(input) 엘리먼트를 트리거합니다.
-    if (inputImage.current) {
-      inputImage.current.click();
-    }
-  };
 
   // 책 정보 게시물에 등록
   const BookInfo = () => {
     return (
       <Book>
         <img
-          onClick={(e) => setOpenModal(true)}
-          src={bookThumb || itemImage}
+          src={bookThumb}
           alt="책 표지"
+          onClick={(e) => navigate("/searchbook")}
         />
         <p className="book-title">{bookTitle}</p>
         <p className="book-author">{bookAuthor}</p>
@@ -138,38 +113,12 @@ export default function PostUpload() {
                   alt="프로필이미지"
                 />
                 <InputWrap>
-                  {imgSrc && (
-                    <img
-                      src={imgSrc}
-                      alt="업로드 이미지"
-                      onClick={(e) => navigate("/searchbook")}
-                    />
-                  )}
-
-                  {/* 모달 창 */}
-                  {openModal && (
-                    <UploadModal onClickHandler={handleModalClose}>
-                      <li onClick={() => handleModalClose("searchBook")}>
-                        책 검색
-                      </li>
-                      <li onClick={handleUpload}>
-                        이미지 업로드
-                        <input
-                          id="file-upload"
-                          onChange={(e) => handleChangeImage(e)}
-                          type="file"
-                          accept="image/*"
-                          ref={inputImage}
-                          style={{ display: openModal ? "none" : "block" }}
-                        />
-                      </li>
-                    </UploadModal>
-                  )}
+                  {imgSrc && <img src={imgSrc} alt="업로드 이미지" onClick={(e) => navigate("/searchbook")}/>}
 
                   {/* 책 정보 */}
-                  {bookThumb ? <BookInfo /> : null}
-                  {itemImage || bookThumb ? null : (
-                    <SearchBook onClick={(e) => setOpenModal(true)} />
+                  {bookInfo ? <BookInfo /> : null}
+                  {bookInfo ? null : (
+                    <SearchBook onClick={(e) => navigate("/searchbook")} />
                   )}
 
                   <TextArea
@@ -187,6 +136,19 @@ export default function PostUpload() {
               <p>로딩 중 ..</p>
             )}
           </ContentWrap>
+
+          <UploadButton>
+            <label htmlFor="file-upload">
+              <img src={IconUpload} alt="이미지 업로드 아이콘" />
+            </label>
+            <input
+              id="file-upload"
+              onChange={handleChangeImage}
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+            />
+          </UploadButton>
         </PositionWrap>
       </LayoutInsideStyle>
     </LayoutStyle>

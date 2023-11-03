@@ -57,6 +57,7 @@ export const NextBtn = styled(Btn)`
   margin-top: 10px;
 
   &:enabled {
+    transition: background-color 0.8s, color 0.5s;
     background-color: var(--color-mainColor);
     cursor: pointer;
   }

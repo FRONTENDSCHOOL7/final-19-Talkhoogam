@@ -19,7 +19,7 @@ import GreedFeed from "../profile/GreedFeed";
 import MyProduct from "../../components/profile/MyProduct.jsx";
 import AccountNameProfileAPI from "../../api/post/AcountNameProfileAPI";
 import accountname from "../../recoil/accountname";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 //Modal.setAppElemnet("#root");
@@ -55,7 +55,8 @@ export default function Profile() {
   };
 
   //유저 정보 불러오기
-  {/*const [profileInfo, setProfileInfo] = useState(() => {});
+  {
+    /*const [profileInfo, setProfileInfo] = useState(() => {});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchUserData = async () => {
@@ -69,7 +70,8 @@ export default function Profile() {
       }
     };
     fetchUserData();
-  }, []);*/}
+  }, []);*/
+  }
 
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   //피드 스타일 선택
@@ -104,25 +106,25 @@ export default function Profile() {
 
   //유저 프로필 불러오기
   const params = useParams();
-  const {getAccountNameProfile} = AccountNameProfileAPI(params.accountname);
+  const { getAccountNameProfile } = AccountNameProfileAPI(params.accountname);
   const [userInfo, setUserInfo] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData(){
-        try {
-            const data = await getAccountNameProfile();
-            setUserInfo(data.profile);
-        } catch (error){
-            console.error("데이터 가져오기 오류:", error);
-        } finally {
-            setLoading(false)
-        }
+    async function fetchData() {
+      try {
+        const data = await getAccountNameProfile();
+        setUserInfo(data.profile);
+      } catch (error) {
+        console.error("데이터 가져오기 오류:", error);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchData();
   }, [params.accountname]);
-  console.log(userInfo)
-  
+  console.log(userInfo);
+
   //팔로워 목록
   const navigate = useNavigate();
   //const [isFollowers, setIsFollowers] = useState("");
@@ -151,7 +153,7 @@ export default function Profile() {
                     {userInfo?.followerCount}
                   </button>
                 )}
-                <p className="profilehead-text">followers</p>
+                <p className="profilehead-text">팔로워</p>
               </div>
               <div>
                 <img
@@ -185,7 +187,7 @@ export default function Profile() {
                     {userInfo?.followingCount}
                   </button>
                 )}
-                <p className="profilehead-text">followings</p>
+                <p className="profilehead-text">팔로잉</p>
               </div>
             </ProfileHead>
             <ProfileMid>
@@ -207,22 +209,24 @@ export default function Profile() {
             </ProfileMid>
             <Follow>
               {myAccount === params.accountname ? (
-              <>
-                <button onClick={onClickSetProfile}>프로필 수정</button>
-                <button onClick={onClickProductAdd}>상품 등록</button>
-              </>) : (
-              <>
-                {/* 받아온 accountname 에 따라 각각 나타내기 */}
-                <img src={ImgMessage} alt="메세지구현X"></img>
-                <div onClick={handleClick}>
-                {isFollowing ? (
-                  <button className="unfollow-btn">언팔로우</button>
-                ) : (
-                  <button className="follow-btn">팔로우</button>
-                )}
-              </div>
-              <img src={ImgShare} alt="공유구현X"></img>
-            </>) }
+                <>
+                  <button onClick={onClickSetProfile}>프로필 수정</button>
+                  <button onClick={onClickProductAdd}>상품 등록</button>
+                </>
+              ) : (
+                <>
+                  {/* 받아온 accountname 에 따라 각각 나타내기 */}
+                  <img src={ImgMessage} alt="메세지구현X"></img>
+                  <div onClick={handleClick}>
+                    {isFollowing ? (
+                      <button className="unfollow-btn">언팔로우</button>
+                    ) : (
+                      <button className="follow-btn">팔로우</button>
+                    )}
+                  </div>
+                  <img src={ImgShare} alt="공유구현X"></img>
+                </>
+              )}
             </Follow>
           </ProfileMain>
         </ProfilePage>
@@ -244,7 +248,11 @@ export default function Profile() {
             ></img>
           </LayerNav>
         </Feed>
-        {listStyle ? <GreedFeed accountname = {params.accountname}></GreedFeed> : <ListFeed accountname = {params.accountname}></ListFeed>}
+        {listStyle ? (
+          <GreedFeed accountname={params.accountname}></GreedFeed>
+        ) : (
+          <ListFeed accountname={params.accountname}></ListFeed>
+        )}
         <Footer></Footer>
       </LayoutStyle>
     </>
@@ -291,7 +299,7 @@ const ProfileHead = styled.div`
   color: #767676;
 
   .profilehead-text {
-    font-size: 12px;
+    font-size: 13px;
     color: #767676;
   }
   .userName {
@@ -320,7 +328,7 @@ const ProfileHead = styled.div`
 const ProfileMid = styled.div`
   text-align: center;
   margin: 16px auto;
-  color: #767676;
+  color: var(--color-darkgrey);
   font-size: 12px;
   .userName {
     font-weight: bold;
@@ -331,7 +339,7 @@ const ProfileMid = styled.div`
     margin: 8px auto;
   }
   .profileIntro {
-    font-size: 14px;
+    font-size: 15px;
     margin: 16px auto;
   }
 `;
@@ -340,6 +348,7 @@ const Follow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   .follow-btn,
   .unfollow-btn {
     width: 140px;
@@ -355,12 +364,15 @@ const Follow = styled.div`
   }
   .unfollow-btn {
     //언팔로우 버튼
-    border: 1px Solid #dbdbdb;
     color: #767676;
   }
-  .follow-btn:hover,
+  .follow-btn:hover {
+    background-color: var(--color-dark-mainColor);
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+  }
   .unfollow-btn:hover {
-    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-maingrey);
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;
   }
   img {
     border: 1px solid #dbdbdb;
@@ -370,19 +382,23 @@ const Follow = styled.div`
   }
   img:hover {
     cursor: pointer;
-    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-dark-mainColor);
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;
   }
-  button{ 
-        border-radius: 30px;
-        padding: 8px 26px;
-        font-weight: 500;
-        margin: auto 5px;
-        border: 1px Solid #DBDBDB;
-        color:#767676;  
-    }
-    button:hover{
-        box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.2);
-    }
+  button {
+    background-color: var(--color-trans-grey);
+    border-radius: 30px;
+    padding: 8px 26px;
+    font-weight: 500;
+    margin: auto 5px;
+    color: #494949;
+  }
+
+  button:hover {
+    background-color: #5ac58067;
+    border-color: transparent;
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+  }
 `;
 
 const Feed = styled.div`

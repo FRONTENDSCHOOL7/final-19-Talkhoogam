@@ -35,6 +35,7 @@ body {
 
 input {
     border : none;
+    font-family: 'Pretendard', sans-serif;
 }
 
 a {
@@ -45,6 +46,7 @@ a {
 button {
     border: 0;
     background: none;
+    font-family: 'Pretendard', sans-serif;
 }
 
 button:enabled {

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Button from '../components/common/button/Button';
+import styled from "styled-components";
+import Button from "../components/common/button/Button";
 
 export const MyProductWrap = styled.article`
   box-sizing: border-box;
@@ -90,9 +90,11 @@ export const MyProductLi = styled.li`
     font-family: inherit;
     text-align: left;
     border-radius: 8px;
+    width: 100%;
 
     &:hover {
-      box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+      background-color: var(--color-trans-grey);
     }
   }
 
@@ -104,6 +106,7 @@ export const MyProductLi = styled.li`
   }
 
   & .product-tit {
+    font-weight: bold;
     font-size: 15px;
     margin-bottom: 3px;
     overflow: hidden;
@@ -113,7 +116,7 @@ export const MyProductLi = styled.li`
   }
 
   & .product-price {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--color-mainColor);
   }
 `;

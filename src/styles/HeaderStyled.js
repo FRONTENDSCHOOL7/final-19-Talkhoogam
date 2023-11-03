@@ -90,7 +90,7 @@ export const HeaderMoreList = styled.article`
     min-height: 24px;
     border-bottom: 1px solid #dbdbdb;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 
     & button {
@@ -115,6 +115,10 @@ export const HeaderMoreList = styled.article`
     position: absolute;
     top: 0px;
     right: 15px;
+    img {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 

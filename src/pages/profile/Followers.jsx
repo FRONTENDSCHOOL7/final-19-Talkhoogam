@@ -36,13 +36,7 @@ export default function Followers() {
       <FollowListStyle>
         {userFollowerList.length !== 0 ? (
           userFollowerList.map((item) => {
-            return (
-              <FollowItems
-                userAccountName={userAccountName}
-                item={item}
-                key={item.accountname}
-              />
-            );
+            return <FollowItems item={item} key={item.accountname} />;
           })
         ) : (
           <li>

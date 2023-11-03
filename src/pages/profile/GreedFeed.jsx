@@ -27,7 +27,7 @@ export default function LayerFeed(accountname){
             }
         };
     fetchData();
-    }, []);
+    }, [accountname]);
     console.log('myFeedData : ', myFeedData)
     //console.log(accountname.accountname)
 

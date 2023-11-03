@@ -37,7 +37,7 @@ export default function ListFeed(accountname) {
       }
     };
     fetchData();
-  }, []);
+  }, [accountname]);
   //console.log("myFeedData : ", myFeedData);
 //더보기 버튼
   const showModal = (name, id) => {

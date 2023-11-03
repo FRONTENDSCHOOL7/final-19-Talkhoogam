@@ -92,6 +92,7 @@ export const CommentForm = styled.form`
         width: 55px;
         height: 40px;
         margin-right: 16px;
+        color: var(--color-maingrey);
     }
 `
 

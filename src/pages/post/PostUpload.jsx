@@ -113,7 +113,7 @@ export default function PostUpload() {
                   alt="프로필이미지"
                 />
                 <InputWrap>
-                  {imgSrc && <img src={imgSrc} alt="업로드 이미지" />}
+                  {imgSrc && <img src={imgSrc} alt="업로드 이미지" onClick={(e) => navigate("/searchbook")}/>}
 
                   {/* 책 정보 */}
                   {bookInfo ? <BookInfo /> : null}

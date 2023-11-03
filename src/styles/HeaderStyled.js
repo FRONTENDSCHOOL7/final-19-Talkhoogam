@@ -7,7 +7,7 @@ export const HeaderMain = styled.header`
   min-height: 54px;
   padding: 0 15px;
   text-align: center;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 2px solid #dddcdc8c;
 
   display: flex;
   justify-content: space-between;
@@ -47,7 +47,12 @@ export const MenuBtn = styled.button`
 export const SearchBtn = styled.button`
   width: 22px;
   height: 22px;
-`
+`;
+
+export const LogoImg = styled.img`
+  width: 40px;
+  height: 40px;
+`;
 
 export const UploadBtn = styled(Btn)`
   width: 92px;

@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import IconMessage from "../assets/icons/icon-message-circle.svg";
 import IconDot from "../assets/icons/s-icon-more-vertical.svg";
-import IconHeart from "../assets/icons/heart.svg";
 import { LayoutStyle, LayoutInsideStyle } from "../styles/LayoutStyled";
 import Footer from "../components/footer/Footer";
 import GetFollowerFeedListAPI from "../api/post/GetFollowerFeedListAPI";
 import Empty from "../components/empty/Empty";
 import LogoImg from "../assets/images/Logo.png";
-import IconHeartActive from "../assets/icons/heart-avtive.svg";
 import CommonModal from "../components/modal/CommonModal";
 import { useNavigate } from "react-router-dom";
 import timeFormat from "../utils/timeFormat";
 import BasicHeader from "../components/header/BasicHeader";
+import LikeHeart from "../components/common/LikeHeart";
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
@@ -33,16 +32,6 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
     fetchData(); // 데이터 가져오는 함수를 호출
   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출
   console.log(feedData);
-
-  const [iconColor, setIconColor] = useState(IconHeart);
-
-  const colorChangeHandler = () => {
-    if (iconColor === IconHeart) {
-      setIconColor(IconHeartActive);
-    } else {
-      setIconColor(IconHeart);
-    }
-  };
 
   function moveProfile(accountname) {
     navigate(`/profile/${accountname}`);
@@ -95,12 +84,13 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                       <p className="timeline-main-text">{item.content}</p>
                       <div className="social-wrap">
                         <div>
-                          <img
+                          {/* <img
                             onClick={colorChangeHandler}
                             className="social-icon"
                             src={iconColor}
                             alt="하트아이콘"
-                          />
+                          /> */}
+                          <LikeHeart />
                         </div>
                         <div>
                           <img

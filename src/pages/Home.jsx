@@ -195,6 +195,7 @@ export const FeedWrap = styled.div`
 
   .timeline-title {
     font-size: 14px;
+    font-weight: bold;
   }
 
   .timeline-id {

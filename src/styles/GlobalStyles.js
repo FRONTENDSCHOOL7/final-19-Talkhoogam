@@ -20,6 +20,9 @@ ${reset}
     --color-trans-grey: #f2f2f2;
     --color-red: #EB5757;
     --color-bg: #F2F2F2;
+
+    /* 폰트 */
+    --font-mainFont: 'Pretendard', sans-serif;
 }
 
 body {

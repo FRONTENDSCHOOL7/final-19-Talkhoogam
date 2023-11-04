@@ -38,7 +38,7 @@ export const FollowLiStyle = styled.li`
     text-align: left;
 
     .user-name {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       display: -webkit-box;
       -webkit-box-orient: vertical;

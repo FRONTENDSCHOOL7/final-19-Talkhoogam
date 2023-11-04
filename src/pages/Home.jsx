@@ -160,6 +160,7 @@ export const FeedWrap = styled.div`
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-trans-grey);
   }
 
   .user-profileimg {
@@ -180,17 +181,18 @@ export const FeedWrap = styled.div`
   }
 
   .img-dot {
+    margin-top: 5px;
     cursor: pointer;
   }
 
   .timeline-title {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
   }
 
   .timeline-id {
     color: #767676;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .timeline-main-text {
@@ -204,21 +206,22 @@ export const FeedWrap = styled.div`
     width: 304px;
     height: 228px;
     border-radius: 10px;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .social-wrap {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     color: var(--color-darkgrey);
     font-size: 12px;
     line-height: 12px;
     margin: 10px 0;
+
     .social-icon {
       cursor: pointer;
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
       object-fit: cover;
       margin-right: 6px;
     }
@@ -237,10 +240,11 @@ export const FeedWrap = styled.div`
 
   .wr-date {
     color: #767676;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 400;
     line-height: 12px;
     margin-top: 16px;
+    margin-bottom: 5px;
   }
 `;
 

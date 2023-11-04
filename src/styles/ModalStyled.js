@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes } from "styled-components";
 
 const fadeInUp = keyframes`
     0% {
@@ -29,7 +29,7 @@ export const ModalLayout = styled.div`
             transform: translateZ(0);
         }
     } */
-  animation: ${fadeInUp} 1s;
+  animation: ${fadeInUp} 0.6s;
 
   ${(props) =>
     props.isOpen &&
@@ -74,7 +74,9 @@ export const ModalButton = styled.button`
   height: 46px;
   font: inherit;
   font-weight: bold;
+
   &:hover {
-    border: 2px solid var(--color-mainColor);
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+    background-color: var(--color-trans-grey);
   }
 `;

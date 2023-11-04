@@ -49,10 +49,6 @@ export default function SearchBook() {
     }
   }, [keyword]);
 
-  // console.log(bookData.documents.title);
-  // console.log(bookData.documents.authors);
-  // console.log(bookData.documents.thumbnail);
-
   const SearchResult = () => {
     if (bookData && bookData.documents) {
       return (
@@ -61,11 +57,6 @@ export default function SearchBook() {
             <BookList
               key={index}
               onClick={(e) => {
-                console.log("타이틀", typeof item.title);
-                console.log("저자", typeof item.authors);
-                console.log(item);
-                // console.log("썸네일" + item.thumbnail);
-                // console.log("링크" + item.url);
                 setBookTitle(item.title);
                 setBookAuthor(item.authors);
                 setBookThumb(item.thumbnail);

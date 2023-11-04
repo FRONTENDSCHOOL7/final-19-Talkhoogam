@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Button from '../components/common/button/Button';
+import styled from "styled-components";
+import Button from "../components/common/button/Button";
 
 export const FollowListStyle = styled.ul`
   width: 100%;
@@ -38,7 +38,7 @@ export const FollowLiStyle = styled.li`
     text-align: left;
 
     .user-name {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: bold;
       display: -webkit-box;
       -webkit-box-orient: vertical;

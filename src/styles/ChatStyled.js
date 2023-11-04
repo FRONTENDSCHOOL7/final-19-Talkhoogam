@@ -25,7 +25,7 @@ export const ChatListWrap = styled.div`
   }
 
   .profile-id {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     margin-bottom: 4px;
   }
@@ -38,7 +38,7 @@ export const ChatListWrap = styled.div`
 
   .desc-text {
     color: var(--color-darkgrey);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     white-space: nowrap; /* 텍스트 줄바꿈 방지 */
     overflow: hidden; /* 내용이 넘치면 숨기기 */
@@ -47,9 +47,9 @@ export const ChatListWrap = styled.div`
   }
 
   .desc-date {
-    color: var(--color-lightgrey);
+    color: #adadad;
     text-align: right;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
   }
 `;

@@ -15,7 +15,7 @@ export const HeaderMain = styled.header`
   gap: 10px;
 
   & h2 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
   }
 

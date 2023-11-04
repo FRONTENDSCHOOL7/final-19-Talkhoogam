@@ -1,16 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ProductListAPI from '../../api/product/ProductListAPI';
-import MyProductItems from './MyProductItems';
+import React, { useEffect, useRef, useState } from "react";
+import ProductListAPI from "../../api/product/ProductListAPI";
+import MyProductItems from "./MyProductItems";
 import {
   MyProductLi,
   MyProductUl,
   MyProductWrap,
   ScrollHandler,
-} from '../../styles/MyProductStyled';
-import { useNavigate, useParams } from 'react-router-dom';
-import arrowLeft from '../../assets/icons/icon-arrow-white.svg';
-import arrowRight from '../../assets/icons/icon-arrow-right.svg';
-import pageMoveIcon from "../../assets/icons/sign-in-alt.svg";
+} from "../../styles/MyProductStyled";
+import { useNavigate, useParams } from "react-router-dom";
+import arrowLeft from "../../assets/icons/icon-arrow-white.svg";
+import arrowRight from "../../assets/icons/icon-arrow-right.svg";
+import pageMoveIcon from "../../assets/icons/angle-small-right.svg";
 
 export default function MyProduct() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function MyProduct() {
         const data = await getProductList();
         setProductList(data);
       } catch (error) {
-        console.error('데이터를 불러오는데 실패하였습니다.', error);
+        console.error("데이터를 불러오는데 실패하였습니다.", error);
       }
     };
     fetchData();
@@ -40,19 +40,19 @@ export default function MyProduct() {
   function scrollLeft() {
     productListRef.current.scrollBy({
       left: -300,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
   function scrollRight() {
     productListRef.current.scrollBy({
       left: 300,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
 
   const handleClick = () => {
     // 쿼리 문자열을 사용하여 데이터 전달
-    navigate(`/sellbook?data=${params.accountname}`); 
+    navigate(`/sellbook?data=${params.accountname}`);
   };
 
   return (
@@ -60,7 +60,11 @@ export default function MyProduct() {
       <MyProductWrap>
         <div className="sub-title-wrap">
           <h3 className="sub-title">판매중인 상품</h3>
-          <img onClick={handleClick} src={pageMoveIcon} alt="판매목록보기아이콘" />
+          <img
+            onClick={handleClick}
+            src={pageMoveIcon}
+            alt="판매목록보기아이콘"
+          />
         </div>
         {/* <h3 className="sub-title">판매중인 상품</h3> */}
         {productList.length !== 0 ? (
@@ -68,7 +72,7 @@ export default function MyProduct() {
             <MyProductUl ref={productListRef}>
               {productList.map((item) => {
                 return (
-                  <MyProductItems item={item} key={'myproduct' + item.id} />
+                  <MyProductItems item={item} key={"myproduct" + item.id} />
                 );
               })}
             </MyProductUl>

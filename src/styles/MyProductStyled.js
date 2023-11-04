@@ -24,7 +24,7 @@ export const MyProductWrap = styled.article`
 
   & .sub-title {
     display: inline-block;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
     /* margin-bottom: 16px; */
   }

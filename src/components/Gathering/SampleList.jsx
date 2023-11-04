@@ -1,20 +1,22 @@
-import React, { useRef } from 'react';
-import sampleBook from '../../assets/images/sample_book.jpg';
-import sampleBook2 from '../../assets/images/슈독.jfif';
+import React, { useRef } from "react";
+import sampleBook from "../../assets/images/sample_book.jpg";
+import sampleBook2 from "../../assets/images/슈독.jfif";
 import {
   GroupUlProto,
   GroupLiProto,
   GroupArticleProto,
   BtnScrollHandler,
   ContainerProto,
-} from '../../styles/GatheringStyled';
+  MoreIcon,
+} from "../../styles/GatheringStyled";
+import moreIcon from "../../assets/icons/angle-small-right.svg";
 
 export function SampleList() {
   return <div>SampleList</div>;
 }
 
 function alertInfo() {
-  alert('현재 페이지는 프로토타입 페이지입니다.');
+  alert("현재 페이지는 프로토타입 페이지입니다.");
 }
 
 function SampleItems() {
@@ -25,9 +27,7 @@ function SampleItems() {
         src={sampleBook}
         alt="추천하는 모임 게시글의 대표 이미지"
       />
-      <strong className="post-tit">
-        청춘의 하였으며, 이것은 몸이 때문이다. 사는가 고동을 용기가 충분히 청춘
-      </strong>
+      <strong className="post-tit">독서하는 사람 모임</strong>
       <p className="post-info">너굴사장님</p>
     </button>
   );
@@ -41,9 +41,7 @@ function SampleItems2() {
         src={sampleBook2}
         alt="추천하는 모임 게시글의 대표 이미지"
       />
-      <strong className="post-tit">
-        청춘의 하였으며, 이것은 몸이 때문이다. 사는가 고동을 용기가 충분히 청춘
-      </strong>
+      <strong className="post-tit">청춘 모임</strong>
       <p className="post-info">너굴사장님</p>
     </button>
   );
@@ -56,7 +54,7 @@ export function JoinedGroups() {
         <div className="group-tit-more">
           <h3>참여하고 있는 모임</h3>
           <a href="javascirpt:void(0);" onClick={alertInfo}>
-            더보기
+            <MoreIcon src={moreIcon} alt="더보기 아이콘" />
           </a>
         </div>
         <GroupUlProto>
@@ -81,13 +79,13 @@ export function RecommendedGroups() {
   function handleScrollLeft() {
     RecommendedRef.current.scrollBy({
       left: -300,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
   function handleScrollRight() {
     RecommendedRef.current.scrollBy({
       left: 300,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
   return (
@@ -96,7 +94,7 @@ export function RecommendedGroups() {
         <div className="group-tit-more">
           <h3>추천하는 모임</h3>
           <a href="javascirpt:void(0);" onClick={alertInfo}>
-            더보기
+            <MoreIcon src={moreIcon} alt="더보기 아이콘" />
           </a>
         </div>
         <GroupUlProto className="recommendedList" ref={RecommendedRef}>
@@ -140,13 +138,13 @@ export function AllGroups() {
   function handleScrollLeft() {
     allListRef.current.scrollBy({
       left: -300,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
   function handleScrollRight() {
     allListRef.current.scrollBy({
       left: 300,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
 
@@ -156,7 +154,7 @@ export function AllGroups() {
         <div className="group-tit-more">
           <h3>모임 전체보기</h3>
           <a href="javascirpt:void(0);" onClick={alertInfo}>
-            더보기
+            <MoreIcon src={moreIcon} alt="더보기 아이콘" />
           </a>
         </div>
         <GroupUlProto className="allList" ref={allListRef}>

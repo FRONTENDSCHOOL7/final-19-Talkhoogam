@@ -90,16 +90,13 @@ export default function Join() {
 
   // 전체 필수 값, 에러 메시지 확인 후 버튼 활성화 또는 비활성화
   const handleValid = () => {
-    if (
-      emailErr === "사용 가능한 이메일 입니다." &&
-      !pwErr &&
-      !pwCheckErr &&
-      email &&
-      password &&
-      pwCheck
-    ) {
-      SetBtnState(false);
+    if (email && password && pwCheck) {
+      if (emailErr === "사용 가능한 이메일 입니다." && !pwErr && !pwCheckErr) {
+        console.log("활성화");
+        SetBtnState(false);
+      }
     } else {
+      console.log("비활성화");
       SetBtnState(true);
     }
   };
@@ -107,7 +104,7 @@ export default function Join() {
   // input 값 변할 때마다 버튼 활성화 확인
   useEffect(() => {
     handleValid();
-  }, [email, password, pwCheck]);
+  }, [email, password, pwCheck, emailErr, pwErr, pwCheckErr]);
 
   // 버튼 활성화일 경우 프로필 설정 페이지로 이동
   const MoveSetProfile = (e) => {
@@ -138,7 +135,10 @@ export default function Join() {
           minLength="6"
           maxLength="20"
           onChange={PasswordValue}
-          onBlur={PasswordValid}
+          onBlur={(e) => {
+            PasswordValid(e);
+            PwCheckValid(e);
+          }}
         />
         <ErrorText>{pwErr}</ErrorText>
 

@@ -22,8 +22,14 @@ export const JoinForm = styled.form`
   margin-top: 40px;
 `;
 
+export const InputWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const InputLabel = styled.label`
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
   color: #3d3d3d;
 `;
@@ -36,7 +42,7 @@ export const UnderInput = styled.input`
   margin-top: 5px;
   box-sizing: border-box;
   width: 100%;
-  padding: 10px 10px;
+  padding: 10px 0px;
   border-bottom: 2.5px solid #56b77869;
   font-family: "Pretendard", sans-serif;
   font-size: 16px;

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import arrowWhite from '../assets/icons/icon-arrow-white.svg';
-import arrowRight from '../assets/icons/icon-arrow-right.svg';
+import styled from "styled-components";
+import arrowWhite from "../assets/icons/icon-arrow-white.svg";
+import arrowRight from "../assets/icons/icon-arrow-right.svg";
 
 // Form
 export const GroupSection = styled.section`
@@ -68,7 +68,7 @@ export const GroupArticleProto = styled.article`
 
   & h3 {
     display: inline-block;
-    color: var(--color-mainColor);
+    color: black;
     font-size: 17px;
     font-weight: bold;
   }
@@ -119,7 +119,8 @@ export const GroupLiProto = styled.li`
   }
 
   & .post-tit {
-    font-size: 14px;
+    font-size: 15px;
+    text-align: left;
     color: #343434;
     font-weight: bold;
     margin: 5px auto;
@@ -129,7 +130,8 @@ export const GroupLiProto = styled.li`
     -webkit-line-clamp: 2;
   }
   & .post-info {
-    font-size: 12px;
+    font-size: 13px;
+    text-align: left;
     color: #767676;
     overflow: hidden;
     display: -webkit-box;
@@ -163,4 +165,9 @@ export const BtnScrollHandler = styled.button`
 export const ContainerProto = styled.div`
   position: relative;
   width: 100%;
+`;
+
+export const MoreIcon = styled.img`
+  width: 18px;
+  height: 18px;
 `;

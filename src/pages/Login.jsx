@@ -10,6 +10,7 @@ import {
   SnsLoginBtn,
   ErrorText,
   InputWrap,
+  LogoStyle,
 } from "../styles/LoginStyled";
 import LogoImg from "../components/common/Logo";
 import { Link, useNavigate } from "react-router-dom";
@@ -79,7 +80,7 @@ export default function Login() {
   return (
     <LoginPage>
       <h1 className="a11y-hidden">로그인 페이지</h1>
-      <LogoImg></LogoImg>
+      <LogoImg />
       <EmailLoginForm>
         <InputWrap>
           <InputBox

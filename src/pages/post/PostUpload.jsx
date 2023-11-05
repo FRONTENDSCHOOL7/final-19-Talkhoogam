@@ -141,7 +141,7 @@ export default function PostUpload() {
                   alt="프로필이미지"
                 />
                 <InputWrap>
-                  {imgSrc && (
+                  {imgSrc && !bookThumb && (
                     <img
                       src={imgSrc}
                       alt="업로드 이미지"
@@ -168,13 +168,11 @@ export default function PostUpload() {
                       </li>
                     </UploadModal>
                   )}
-
                   {/* 책 정보 */}
                   {bookThumb ? <BookInfo /> : null}
                   {itemImage || bookThumb ? null : (
                     <SearchBook onClick={(e) => setOpenModal(true)} />
                   )}
-
                   <TextArea
                     className="book-report"
                     placeholder="책 후기를 남겨주세요."
@@ -240,11 +238,11 @@ const InputWrap = styled.div`
   width: 304px;
 
   img {
-    background-color: var(--color-trans-grey);
-    border: 2px solid #e7e7e7;
-    width: 300px;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
     height: 200px;
-    border-radius: 20px;
+    border-radius: 5px;
     object-fit: contain;
 
     cursor: pointer;
@@ -252,11 +250,12 @@ const InputWrap = styled.div`
 `;
 
 const Book = styled.div`
-  line-height: 2rem;
+  line-height: 1.3rem;
 
   & .book-title {
+    margin: 5px 0;
+    display: block;
     font-size: 18px;
-    line-height: 1.2rem;
     font-weight: bold;
   }
 

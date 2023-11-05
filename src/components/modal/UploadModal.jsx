@@ -12,7 +12,8 @@ export default function UploadModal({ children, onClickHandler, ...props }) {
 }
 
 const ModalWrap = styled.article`
-  width: fit-content;
+  box-sizing: border-box;
+  width: 180px;
   border-radius: 10px;
   background-color: white;
   position: absolute;
@@ -24,33 +25,39 @@ const ContentList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
   position: relative;
 
   & li {
-    width: 100%;
+    box-sizing: border-box;
+    width: 180px;
+    padding: 12px;
     text-align: center;
     cursor: pointer;
-    padding: 10px 40px;
     font-size: 14px;
   }
 
-  & :first-child::after {
-    content: "";
-    width: 100%;
-    height: 1px;
-    display: inline-block;
-    border-bottom: 2px solid var(--color-trans-grey);
+  & li:first-child:hover {
+    border-radius: 10px 10px 0 0;
+    background-color: var(--color-lightgrey);
+  }
+
+  & li:nth-child(2):hover {
+    border-radius: 0 0 10px 10px;
+    background-color: var(--color-lightgrey);
+  }
+
+  & :first-child {
+    border-bottom: 1px solid var(--color-lightgrey);
   }
 `;
 
 const ExitIcon = styled.button`
   position: absolute;
-  top: 0;
-  left: 82%;
+  top: -3%;
+  left: 85%;
   width: 20px;
   height: 20px;
-  margin: 8px;
+  margin: 5px;
   background-image: url(${exitImg});
   background-size: cover;
 `;

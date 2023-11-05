@@ -37,9 +37,8 @@ export const InputBox = styled.input`
   box-sizing: border-box;
   width: 100%;
   padding: 10px 30px;
-  /* border: 1 solid #aaaaaa; */
   border-radius: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   font-family: "Pretendard", sans-serif;
   font-size: 16px;
   color: #555555;
@@ -49,6 +48,7 @@ export const InputBox = styled.input`
   }
 
   &:focus {
+    border-radius: 10px;
     outline: none;
     outline: 2px solid var(--color-mainColor);
   }
@@ -115,7 +115,7 @@ export const ErrorText = styled.p`
   margin-left: 15px;
   font-size: 14px;
   color: red;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 
 export const LoginBtn = styled(Btn)`

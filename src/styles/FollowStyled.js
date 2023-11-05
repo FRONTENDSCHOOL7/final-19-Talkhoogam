@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Button from '../components/common/button/Button';
+import styled from "styled-components";
+import Button from "../components/common/button/Button";
 
 export const FollowListStyle = styled.ul`
   width: 100%;

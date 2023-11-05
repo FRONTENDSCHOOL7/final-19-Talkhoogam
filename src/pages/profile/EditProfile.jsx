@@ -5,6 +5,8 @@ import {
   PageArticle,
   UnderInput,
   ErrorText,
+  NextBtn,
+  InputWrap,
 } from "../../styles/JoinStyled";
 import {
   SetProfileForm,
@@ -15,7 +17,6 @@ import {
   ImgUploader,
 } from "../../styles/SetProfileStyled";
 import ProfileInfoAPI from "../../api/profile/ProfileInfoAPI";
-import Button from "../../components/common/button/Button";
 import IdValidApi from "../../api/IdValidApi";
 import EditProfileApi from "../../api/EditProfileApi";
 import { useRecoilState } from "recoil";
@@ -23,6 +24,8 @@ import loginToken from "../../recoil/loginToken";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 import { useNavigate } from "react-router-dom";
 import accountname from "../../recoil/accountname";
+import BasicHeader from "../../components/header/BasicHeader";
+import { LayoutStyle } from "../../styles/LayoutStyled";
 
 export default function EditProfile() {
   const [data, setData] = useState({});
@@ -41,7 +44,7 @@ export default function EditProfile() {
 
   const [token, setToken] = useRecoilState(loginToken);
 
-  const [btnState, SetBtnState] = useState(true);
+  const [btnState, SetBtnState] = useState(false);
 
   // 최초 렌더링 시 각 input value에 기존 정보 값 입력
   useEffect(() => {
@@ -118,20 +121,19 @@ export default function EditProfile() {
 
   // 버튼 활성화
   const BtnActive = () => {
-    if (
-      !usernameErr &&
-      // 아이디를 변경한 경우 아이디 중복 확인, 변경하지 않은 경우 에러 메시지가 출력되지 않아야 함
-      (userIdErr === "사용 가능한 계정ID 입니다." || !userIdErr) &&
-      !introErr &&
-      username &&
-      userId &&
-      intro
-    ) {
-      console.log("활성화");
-      SetBtnState(false);
-    } else {
-      console.log("비활성화");
-      SetBtnState(true);
+    if (username && userId && intro) {
+      if (
+        (!usernameErr &&
+          // 아이디를 변경한 경우 아이디 중복 확인, 변경하지 않은 경우 에러 메시지가 출력되지 않아야 함
+          userIdErr === "사용 가능한 계정ID 입니다.") ||
+        (!userIdErr && !introErr)
+      ) {
+        console.log("활성화");
+        SetBtnState(false);
+      } else {
+        console.log("비활성화");
+        SetBtnState(true);
+      }
     }
   };
 
@@ -147,73 +149,78 @@ export default function EditProfile() {
   };
 
   return (
-    <PageArticle>
-      <PageTitle>프로필 수정</PageTitle>
-      <SetProfileForm>
-        <ImgWrapper>
-          <ProfileImg src={image} />
-          <ImgLabel htmlFor="img-file" />
-          <ImgUploader
-            type="file"
-            id="img-file"
-            accept="image/*"
-            onChange={(e) => {
-              UploadImage(e);
+    <LayoutStyle>
+      <BasicHeader />
+      <PageArticle>
+        <PageTitle style={{ marginTop: "0px" }}>프로필 수정</PageTitle>
+        <SetProfileForm>
+          <ImgWrapper>
+            <ProfileImg src={image} />
+            <ImgLabel htmlFor="img-file" />
+            <ImgUploader
+              type="file"
+              id="img-file"
+              accept="image/*"
+              onChange={(e) => {
+                UploadImage(e);
+                BtnActive();
+              }}
+              ref={InputFile}
+            />
+          </ImgWrapper>
+
+          <InputWrap>
+            <InputLabel htmlFor="nickname">닉네임</InputLabel>
+            <InforText>2~10자 이내</InforText>
+          </InputWrap>
+          <UnderInput
+            type="text"
+            id="nickname"
+            placeholder="닉네임"
+            value={username}
+            onBlur={(e) => {
+              UsernameValid(e);
               BtnActive();
             }}
-            ref={InputFile}
+            onChange={UsernameValue}
           />
-        </ImgWrapper>
+          <ErrorText>{usernameErr}</ErrorText>
 
-        <InputLabel htmlFor="nickname">닉네임</InputLabel>
-        <InforText>(2~10자)</InforText>
-        <UnderInput
-          type="text"
-          id="nickname"
-          placeholder="닉네임"
-          value={username}
-          onBlur={(e) => {
-            UsernameValid(e);
-            BtnActive();
-          }}
-          onChange={UsernameValue}
-        />
-        <ErrorText>{usernameErr}</ErrorText>
+          <InputWrap>
+            <InputLabel htmlFor="id">아이디</InputLabel>
+            <InforText>5글자 이상의 영문, 숫자, 특수기호(_), (.)</InforText>
+          </InputWrap>
+          <UnderInput
+            type="text"
+            id="id"
+            placeholder="아이디"
+            value={userId}
+            onBlur={(e) => {
+              UserIdValid(e);
+              BtnActive();
+            }}
+            onChange={UserIdValue}
+          />
+          <ErrorText>{userIdErr}</ErrorText>
 
-        <InputLabel htmlFor="id">아이디</InputLabel>
-        <InforText>
-          5글자 이상의 영문, 숫자, 특수기호(_), (.)만 사용 가능합니다.
-        </InforText>
-        <UnderInput
-          type="text"
-          id="id"
-          placeholder="아이디"
-          value={userId}
-          onBlur={(e) => {
-            UserIdValid(e);
-            BtnActive();
-          }}
-          onChange={UserIdValue}
-        />
-        <ErrorText>{userIdErr}</ErrorText>
-
-        <InputLabel htmlFor="intro">소개</InputLabel>
-        <UnderInput
-          type="text"
-          id="intro"
-          placeholder="소개"
-          value={intro}
-          onBlur={(e) => {
-            IntroValid(e);
-            BtnActive();
-          }}
-          onChange={IntroValue}
-        />
-        <ErrorText>{introErr}</ErrorText>
-        <Button onClick={EditData} disabled={btnState}>
-          수정하기
-        </Button>
-      </SetProfileForm>
-    </PageArticle>
+          <InputLabel htmlFor="intro">소개</InputLabel>
+          <UnderInput
+            type="text"
+            id="intro"
+            placeholder="소개"
+            value={intro}
+            onBlur={(e) => {
+              IntroValid(e);
+              BtnActive();
+            }}
+            onChange={IntroValue}
+          />
+          <ErrorText>{introErr}</ErrorText>
+          <NextBtn onClick={EditData} disabled={btnState}>
+            수정하기
+          </NextBtn>
+        </SetProfileForm>
+      </PageArticle>
+    </LayoutStyle>
   );
 }

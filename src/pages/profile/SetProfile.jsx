@@ -172,7 +172,7 @@ export default function SetProfile() {
         </ImgWrapper>
 
         <InputLabel htmlFor="nickname">닉네임</InputLabel>
-        <InforText>(2~10자)</InforText>
+        <InforText>2~10자까지 입력 가능합니다.</InforText>
         <UnderInput
           type="text"
           id="nickname"

@@ -29,7 +29,7 @@ export const ImgLabel = styled.label`
   background-size: 36px 36px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-position: 78px 74px;
+  background-position: 83px 74px;
   margin: 0 auto;
   position: absolute;
   top: -5px;
@@ -37,8 +37,8 @@ export const ImgLabel = styled.label`
 
   &::after {
     content: "";
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     border: 1px solid lightgrey;
     border-radius: 50%;
     top: 50%;

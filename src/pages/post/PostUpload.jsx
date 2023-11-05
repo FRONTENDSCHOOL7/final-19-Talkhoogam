@@ -8,7 +8,7 @@ import IconUpload from "../../assets/icons/icon-upload.svg";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 import { validateImage } from "../../utils/imageValidate";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { author, link, thumbnail, title } from "../../recoil/bookInfo";
 import bookImg from "../../assets/images/book.png";
 import UploadModal from "../../components/modal/UploadModal";
@@ -24,9 +24,9 @@ export default function PostUpload() {
   const textareaRef = useRef();
 
   // 책 정보 recoil에서 가져오기
-  const bookTitle = useRecoilValue(title);
-  const bookAuthor = useRecoilValue(author);
-  const bookThumb = useRecoilValue(thumbnail);
+  const [bookTitle, setBookTitle] = useRecoilState(title);
+  const [bookAuthor, setBookAuthor] = useRecoilState(author);
+  const [bookThumb, setBookThumb] = useRecoilState(thumbnail);
 
   // 책 정보 값 상태 확인
   const [bookInfo, setBookInfo] = useState(false);
@@ -44,6 +44,9 @@ export default function PostUpload() {
   const onClickHandler = async (e) => {
     e.preventDefault();
     await postUpload();
+    setBookTitle("");
+    setBookAuthor("");
+    setBookThumb("");
   };
 
   // 파일 가져오기
@@ -85,7 +88,7 @@ export default function PostUpload() {
 
   // 책 제목, 저자, 썸네일이 전부 있는 경우 책 정보 상태 값 true로 변경
   useEffect(() => {
-    if (bookInfo) {
+    if (bookTitle && bookAuthor && bookThumb) {
       setBookInfo(true);
       setItemImage(bookThumb);
     }
@@ -117,7 +120,7 @@ export default function PostUpload() {
           src={bookThumb || itemImage}
           alt="책 표지"
         />
-        <p className="book-title">{bookTitle}</p>
+        <strong className="book-title">{bookTitle}</strong>
         <p className="book-author">{bookAuthor}</p>
       </Book>
     );
@@ -138,7 +141,7 @@ export default function PostUpload() {
                   alt="프로필이미지"
                 />
                 <InputWrap>
-                  {imgSrc && (
+                  {imgSrc && !bookThumb && (
                     <img
                       src={imgSrc}
                       alt="업로드 이미지"
@@ -165,13 +168,11 @@ export default function PostUpload() {
                       </li>
                     </UploadModal>
                   )}
-
                   {/* 책 정보 */}
                   {bookThumb ? <BookInfo /> : null}
                   {itemImage || bookThumb ? null : (
                     <SearchBook onClick={(e) => setOpenModal(true)} />
                   )}
-
                   <TextArea
                     className="book-report"
                     placeholder="책 후기를 남겨주세요."
@@ -237,11 +238,11 @@ const InputWrap = styled.div`
   width: 304px;
 
   img {
-    background-color: var(--color-trans-grey);
-    border: 2px solid #e7e7e7;
-    width: 300px;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
     height: 200px;
-    border-radius: 20px;
+    border-radius: 5px;
     object-fit: contain;
 
     cursor: pointer;
@@ -249,11 +250,12 @@ const InputWrap = styled.div`
 `;
 
 const Book = styled.div`
-  line-height: 2rem;
+  line-height: 1.3rem;
 
   & .book-title {
+    margin: 5px 0;
+    display: block;
     font-size: 18px;
-    line-height: 1.2rem;
     font-weight: bold;
   }
 

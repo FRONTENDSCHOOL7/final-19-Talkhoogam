@@ -13,6 +13,7 @@ import LogoImg from "../../assets/images/Logo.png"
 import CommonModal from '../../components/modal/CommonModal';
 import { useRecoilValue } from "recoil";
 import timeFormat from "../../utils/timeFormat.js";
+import LikeHeart from "../../components/common/LikeHeart";
 
 export default function ListFeed(accountname) {
   const navigate = useNavigate();
@@ -91,8 +92,9 @@ const colorChangeHandler = () => {
               </MoreButton>
               <p className="list-text">{item.content}</p>
               <div className="list-icon">
-                <img onClick={colorChangeHandler} src={iconColor} alt="좋아요"/>
-                <p>{item.heartCount}</p>
+                {/*<img onClick={colorChangeHandler} src={iconColor} alt="좋아요"/>
+                <p>{item.heartCount}</p>*/}
+                <LikeHeart/>
                 <img src={IconMessage} alt="댓글" />
                 <p>{item.commentCount}</p>
               </div>
@@ -164,6 +166,7 @@ const List = styled.li`
   .list-icon {
     display: flex;
     margin: 12px auto;
+    gap: 5px;
   }
   .list-icon img {
     width: 20px;

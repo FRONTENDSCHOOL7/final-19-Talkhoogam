@@ -42,12 +42,10 @@ export default function MainHeader({ pageName }) {
           </BackBtn>
         )}
 
+        <h1 className="a11y-hidden">톡후감</h1>
         {pageName && <h2>{pageName}</h2>}
         {location.pathname === "/home" ? (
-          <>
-            <h1 className="a11y-hidden">톡후감</h1>
-            <LogoImg src={logoImg} alt="로고" />
-          </>
+          <LogoImg src={logoImg} alt="로고" />
         ) : null}
         {location.pathname === "/home" ? (
           <SearchBtn

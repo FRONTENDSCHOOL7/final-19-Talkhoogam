@@ -42,6 +42,10 @@ export default function MoreList({ setMoreOpen }) {
     setMoreOpen(false);
   }
 
+  function MoveEditProfile() {
+    navigate("/editprofile");
+  }
+
   // 로그아웃
   function funcLogout() {
     setIsLogin(false);
@@ -59,13 +63,7 @@ export default function MoreList({ setMoreOpen }) {
     return (
       <>
         <ul>
-          {isLogin ? (
-            <li>
-              <Link to="../editprofile">설정 및 개인정보</Link>
-            </li>
-          ) : (
-            ""
-          )}
+          {isLogin ? <li onClick={MoveEditProfile}>개인 정보 수정</li> : ""}
           <li>
             <BtnLogout>로그아웃</BtnLogout>
           </li>

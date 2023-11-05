@@ -73,7 +73,7 @@ export const ModalButton = styled.button`
   width: 100%;
   height: 46px;
   font: inherit;
-  font-weight: bold;
+  font-weight: 500;
 
   &:hover {
     transition: border-color 0.5s, background-color 0.5s, color 0.5s;

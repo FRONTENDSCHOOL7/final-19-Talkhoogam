@@ -67,7 +67,7 @@ function Footer() {
           <p
             style={{ color: svgColor === "/gathering" ? "#56b778" : "#767676" }}
           >
-            독서모임
+            독서 모임
           </p>
         </FooterIconWrap>
 

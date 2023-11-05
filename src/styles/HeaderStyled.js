@@ -72,28 +72,31 @@ export const Backdrop = styled.div`
 `;
 
 export const HeaderMoreList = styled.article`
-  width: 252px;
+  width: 230px;
   height: auto;
   background-color: white;
   position: absolute;
   border: 1px solid #dbdbdb;
-  border-radius: 10px;
 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 300;
-  padding: 20px;
+  border-radius: 10px;
 
   & li {
+    box-sizing: border-box;
+    text-align: center;
     background-color: white;
     min-height: 24px;
-    border-bottom: 1px solid #dbdbdb;
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 20px;
+
+    cursor: pointer;
 
     & button {
+      width: 100%;
       font: inherit;
       color: inherit;
       padding: 0;
@@ -101,19 +104,25 @@ export const HeaderMoreList = styled.article`
   }
 
   & li:first-child {
-    margin-top: 20px;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #dbdbdb;
+  }
+
+  & li:nth-child(2) {
+    border-radius: 0 0 10px 10px;
   }
 
   & li:hover,
   & li:active {
-    color: var(--color-mainColor);
+    transition: background-color 0.3s;
+    background-color: #cdcdcda8;
   }
 
   & .btn-Close-list {
     width: 24px;
     height: 24px;
     position: absolute;
-    top: 0px;
+    top: 3px;
     right: 15px;
     img {
       width: 30px;

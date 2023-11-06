@@ -239,7 +239,7 @@ export const FeedWrap = styled.div`
   }
 
   .timeline-main-text {
-    font-size: 14px;
+    font-size: 15px;
     line-height: normal;
     margin: 16px 0;
     white-space: pre-line;

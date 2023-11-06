@@ -64,6 +64,7 @@ export default function Search() {
   const SearchResult = () => {
     return (
       <>
+        <h1 className="a11y-hidden">유저 검색</h1>
         {searchData.map((item) => (
           <SearchList
             key={item._id}

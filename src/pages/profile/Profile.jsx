@@ -333,14 +333,17 @@ const ProfileMid = styled.div`
   .userName {
     font-weight: bold;
     color: black;
-    font-size: 16px;
+    font-size: 17px;
   }
   .id {
-    margin: 8px auto;
+    margin: 2px auto;
+    font-size: 13px;
   }
   .profileIntro {
+    width: 200px;
     font-size: 15px;
-    margin: 16px auto;
+    margin: 20px auto;
+    margin-bottom: 0;
   }
 `;
 
@@ -463,6 +466,7 @@ const List = styled.div`
   justify-content: center;
   font-size: 14px;
   padding: 30px 16px;
+
   .list-profileimg {
     width: 42px;
     height: 42px;

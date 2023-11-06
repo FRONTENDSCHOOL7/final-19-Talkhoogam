@@ -292,8 +292,9 @@ const ProfileMid = styled.div`
     margin: 8px auto;
   }
   .profileIntro {
-    font-size: 14px;
-    margin: 16px auto;
+    width: 200px;
+    font-size: 15px;
+    margin: 20px auto;
   }
 `;
 

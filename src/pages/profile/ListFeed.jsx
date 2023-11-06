@@ -8,9 +8,9 @@ import IconHeartActive from "../../assets/icons/heart-avtive.svg";
 import IconMessage from "../../assets/icons/icon-message-circle.svg";
 import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
 import accountName from "../../recoil/accountname";
-import Empty from '../../components/empty/Empty';
-import LogoImg from "../../assets/images/Logo.png"
-import CommonModal from '../../components/modal/CommonModal';
+import Empty from "../../components/empty/Empty";
+import LogoImg from "../../assets/images/Logo.png";
+import CommonModal from "../../components/modal/CommonModal";
 import { useRecoilValue } from "recoil";
 import timeFormat from "../../utils/timeFormat.js";
 import LikeHeart from "../../components/common/LikeHeart";
@@ -20,7 +20,7 @@ export default function ListFeed(accountname) {
   const [loading, setLoading] = useState(false);
   const { getMyFeedListAPI } = MyFeedListAPI(accountname);
   const [myFeedData, setMyFeedData] = useState(() => {});
-  const [modalOpen, setModalOpen ] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
   const loginName = useRecoilValue(accountName);
   const [postId, setPostId] = useState("");
@@ -40,27 +40,27 @@ export default function ListFeed(accountname) {
     fetchData();
   }, [accountname]);
   //console.log("myFeedData : ", myFeedData);
-//더보기 버튼
+  //더보기 버튼
   const showModal = (name, id) => {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
     setPostId(id);
-    if(name === loginName){
-      setIsMine(true)  
+    if (name === loginName) {
+      setIsMine(true);
     } else {
-      setIsMine(false)
+      setIsMine(false);
     }
-}
+  };
 
-//하트 색칠하기
-const [iconColor, setIconColor] = useState(IconHeart);
+  //하트 색칠하기
+  const [iconColor, setIconColor] = useState(IconHeart);
 
-const colorChangeHandler = () => {
-    if(iconColor === IconHeart){
-        setIconColor(IconHeartActive);
-    }else{
-        setIconColor(IconHeart);
+  const colorChangeHandler = () => {
+    if (iconColor === IconHeart) {
+      setIconColor(IconHeartActive);
+    } else {
+      setIconColor(IconHeart);
     }
-}
+  };
 
   return (
     <UlStyled>
@@ -75,26 +75,24 @@ const colorChangeHandler = () => {
             <div className="feedlist">
               <div>
                 <img
-                    onClick={() => {showModal(item.author.accountname, item.id)}}
+                  onClick={() => {
+                    showModal(item.author.accountname, item.id);
+                  }}
                   className="list-vertical"
                   src={ImgVertical}
                   alt="vertical 탭"
                 />
                 <p className="list-name">{item.author.username}</p>
-                <p className="list-id">{item.author.accountname}</p>
+                <p className="list-id">@ {item.author.accountname}</p>
               </div>
               <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
-                <img
-                    className="list-img"
-                    src={item.image}
-                    alt="피드 사진"
-                />
+                <img className="list-img" src={item.image} alt="피드 사진" />
               </MoreButton>
               <p className="list-text">{item.content}</p>
               <div className="list-icon">
                 {/*<img onClick={colorChangeHandler} src={iconColor} alt="좋아요"/>
                 <p>{item.heartCount}</p>*/}
-                <LikeHeart/>
+                <LikeHeart />
                 <img src={IconMessage} alt="댓글" />
                 <p>{item.commentCount}</p>
               </div>
@@ -106,27 +104,27 @@ const colorChangeHandler = () => {
         ))
       ) : (
         <>
-        <h1 className='a11y-hidden'>팔로우가 존재하지 않습니다.</h1>
-        <Empty image={LogoImg} alt={"404페이지"} >
-          유저를 검색해 팔로우 해보세요!
-        </Empty>
-      </>
+          <h1 className="a11y-hidden">팔로우가 존재하지 않습니다.</h1>
+          <Empty image={LogoImg} alt={"404페이지"}>
+            유저를 검색해 팔로우 해보세요!
+          </Empty>
+        </>
       )}
-        { modalOpen && 
-        <CommonModal 
-        isMine={isMine}  
-        id={postId}
-        setModalOpen={setModalOpen}
-        isLocation={`post`}
+      {modalOpen && (
+        <CommonModal
+          isMine={isMine}
+          id={postId}
+          setModalOpen={setModalOpen}
+          isLocation={`post`}
         ></CommonModal>
-      }
+      )}
     </UlStyled>
   );
 }
 const MoreButton = styled.div`
-    cursor: pointer;
-    border: none;
-`
+  cursor: pointer;
+  border: none;
+`;
 const List = styled.li`
   display: flex;
   justify-content: space-between;
@@ -136,6 +134,7 @@ const List = styled.li`
   margin: 4px auto;
   font-size: 14px;
   padding: 16px 21px;
+
   .list-profileimg {
     width: 42px;
     height: 42px;
@@ -173,7 +172,7 @@ const List = styled.li`
     height: 20px;
   }
   .list-icon img:hover {
-      cursor: pointer;
+    cursor: pointer;
   }
   .list-icon p {
     margin: 4px 6px;

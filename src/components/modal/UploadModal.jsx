@@ -43,6 +43,7 @@ const ContentList = styled.ul`
 
   & li:nth-child(2):hover {
     border-radius: 0 0 10px 10px;
+    transition: background-color 0.4s;
     background-color: var(--color-lightgrey);
   }
 
@@ -53,7 +54,7 @@ const ContentList = styled.ul`
 
 const ExitIcon = styled.button`
   position: absolute;
-  top: -3%;
+  top: 0;
   left: 85%;
   width: 20px;
   height: 20px;

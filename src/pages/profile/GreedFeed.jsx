@@ -66,7 +66,7 @@ export default function LayerFeed(accountname) {
 }
 const MoreButton = styled.div`
   cursor: pointer;
-  border: none;
+  height: 160px;
 `;
 const Layer = styled.div`
   display: grid; // 재웅 그리드로 바꾸고 도망갑니다
@@ -78,16 +78,18 @@ const Layer = styled.div`
   .content {
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 0;
+  }
 
-    & .bookImg {
-      width: 100%;
-      transition: 0.2s all ease-in-out;
-    }
+  & .bookImg {
+    object-fit: cover;
+    width: 100%;
+    transition: 0.2s all ease-in-out;
   }
   .feedlayer .bookImg {
     //책표지 api 사이즈 따라서 수정
+    box-sizing: border-box;
     min-width: 108px;
     min-height: 160px;
   }

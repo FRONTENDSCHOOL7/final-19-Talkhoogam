@@ -203,7 +203,10 @@ export default function EditProfile() {
           />
           <ErrorText>{userIdErr}</ErrorText>
 
-          <InputLabel htmlFor="intro">소개</InputLabel>
+          <InputWrap>
+            <InputLabel htmlFor="intro">소개</InputLabel>
+            <InforText>40자 이내</InforText>
+          </InputWrap>
           <UnderInput
             type="text"
             id="intro"

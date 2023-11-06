@@ -15,6 +15,7 @@ import {
   InputLabel,
   ErrorText,
   InforText,
+  InputWrap,
 } from "../../styles/JoinStyled";
 import { emailState, newToken, userData, pwState } from "../../recoil/joinData";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -171,8 +172,10 @@ export default function SetProfile() {
           />
         </ImgWrapper>
 
-        <InputLabel htmlFor="nickname">닉네임</InputLabel>
-        <InforText>2~10자까지 입력 가능합니다.</InforText>
+        <InputWrap>
+          <InputLabel htmlFor="nickname">닉네임</InputLabel>
+          <InforText>2~10자</InforText>
+        </InputWrap>
         <UnderInput
           type="text"
           id="nickname"
@@ -182,10 +185,10 @@ export default function SetProfile() {
         />
         <ErrorText>{usernameErr}</ErrorText>
 
-        <InputLabel htmlFor="id">아이디</InputLabel>
-        <InforText>
-          5글자 이상의 영문, 숫자, 특수기호(_), (.)만 사용 가능합니다.
-        </InforText>
+        <InputWrap>
+          <InputLabel htmlFor="id">아이디</InputLabel>
+          <InforText>5자 이상 영문, 숫자, 특수기호(_), (.)</InforText>
+        </InputWrap>
         <UnderInput
           type="text"
           id="id"
@@ -195,14 +198,19 @@ export default function SetProfile() {
         />
         <ErrorText>{userIdErr}</ErrorText>
 
-        <InputLabel htmlFor="intro">소개</InputLabel>
+        <InputWrap>
+          <InputLabel htmlFor="intro">소개</InputLabel>
+          <InforText>40자 이내</InforText>
+        </InputWrap>
         <UnderInput
           type="text"
           id="intro"
           placeholder="소개"
+          maxLength={40}
           onChange={IntroValue}
           onBlur={IntroValid}
         />
+
         <ErrorText>{introErr}</ErrorText>
         <NextBtn onClick={handleJoin} disabled={btnState}>
           가입하기

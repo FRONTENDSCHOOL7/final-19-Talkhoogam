@@ -30,9 +30,9 @@ export const MyProductWrap = styled.article`
   }
 
   & .error-list {
+    margin: 30px;
     display: block;
     font-size: 15px;
-    font-weight: bold;
     text-align: center;
   }
 

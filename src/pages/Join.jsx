@@ -8,6 +8,7 @@ import {
   NextBtn,
   PageArticle,
   Title,
+  InputWrap,
 } from "../styles/JoinStyled";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -125,10 +126,10 @@ export default function Join() {
         />
         <ErrorText>{emailErr}</ErrorText>
 
-        <InputLabel htmlFor="password">비밀번호</InputLabel>
-        <InforText>
-          영어 소문자, 숫자를 포함한 6자 이상의 비밀번호를 입력해 주세요.
-        </InforText>
+        <InputWrap>
+          <InputLabel htmlFor="password">비밀번호</InputLabel>
+          <InforText>영어 소문자, 숫자 포함 6자 이상</InforText>
+        </InputWrap>
         <UnderInput
           type="password"
           placeholder="비밀번호"

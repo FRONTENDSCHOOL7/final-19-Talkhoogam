@@ -26,7 +26,7 @@
 
 |**최창호**|**안정현**|**황시하**|**박예빈** |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img width="180" alt="창호이미지" src="final-19-Talkhoogam\src\assets\images\최창호.jpg"> | <img width="180"  alt="정현이미지" src="final-19-Talkhoogam\src\assets\images\안정현.jfif"> | <img width="180" alt="시하이미지" src="final-19-Talkhoogam\src\assets\images\황시하.png"> | <img width="180" alt="예빈이미지" src="final-19-Talkhoogam\src\assets\images\박예빈.jfif" > |
+| <img width="180" alt="창호이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/185c7294-cafd-482c-8bce-277a10d2e744"> | <img width="180"  alt="정현이미지" src="final-19-Talkhoogam\src\assets\images\안정현.jfif"> | <img width="180" alt="시하이미지" src="final-19-Talkhoogam\src\assets\images\황시하.png"> | <img width="180" alt="예빈이미지" src="final-19-Talkhoogam\src\assets\images\박예빈.jfif" > |
 | [ChangHoChoi92](https://github.com/ChangHoChoi92) | [nonelijah](https://github.com/nonelijah) | [coo1river](https://github.com/coo1river) | [yebinholmes](https://github.com/yebinholmes) |
 | 팀장 | 팀원 | 팀원 | 팀원 |
 

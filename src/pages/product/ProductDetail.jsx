@@ -122,25 +122,27 @@ export const ProductDetailWrap = styled.div`
   .profile-wrap {
     width: 42px;
     height: 42px;
+    font-weight: bold;
   }
 
   .product-title-wrap {
     display: flex;
-    gap: 15px;
+    gap: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 17px;
+    color: black;
     font-weight: bold;
   }
 
   .product-sell-text {
-    color: #f26e22;
+    color: var(--color-dark-mainColor);
   }
 
   .product-price {
     font-weight: bold;
     margin-bottom: 10px;
-    color: var(--color-mainColor);
+    color: black;
   }
 
   .product-price-wrap {

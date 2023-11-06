@@ -38,14 +38,14 @@ export const FollowLiStyle = styled.li`
     text-align: left;
 
     .user-name {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: bold;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
     }
     .user-info {
-      font-size: 12px;
+      font-size: 13px;
 
       overflow: hidden;
       display: -webkit-box;
@@ -58,8 +58,9 @@ export const FollowLiStyle = styled.li`
 export const BtnFollow = styled(Button)`
   box-sizing: border;
   width: 76px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
+  padding: 8px;
 
   &.btn-cancel {
     color: black;

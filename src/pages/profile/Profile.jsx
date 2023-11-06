@@ -306,6 +306,7 @@ const ProfileHead = styled.div`
     font-weight: bold;
   }
   .profileImg {
+    cursor: pointer;
     height: 110px;
     width: 110px;
     border-radius: 110px;
@@ -354,10 +355,10 @@ const Follow = styled.div`
 
   .follow-btn,
   .unfollow-btn {
-    width: 140px;
+    width: 130px;
     border-radius: 30px;
     padding: 8px 40px;
-    font-weight: 500;
+    font-weight: 600;
     margin: auto 5px;
   }
   .follow-btn {
@@ -367,7 +368,9 @@ const Follow = styled.div`
   }
   .unfollow-btn {
     //언팔로우 버튼
-    color: #767676;
+    color: #000000;
+    box-sizing: border-box;
+    background-color: #e4e4e4b7;
   }
   .follow-btn:hover {
     background-color: var(--color-dark-mainColor);

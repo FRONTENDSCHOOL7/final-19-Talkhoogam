@@ -6,6 +6,7 @@ import ImgLayes from "../../assets/icons/icon-img-layers.svg";
 import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
 import Empty from "../../components/empty/Empty";
 import LogoImg from "../../assets/images/Logo.png";
+import NoneImg from "../../assets/icons/none.png";
 
 export default function LayerFeed(accountname) {
   const navigate = useNavigate();
@@ -55,11 +56,11 @@ export default function LayerFeed(accountname) {
         ))
       ) : (
         <>
-          <h1 className="a11y-hidden">팔로우가 존재하지 않습니다.</h1>
-          <Empty image={LogoImg} alt={"404페이지"}>
-            유저를 검색해 팔로우 해보세요!
-          </Empty>
-        </>
+        <h1 className="a11y-hidden">팔로우가 존재하지 않습니다.</h1>
+        <Empty image={LogoImg} alt={"404페이지"}>
+          유저를 검색해 팔로우 해보세요!
+        </Empty>
+      </>
       )}
     </Layer>
   );
@@ -73,8 +74,8 @@ const Layer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin: 16px;
-  margin-bottom: 80px;
-
+  margin-bottom: 70px;
+  padding-bottom: 10px;
   .content {
     position: relative;
     overflow: hidden;

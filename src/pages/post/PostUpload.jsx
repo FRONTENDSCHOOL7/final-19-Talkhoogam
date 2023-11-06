@@ -17,9 +17,7 @@ export default function PostUpload() {
   const [imgSrc, setImgSrc] = useState("");
   const [itemImage, setItemImage] = useState("");
   const [profileInfo, setProfileInfo] = useState(() => {});
-  const [inputValue, setInputValue] = useState("");
-  const { postUpload } = PostUploadAPI({ inputValue, itemImage });
-
+  const [inputContent, setInputContent] = useState("");
   const inputImage = useRef(null);
   const textareaRef = useRef();
 
@@ -27,6 +25,10 @@ export default function PostUpload() {
   const [bookTitle, setBookTitle] = useRecoilState(title);
   const [bookAuthor, setBookAuthor] = useRecoilState(author);
   const [bookThumb, setBookThumb] = useRecoilState(thumbnail);
+
+  const inputValue = `bookTitle:${bookTitle}, bookAuthor:${bookAuthor}, inputContent:${inputContent}`;
+
+  const { postUpload } = PostUploadAPI({ inputValue, itemImage });
 
   // 책 정보 값 상태 확인
   const [bookInfo, setBookInfo] = useState(false);
@@ -179,7 +181,7 @@ export default function PostUpload() {
                     ref={textareaRef}
                     onChange={(event) => {
                       hendleResizeHeight();
-                      setInputValue(event.target.value);
+                      setInputContent(event.target.value);
                     }}
                   />
                 </InputWrap>

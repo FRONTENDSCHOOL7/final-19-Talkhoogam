@@ -25,16 +25,60 @@ export default function PostDetail() {
   const [createName, setCreateName] = useState("");
   const [idState, setIdState] = useState("");
   const [isLocation, setIsLocation] = useState("");
+  const [bookTitle, setBookTitle] = useState("");
+  const [bookAuthor, setBookAuthor] = useState("");
+  const [bookContent, setBookContent] = useState("");
 
   useEffect(() => {
     const detailList = async () => {
-      const list = await getPostDetail();
-      setPostDetail(list.post);
+      try {
+        const list = await getPostDetail(params.id);
+        console.log(list.post.content);
+        setPostDetail(list.post);
+
+        const titleMatch = list.post.content.match(/bookTitle:(.*?),/);
+        if (titleMatch) {
+          const title = titleMatch[1];
+          if (title) {
+            setBookTitle(title);
+          } else {
+            setBookTitle("");
+          }
+        } else {
+          setBookTitle("");
+        }
+
+        const authorMatch = list.post.content.match(/bookAuthor:(.*?),/);
+        if (authorMatch) {
+          const author = authorMatch[1];
+          if (author) {
+            setBookAuthor(author);
+          } else {
+            setBookAuthor("");
+          }
+        } else {
+          setBookAuthor("");
+        }
+
+        const contentMatch = list.post.content.match(
+          /inputContent:(.*?)(?:,|$)/
+        );
+        if (contentMatch) {
+          const content = contentMatch[1];
+          if (content) {
+            setBookContent(content);
+          } else {
+            setBookContent("");
+          }
+        } else {
+          setBookContent("");
+        }
+      } catch (error) {
+        console.error("에러", error);
+      }
     };
     detailList();
-  }, []);
-
-  // console.log(postDetail);
+  }, [params.id]);
 
   const showModalInComment = (id, name, location) => {
     showModal(id, name, location);
@@ -109,7 +153,9 @@ export default function PostDetail() {
                   src={postDetail.image}
                   alt="피드이미지"
                 />
-                <p className="timeline-main-text">{postDetail.content}</p>
+                <strong className="book-title">{bookTitle}</strong>
+                <p className="book-author">{bookAuthor}</p>
+                <p className="timeline-main-text">{bookContent}</p>
                 <div className="social-wrap">
                   <div>
                     <LikeHeart />
@@ -195,6 +241,19 @@ export const PostDetailWrap = styled.div`
 
   .img-dot {
     cursor: pointer;
+  }
+
+  .book-title {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  .book-author {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #474646;
   }
 
   .timeline-title {

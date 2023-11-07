@@ -21,6 +21,7 @@ import AccountNameProfileAPI from "../../api/post/AcountNameProfileAPI";
 import accountname from "../../recoil/accountname";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import Loding from "../../components/loding/Loding.jsx";
 
 //Modal.setAppElemnet("#root");
 export default function Profile() {
@@ -147,7 +148,7 @@ export default function Profile() {
             <ProfileHead>
               <div className="followerText" onClick={onClickFollower}>
                 {loading ? (
-                  <button className="followersNum">Loading...</button>
+                  <button className="followersNum"></button>
                 ) : (
                   <button className="followersNum">
                     {userInfo?.followerCount}
@@ -181,28 +182,28 @@ export default function Profile() {
               </div>
               <div className="followingText" onClick={onClickFollowing}>
                 {loading ? (
-                  <button className="followingsNum">Loading...</button>
+                  <button className="followingsNum"></button>
                 ) : (
                   <button className="followingsNum">
                     {userInfo?.followingCount}
                   </button>
                 )}
-                <p className="profilehead-text">팔로잉</p>
+                <p className="profilehead-text"></p>
               </div>
             </ProfileHead>
             <ProfileMid>
               {loading ? (
-                <p className="userName">Loading...</p>
+                <p className="userName"></p>
               ) : (
                 <p className="userName">{userInfo.username}</p>
               )}
               {loading ? (
-                <p className="id">Loading...</p>
+                <p className="id"></p>
               ) : (
                 <p className="id">@ {userInfo.accountname}</p>
               )}
               {loading ? (
-                <p className="profileIntro">Loading...</p>
+                <p className="profileIntro"></p>
               ) : (
                 <p className="profileIntro">{userInfo.intro}</p>
               )}
@@ -253,6 +254,7 @@ export default function Profile() {
         ) : (
           <ListFeed accountname={params.accountname}></ListFeed>
         )}
+        <Loding></Loding>
         <Footer></Footer>
       </LayoutStyle>
     </>

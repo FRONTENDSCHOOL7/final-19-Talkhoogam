@@ -65,43 +65,69 @@ export default function ListFeed(accountname) {
   return (
     <UlStyled>
       {myFeedData ? (
-        myFeedData.post.map((item, index) => (
-          <List key={item.id}>
-            <img
-              className="list-profileimg"
-              src={item.author.image}
-              alt="프로필이미지"
-            />
-            <div className="feedlist">
-              <div>
-                <img
-                  onClick={() => {
-                    showModal(item.author.accountname, item.id);
-                  }}
-                  className="list-vertical"
-                  src={ImgVertical}
-                  alt="vertical 탭"
-                />
-                <p className="list-name">{item.author.username}</p>
-                <p className="list-id">@ {item.author.accountname}</p>
-              </div>
-              <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
-                <img className="list-img" src={item.image} alt="피드 사진" />
-              </MoreButton>
-              <p className="list-text">{item.content}</p>
-              <div className="list-icon">
-                {/*<img onClick={colorChangeHandler} src={iconColor} alt="좋아요"/>
+        myFeedData.post.map((item, index) => {
+          const bookData = {
+            bookTitle: "",
+            bookAuthor: "",
+            bookContent: "",
+          };
+
+          const titleMatch = item.content.match(/bookTitle:(.*?),/);
+          const authorMatch = item.content.match(/bookAuthor:(.*?),/);
+          const contentMatch = item.content.match(/inputContent:(.*?)(?:,|$)/);
+
+          if (titleMatch) {
+            bookData.bookTitle = titleMatch[1] || "";
+          }
+
+          if (authorMatch) {
+            bookData.bookAuthor = authorMatch[1] || "";
+          }
+
+          if (contentMatch) {
+            bookData.bookContent = contentMatch[1] || "";
+          }
+
+          return (
+            <List key={item.id}>
+              <img
+                className="list-profileimg"
+                src={item.author.image}
+                alt="프로필이미지"
+              />
+              <div className="feedlist">
+                <div>
+                  <img
+                    onClick={() => {
+                      showModal(item.author.accountname, item.id);
+                    }}
+                    className="list-vertical"
+                    src={ImgVertical}
+                    alt="vertical 탭"
+                  />
+                  <p className="list-name">{item.author.username}</p>
+                  <p className="list-id">@ {item.author.accountname}</p>
+                </div>
+                <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
+                  <img className="list-img" src={item.image} alt="피드 사진" />
+                </MoreButton>
+                <strong className="book-title">{bookData.bookTitle}</strong>
+                <p className="book-author">{bookData.bookAuthor}</p>
+                <p className="list-text">{bookData.bookContent}</p>
+                <div className="list-icon">
+                  {/*<img onClick={colorChangeHandler} src={iconColor} alt="좋아요"/>
                 <p>{item.heartCount}</p>*/}
-                <LikeHeart />
-                <img src={IconMessage} alt="댓글" />
-                <p>{item.commentCount}</p>
+                  <LikeHeart />
+                  <img src={IconMessage} alt="댓글" />
+                  <p>{item.commentCount}</p>
+                </div>
+                <div className="list-date">
+                  <p>{timeFormat(item.updatedAt)}</p>
+                </div>
               </div>
-              <div className="list-date">
-                <p>{timeFormat(item.updatedAt)}</p>
-              </div>
-            </div>
-          </List>
-        ))
+            </List>
+          );
+        })
       ) : (
         <>
           <h1 className="a11y-hidden">팔로우가 존재하지 않습니다.</h1>
@@ -141,6 +167,20 @@ const List = styled.li`
     border: 0.5px solid #dbdbdb;
     border-radius: 30px;
   }
+
+  .book-title {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  .book-author {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #474646;
+  }
+
   .feedlist {
     line-height: 1.1;
     margin-top: 4px;
@@ -152,6 +192,7 @@ const List = styled.li`
     font-weight: 500;
     max-width: 300px;
   }
+
   .list-id {
     color: #767676;
     margin-top: 4px;

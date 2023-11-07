@@ -139,49 +139,49 @@
 
 ### 📁폴더 구조
 
-📦final-19-Talkhoogam
-┣ 📂public
-┃ ┣ 📜index.html
-┃ ┗ 📜Logo.ico
-┣ 📂src
-┃ ┣ 📂api
-┃ ┃ ┣ 📂comment
-┃ ┃ ┣ 📂post
-┃ ┃ ┣ 📂product
-┃ ┃ ┣ 📂profile
-┃ ┃ ┗ 📂upload
-┃ ┣ 📂assets
-┃ ┃ ┣ 📂chat
-┃ ┃ ┣ 📂fonts
-┃ ┃ ┃ ┗ 📂pretendard
-┃ ┃ ┣ 📂icons
-┃ ┃ ┗ 📂images
-┃ ┣ 📂components
-┃ ┃ ┣ 📂comment
-┃ ┃ ┣ 📂common
-┃ ┃ ┃ ┣ 📂button
-┃ ┃ ┃ ┗ 📂input
-┃ ┃ ┣ 📂empty
-┃ ┃ ┣ 📂footer
-┃ ┃ ┣ 📂Gathering
-┃ ┃ ┣ 📂header
-┃ ┃ ┣ 📂modal
-┃ ┃ ┗ 📂profile
-┃ ┣ 📂pages
-┃ ┃ ┣ 📂chat
-┃ ┃ ┣ 📂post
-┃ ┃ ┣ 📂product
-┃ ┃ ┗ 📂profile
-┃ ┣ 📂recoil
-┃ ┣ 📂router
-┃ ┣ 📂styles
-┃ ┣ 📂utils
-┃ ┣ 📜App.js
-┃ ┗ 📜index.js
-┣ 📜.gitignore
-┣ 📜.prettierrc
-┣ 📜package-lock.json
-┣ 📜package.json
-┗ 📜README.md
+📦final-19-Talkhoogam<br>
+┣ 📂public<br>
+┃ ┣ 📜index.html<br>
+┃ ┗ 📜Logo.ico<br>
+┣ 📂src<br>
+┃ ┣ 📂api<br>
+┃ ┃ ┣ 📂comment<br>
+┃ ┃ ┣ 📂post<br>
+┃ ┃ ┣ 📂product<br>
+┃ ┃ ┣ 📂profile<br>
+┃ ┃ ┗ 📂upload<br>
+┃ ┣ 📂assets<br>
+┃ ┃ ┣ 📂chat<br>
+┃ ┃ ┣ 📂fonts<br>
+┃ ┃ ┃ ┗ 📂pretendard<br>
+┃ ┃ ┣ 📂icons<br>
+┃ ┃ ┗ 📂images<br>
+┃ ┣ 📂components<br>
+┃ ┃ ┣ 📂comment<br>
+┃ ┃ ┣ 📂common<br>
+┃ ┃ ┃ ┣ 📂button<br>
+┃ ┃ ┃ ┗ 📂input<br>
+┃ ┃ ┣ 📂empty<br>
+┃ ┃ ┣ 📂footer<br>
+┃ ┃ ┣ 📂Gathering<br>
+┃ ┃ ┣ 📂header<br>
+┃ ┃ ┣ 📂modal<br>
+┃ ┃ ┗ 📂profile<br>
+┃ ┣ 📂pages<br>
+┃ ┃ ┣ 📂chat<br>
+┃ ┃ ┣ 📂post<br>
+┃ ┃ ┣ 📂product<br>
+┃ ┃ ┗ 📂profile<br>
+┃ ┣ 📂recoil<br>
+┃ ┣ 📂router<br>
+┃ ┣ 📂styles<br>
+┃ ┣ 📂utils<br>
+┃ ┣ 📜App.js<br>
+┃ ┗ 📜index.js<br>
+┣ 📜.gitignore<br>
+┣ 📜.prettierrc<br>
+┣ 📜package-lock.json<br>
+┣ 📜package.json<br>
+┗ 📜README.md<br>
 
 ## 6. 협업 방식

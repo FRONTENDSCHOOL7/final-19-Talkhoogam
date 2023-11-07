@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FollowLiStyle } from '../../styles/FollowStyled';
 import { useRecoilValue } from 'recoil';
@@ -51,19 +51,20 @@ export default function FollowItems({ item }) {
             <p className="user-info">{item.intro}</p>
           </div>
         </button>
-        {item.accountname !== loginAccount && item.isfollow ? (
-          <BtnUnFollowing
-            item={item}
-            handleFollow={handleFollow}
-            handleUnFollow={handleUnFollow}
-          />
-        ) : (
-          <BtnFollowing
-            item={item}
-            handleFollow={handleFollow}
-            handleUnFollow={handleUnFollow}
-          />
-        )}
+        {item.accountname !== loginAccount &&
+          (item.isfollow ? (
+            <BtnUnFollowing
+              item={item}
+              handleFollow={handleFollow}
+              handleUnFollow={handleUnFollow}
+            />
+          ) : (
+            <BtnFollowing
+              item={item}
+              handleFollow={handleFollow}
+              handleUnFollow={handleUnFollow}
+            />
+          ))}
       </FollowLiStyle>
     </>
   );

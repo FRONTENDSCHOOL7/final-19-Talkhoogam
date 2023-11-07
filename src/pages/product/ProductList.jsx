@@ -137,7 +137,7 @@ const MoreButton = styled.div`
     color: #767676;
     font-size: 10px;
     line-height: 12px; /* 120% */
-    width: 68px;
+    width: 85px;
   }
 
   .create {

@@ -17,10 +17,9 @@ export default function LayerFeed(accountname) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const list = await getMyFeedListAPI();
         setMyFeedData(list);
-        setLoading(false);
+        setLoading(true);
       } catch (error) {
         console.error("데이터 가져오기 오류:", error);
         setLoading(false);
@@ -33,36 +32,37 @@ export default function LayerFeed(accountname) {
 
   return (
     <Layer>
-      {myFeedData ? (
-        myFeedData.post.map((item, index) => (
-          <div className="feedlayer" key={index}>
-            <button className="content">
-              {" "}
-              {/*피드가 추가될때마다 content div 추가*/}
-              <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
-                <img src={item.image} alt="예시 사진" className="bookImg"></img>
-                {item.image.length >= 1 ? (
-                  <img
-                    src={ImgLayes}
-                    alt="이미지 2장 이상일 경우 나타나는 아이콘"
-                    className="bookMultiple"
-                  ></img>
-                ) : (
-                  <p className="a11y-hidden">1장이에용</p>
-                )}
-              </MoreButton>
-            </button>
-          </div>
-        ))
-      ) : (
-        <>
-        <h1 className="a11y-hidden">팔로우가 존재하지 않습니다.</h1>
-        <Empty image={LogoImg} alt={"404페이지"}>
-          유저를 검색해 팔로우 해보세요!
-        </Empty>
+    {loading && myFeedData.post.length === 0 ? (
+      <>
+        <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
+        <div className="noneFeed">        
+        <img src={LogoImg}></img>
+        게시글이 존재하지 않습니다.
+        </div>
       </>
-      )}
-    </Layer>
+    ) : (
+      loading &&
+      myFeedData.post.map((item, index) => (
+        <div className="feedlayer" key={index}>
+          <button className="content">
+            {/* 피드가 추가될때마다 content div 추가 */}
+            <MoreButton onClick={() => navigate(`/post/detail/${item.id}`)}>
+              <img src={item.image} alt="예시 사진" className="bookImg" />
+              {item.image.length >= 1 ? (
+                <img
+                  src={ImgLayes}
+                  alt="이미지 2장 이상일 경우 나타나는 아이콘"
+                  className="bookMultiple"
+                />
+              ) : (
+                <p className="a11y-hidden">1장이에용</p>
+              )}
+            </MoreButton>
+          </button>
+        </div>
+      ))
+    )}
+  </Layer>
   );
 }
 const MoreButton = styled.div`
@@ -76,6 +76,8 @@ const Layer = styled.div`
   margin: 16px;
   margin-bottom: 70px;
   padding-bottom: 10px;
+  position: relative;
+  min-height: 550px;
   .content {
     position: relative;
     overflow: hidden;
@@ -102,5 +104,22 @@ const Layer = styled.div`
   .bookImg:hover {
     transform: scale(1.03);
     cursor: pointer;
+  }
+
+  .noneFeed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-bottom: 90px;
+    transform: translate(-50%, -50%);
+  };
+  .noneFeed img {
+    width: 110px;
+    display: block;
+    margin-bottom: 20px;
   }
 `;

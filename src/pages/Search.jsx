@@ -34,19 +34,37 @@ export default function Search() {
     window.history.back();
   }
 
+  function useDebounce(value, delay = 500) {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+      return () => clearTimeout(timer);
+    }, [value]);
+
+    return debouncedValue;
+  }
+
+  const searchResult = useDebounce(searchId);
+
   useEffect(() => {
-    const fetchSearch = async () => {
-      const searchRes = await SearchApi(token, searchId);
-      setSearchData(searchRes);
+    const setResult = async () => {
+      if (searchResult) {
+        setSearchData(await SearchApi(token, searchId));
+        console.log("검색됨");
+      } else {
+        setSearchData([]);
+      }
     };
-    if (searchId) {
-      fetchSearch();
-    }
-  }, [searchId]);
+    setResult();
+  }, [searchResult]);
 
   const SearchResult = () => {
     return (
       <>
+        <h1 className="a11y-hidden">유저 검색</h1>
         {searchData.map((item) => (
           <SearchList
             key={item._id}

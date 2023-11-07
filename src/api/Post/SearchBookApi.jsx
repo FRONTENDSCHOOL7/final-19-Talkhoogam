@@ -12,7 +12,6 @@ const SearchApi = async (title) => {
     });
 
     const resJson = await res.json();
-    console.log(resJson);
     return resJson;
   } catch (error) {
     console.log(error);

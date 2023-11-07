@@ -53,6 +53,7 @@ export default function SearchBook() {
     if (bookData && bookData.documents) {
       return (
         <>
+          <h1 className="a11y-hidden">책 검색</h1>
           {bookData.documents.map((item, index) => (
             <BookList
               key={index}

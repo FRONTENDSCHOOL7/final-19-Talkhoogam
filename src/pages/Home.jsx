@@ -51,6 +51,29 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
           loding && (
             <>
               {feedData.posts.map((item, index) => {
+                const bookData = {
+                  bookTitle: "",
+                  bookAuthor: "",
+                  bookContent: "",
+                };
+
+                const titleMatch = item.content.match(/bookTitle:(.*?),/);
+                const authorMatch = item.content.match(/bookAuthor:(.*?),/);
+                const contentMatch = item.content.match(
+                  /inputContent:(.*?)(?:,|$)/
+                );
+
+                if (titleMatch) {
+                  bookData.bookTitle = titleMatch[1] || "";
+                }
+
+                if (authorMatch) {
+                  bookData.bookAuthor = authorMatch[1] || "";
+                }
+
+                if (contentMatch) {
+                  bookData.bookContent = contentMatch[1] || "";
+                }
                 return (
                   <div key={index} className="user-timeline">
                     <img
@@ -81,7 +104,14 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                           alt="피드이미지"
                         />
                       </MoreButton>
-                      <p className="timeline-main-text">{item.content}</p>
+
+                      <strong className="book-title">
+                        {bookData.bookTitle}
+                      </strong>
+                      <p className="book-author">{bookData.bookAuthor}</p>
+                      <p className="timeline-main-text">
+                        {bookData.bookContent}
+                      </p>
                       <div className="social-wrap">
                         <div>
                           {/* <img
@@ -195,8 +225,21 @@ export const FeedWrap = styled.div`
     font-size: 13px;
   }
 
-  .timeline-main-text {
+  .book-title {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  .book-author {
     font-size: 14px;
+    margin-bottom: 10px;
+    color: #474646;
+  }
+
+  .timeline-main-text {
+    font-size: 15px;
     line-height: normal;
     margin: 16px 0;
     white-space: pre-line;

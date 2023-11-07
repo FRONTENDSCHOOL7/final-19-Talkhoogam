@@ -6,7 +6,7 @@ export const MyProductWrap = styled.article`
   width: 100%;
   max-width: 390px;
   margin: 6px auto;
-  padding: 20px 12px 10px;
+  padding: 20px 12px 5px;
   position: relative;
 
   & .sub-title-wrap {
@@ -67,7 +67,7 @@ export const ScrollHandler = styled.button`
 
 export const MyProductUl = styled.ul`
   max-width: 390px;
-  height: 140px;
+  height: 160px;
 
   display: flex;
   gap: 10px;
@@ -99,10 +99,11 @@ export const MyProductLi = styled.li`
   }
 
   & .img-my-product {
-    width: 100%;
-    aspect-ratio: 140/90;
-    border-radius: 8px;
-    margin: 6px auto 4px 0;
+    object-fit: contain;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    display: block;
   }
 
   & .product-tit {

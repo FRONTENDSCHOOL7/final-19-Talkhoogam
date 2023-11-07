@@ -28,10 +28,9 @@ export default function ListFeed(accountname) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const list = await getMyFeedListAPI();
         setMyFeedData(list);
-        setLoading(false);
+        setLoading(true);
       } catch (error) {
         console.error("데이터 가져오기 오류:", error);
         setLoading(false);
@@ -64,8 +63,15 @@ export default function ListFeed(accountname) {
 
   return (
     <UlStyled>
-      {myFeedData ? (
-        myFeedData.post.map((item, index) => {
+      {loading && myFeedData.post.length === 0 ? (
+        <>
+          <h1 className="a11y-hidden">게시글이 존재하지 않습니다..</h1>
+          <Empty image={LogoImg} alt={"404페이지"}>
+          게시글이 존재하지 않습니다. 
+          </Empty>
+        </>
+      ) : (
+        loading && myFeedData.post.map((item, index) => {
           const bookData = {
             bookTitle: "",
             bookAuthor: "",
@@ -128,13 +134,6 @@ export default function ListFeed(accountname) {
             </List>
           );
         })
-      ) : (
-        <>
-          <h1 className="a11y-hidden">팔로우가 존재하지 않습니다.</h1>
-          <Empty image={LogoImg} alt={"404페이지"}>
-            유저를 검색해 팔로우 해보세요!
-          </Empty>
-        </>
       )}
       {modalOpen && (
         <CommonModal

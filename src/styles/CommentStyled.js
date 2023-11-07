@@ -77,7 +77,7 @@ export const CommentForm = styled.form`
     border-top: 1px solid var(--color-lightgrey);
     /* justify-content: space-between; */
     gap: 15px;
-    color: var(--color-maingrey);
+    /* color: var(--color-maingrey); */
     font-size: 14px;
     font-weight: 400;
 
@@ -92,8 +92,15 @@ export const CommentForm = styled.form`
         width: 55px;
         height: 40px;
         margin-right: 16px;
-        color: var(--color-maingrey);
         font-family: "Pretendard",sans-serif;
+        
+        
+    }
+    .commnt-btn:enabled {
+        color: var( --color-mainColor); /* 활성화 상태일 때의 색상 */
+    }
+    .commnt-btn:disabled {
+        color: var(--color-maingrey);
     }
 `
 

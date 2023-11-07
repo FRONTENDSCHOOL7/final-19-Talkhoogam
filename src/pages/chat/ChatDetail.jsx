@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import chatData from "../../assets/chat/chatData.json";
 import { useParams } from 'react-router-dom';
 import {LayoutStyle, LayoutInsideStyle} from "../../styles/LayoutStyled";
@@ -13,6 +13,14 @@ export default function ChatDetail() {
 
     const params = useParams()
     const findName = chatData[chatData.findIndex(item => item.accountname === params.name)] || ""
+
+    const [comment, setComment] = useState('');
+    
+    // 입력 이벤트 핸들러
+    const handleCommentChange = (event) => {
+        const inputValue = event.target.value;
+        setComment(inputValue);
+    };
     
     return (
         <LayoutStyle>
@@ -43,8 +51,10 @@ export default function ChatDetail() {
                     id="commentId"
                     type="text" 
                     placeholder="메시지 입력하기..."
+                    onChange={handleCommentChange} // 입력 이벤트 핸들러
+                    value={comment} // 입력된 값
                 />
-                <button className="commnt-btn">전송</button>
+                <button className="commnt-btn" disabled={comment.length === 0}>전송</button>
             </CommentForm>
         </LayoutStyle>
     )

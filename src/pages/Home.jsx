@@ -18,6 +18,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
   const { getFeedListAPI } = GetFollowerFeedListAPI();
   const [loding, setLoding] = useState(false);
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {

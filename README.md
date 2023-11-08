@@ -268,9 +268,7 @@ Test PW : `test123` <br>
 
 ![image](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/27818df4-6d2c-44f6-b396-e9499bfd97b8)
 
-![image](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/f5f1059c-3692-4e2e-bbab-080c114c5a31)
-
-- 진행 상황 공유, 버그 리포트, 회의록, 깃 사용법 등을 노션에서 문서화 하여 관리했습니다.
+- 진행 상황 공유, [버그 리포트](https://www.notion.so/cb3ce8d494a14bc0b5909b378b4dc063?v=3fe1b40f4f9c42568ec11d2c90e87ec8), 회의록, [깃 사용법](https://www.notion.so/GitHub-b2b1d8e6de8048f58df27786ea39b954) 등을 노션에서 문서화 하여 관리했습니다.
 
 
 <br>

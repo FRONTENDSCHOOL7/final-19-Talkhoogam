@@ -21,7 +21,7 @@ import AccountNameProfileAPI from "../../api/post/AcountNameProfileAPI";
 import accountname from "../../recoil/accountname";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import Loding from "../../components/loding/Loding.jsx";
+import Loading from "../../components/loading/Loading.jsx";
 
 //Modal.setAppElemnet("#root");
 export default function Profile() {
@@ -188,7 +188,7 @@ export default function Profile() {
                     {userInfo?.followingCount}
                   </button>
                 )}
-                <p className="profilehead-text"></p>
+                <p className="profilehead-text">팔로잉</p>
               </div>
             </ProfileHead>
             <ProfileMid>
@@ -254,7 +254,7 @@ export default function Profile() {
         ) : (
           <ListFeed accountname={params.accountname}></ListFeed>
         )}
-        <Loding></Loding>
+        <Loading></Loading>
         <Footer></Footer>
       </LayoutStyle>
     </>

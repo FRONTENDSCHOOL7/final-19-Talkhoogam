@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {LodingLayOut, LogoImgStyle} from "../../styles/LodingStyled";
 import logo from "../../assets/images/Logo.png";
 
-export default function Loding() {
+export default function Loading() {
 
     const [isLoading, setIsLoading] = useState(true);
 

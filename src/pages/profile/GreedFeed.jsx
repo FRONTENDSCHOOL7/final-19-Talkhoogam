@@ -77,7 +77,7 @@ const Layer = styled.div`
   margin-bottom: 70px;
   padding-bottom: 10px;
   position: relative;
-  min-height: 550px;
+  min-height: 300px;
   .content {
     position: relative;
     overflow: hidden;
@@ -114,6 +114,7 @@ const Layer = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
+    /* margin-top: 90px; */
     margin-bottom: 90px;
     transform: translate(-50%, -50%);
   };

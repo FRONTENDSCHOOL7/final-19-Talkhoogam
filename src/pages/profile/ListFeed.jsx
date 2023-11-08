@@ -65,11 +65,12 @@ export default function ListFeed(accountname) {
     <UlStyled>
       {loading && myFeedData.post.length === 0 ? (
         <>
-          <h1 className="a11y-hidden">게시글이 존재하지 않습니다..</h1>
-          <Empty image={LogoImg} alt={"404페이지"}>
-          게시글이 존재하지 않습니다. 
-          </Empty>
-        </>
+        <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
+        <div className="noneFeed">        
+        <img src={LogoImg}></img>
+        게시글이 존재하지 않습니다.
+        </div>
+      </>
       ) : (
         loading && myFeedData.post.map((item, index) => {
           const bookData = {
@@ -230,4 +231,23 @@ const List = styled.li`
 `;
 const UlStyled = styled.ul`
   margin-bottom: 50px;
+  position: relative;
+  min-height: 300px;
+
+  .noneFeed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-bottom: 90px;
+    transform: translate(-50%, -50%);
+  };
+  .noneFeed img {
+    width: 110px;
+    display: block;
+    margin-bottom: 20px;
+  }
 `;

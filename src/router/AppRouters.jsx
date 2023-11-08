@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Welcome from "../pages/Welcome";
 import Login from "../pages/Login";
@@ -23,13 +23,19 @@ import Search from "../pages/Search";
 import SearchBook from "../pages/post/SearchBook";
 import ChatList from "../pages/chat/ChatList";
 import ChatDetail from "../pages/chat/ChatDetail";
+import { useRecoilValue } from "recoil";
+import loginCheck from "../recoil/loginCheck";
 
 export default function Routers() {
-  return (
+
+  const check = useRecoilValue(loginCheck);
+  
+  const privateRoutes = (
+    <>
     <Routes>
       <Route path="/" element={<Welcome />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Navigate to={"/home"} />} />
       <Route path="/join" element={<Join />} />
       <Route path="/setprofile" element={<SetProfile />} />
       <Route path="/gathering" element={<Gathering />} />
@@ -51,5 +57,17 @@ export default function Routers() {
       <Route path="/chat/:name" element={<ChatDetail />}/>
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </>
+  );
+  
+  return (
+    <>
+      {check ? privateRoutes : 
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={!check && <Navigate to={"/login"} />} />
+        </Routes>
+      }
+    </>
   );
 }

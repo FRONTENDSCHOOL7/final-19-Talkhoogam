@@ -54,7 +54,7 @@ export default function MoreList({ setMoreOpen }) {
     console.log("login : " + isLogin);
     console.log("token : " + token);
     console.log("accountName : " + accountName);
-    navigate("../login");
+    navigate("/login");
     setShowLogout(false);
     setMoreOpen(false);
   }
@@ -79,7 +79,7 @@ export default function MoreList({ setMoreOpen }) {
         setShowLogout(true);
       } else {
         console.log("login : " + isLogin);
-        navigate("../login");
+        navigate("/login");
       }
     }
 

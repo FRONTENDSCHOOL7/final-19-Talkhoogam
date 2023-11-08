@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { JoinForm, Title } from "./JoinStyled";
+import imgBtn from "../assets/images/img-btn.svg";
 
 export const PageTitle = styled(Title)`
   margin-bottom: 20px;
@@ -8,6 +9,7 @@ export const PageTitle = styled(Title)`
 export const ImgWrapper = styled.div`
   position: relative;
   display: flex;
+  margin-bottom: 25px;
 `;
 
 export const ProfileImg = styled.img`
@@ -18,15 +20,33 @@ export const ProfileImg = styled.img`
 `;
 
 export const ImgLabel = styled.label`
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
   cursor: pointer;
-`;
 
-export const ImgUploadBtn = styled.img`
-  cursor: pointer;
-
+  background-image: url(${imgBtn});
+  background-size: 36px 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-position: 83px 74px;
+  margin: 0 auto;
   position: absolute;
-  top: 58%;
-  left: 57%;
+  top: -5px;
+  left: 115px;
+
+  &::after {
+    content: "";
+    width: 110px;
+    height: 110px;
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: -1;
+  }
 `;
 
 export const ImgUploader = styled.input`

@@ -9,6 +9,7 @@ ${reset}
 :root {
     /* 색 */
     --color-mainColor: #56b778;
+    --color-dark-mainColor: #4b9f68;
     --color-navy: #132644;
     --color-lime: #E1FF67;
     --color-blue: #1643DB;
@@ -16,16 +17,25 @@ ${reset}
     --color-maingrey: #C4C4C4;
     --color-darkgrey: #767676;
     --color-lightgrey: #DBDBDB;
+    --color-trans-grey: #f2f2f2;
     --color-red: #EB5757;
     --color-bg: #F2F2F2;
+
+    /* 폰트 */
+    --font-mainFont: 'Pretendard', sans-serif;
 }
 
 body {
     font-family: 'Pretendard', sans-serif;
+    overflow: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }
 
 input {
     border : none;
+    font-family: 'Pretendard', sans-serif;
 }
 
 a {
@@ -36,6 +46,7 @@ a {
 button {
     border: 0;
     background: none;
+    font-family: 'Pretendard', sans-serif;
 }
 
 button:enabled {

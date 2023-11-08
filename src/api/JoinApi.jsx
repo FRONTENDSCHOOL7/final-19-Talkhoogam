@@ -1,4 +1,4 @@
-const JoinApi = async (username, email, password) => {
+const JoinApi = async (username, email, password, userId, intro, image) => {
   const url = "https://api.mandarin.weniv.co.kr";
 
   try {
@@ -20,8 +20,10 @@ const JoinApi = async (username, email, password) => {
     });
 
     const resJson = await res.json();
+    console.log(resJson);
     return resJson;
   } catch (error) {
+    console.log(error);
     return error;
   }
 };

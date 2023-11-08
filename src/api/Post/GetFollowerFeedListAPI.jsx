@@ -12,13 +12,12 @@ function GetFollowerFeedListAPI(){
                     method: "GET",
                     headers: {
                         Authorization : `Bearer ${token}`,
-                        "Content-type": "application/json",
                     },
                 });
                 const data = await res.json()
-                return data.post;
+                return data;
             } catch (error) {
-                return error;
+                console.log("API 응답에 실패하였습니다." ,error);
             };
         };
         return {getFeedListAPI}

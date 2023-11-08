@@ -1,9 +1,13 @@
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
+import { useNavigate } from "react-router-dom";
+import accountname from "../../recoil/accountname";
 
 const ProductUploadAPI = (products) => {
     const token = useRecoilValue(loginToken);
-    const {productName, price, link, itemImage} = products;
+    const navigate = useNavigate();
+    const loginName = useRecoilValue(accountname);
+    const {productName, price, inputValue, itemImage} = products;
 
     const productUpload = async () =>{
         const url = "https://api.mandarin.weniv.co.kr";
@@ -19,11 +23,14 @@ const ProductUploadAPI = (products) => {
                     product: {
                         itemName : productName,
                         price: parseInt(price),
-                        link: link,
+                        link: inputValue,
                         itemImage: itemImage,
                     },
                 }),
             });
+            alert("상품 등록 완료!")
+            // navigate(`/sellbook`)
+            navigate(`/sellbook?data=${loginName}`)
         } catch (error) {
             console.log("API 응답에 실패하였습니다." ,error);
         }

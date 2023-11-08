@@ -40,7 +40,7 @@ Test PW : `test123` <br>
 | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
 | <img width="360" alt="창호이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/208158f8-bb5d-4f2b-93cd-032591823fe4"> | <img width="360"  alt="정현이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/17d69428-300c-4441-873d-c9e3946dc5fc"> | <img width="360" alt="시하이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/28d8fc96-6b36-4524-b282-c3ff9ef9729e"> | <img width="360" alt="예빈이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/66b34004-7caf-4729-bff0-9043855da981" > |
 | [ChangHoChoi92](https://github.com/ChangHoChoi92) | [nonelijah](https://github.com/nonelijah) | [coo1river](https://github.com/coo1river) | [yebinholmes](https://github.com/yebinholmes) |
-| 팀장 | 팀원 | 팀원 | 팀원 |
+| <img src="https://img.shields.io/badge/Team Leader-7569db"/> | <img src="https://img.shields.io/badge/Team Member-118704"/> | <img src="https://img.shields.io/badge/Team Member-d19c32"/> | <img src="https://img.shields.io/badge/Team Member-06a9c2"/> |
 
 <br>
 

@@ -13,6 +13,7 @@ import Comment from "../../components/comment/Comment";
 import CommentInput from "../../components/comment/CommentInput";
 import timeFormat from "../../utils/timeFormat";
 import LikeHeart from "../../components/common/LikeHeart";
+import { ClipLoader } from "react-spinners";
 
 export default function PostDetail() {
   const params = useParams();
@@ -173,7 +174,9 @@ export default function PostDetail() {
               </div>
             </div>
           ) : (
-            <p>Loading..</p>
+            <Loading>
+              <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
+            </Loading>
           )}
         </PostDetailWrap>
 
@@ -332,4 +335,8 @@ export const PostDetailWrap = styled.div`
     align-items: center;
     justify-content: center;
   }
+`;
+
+const Loading = styled.div`
+  margin: 20px;
 `;

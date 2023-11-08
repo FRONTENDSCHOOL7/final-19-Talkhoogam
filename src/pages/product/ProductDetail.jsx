@@ -9,6 +9,7 @@ import CommonModal from "../../components/modal/CommonModal";
 import { useRecoilValue } from "recoil";
 import newAaccountname from "../../recoil/accountname";
 import timeFormat from "../../utils/timeFormat";
+import { ClipLoader } from "react-spinners";
 
 export default function ProductDetail() {
   const navigate = useNavigate();
@@ -92,7 +93,9 @@ export default function ProductDetail() {
             </div>
           </ProductDetailWrap>
         ) : (
-          <p>Loading..</p>
+          <Loading>
+            <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
+          </Loading>
         )}
       </LayoutInsideStyle>
       {modalOpen && (
@@ -188,4 +191,10 @@ export const ProductDetailWrap = styled.div`
     font-weight: 400;
     line-height: 1.2em;
   }
+`;
+
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 `;

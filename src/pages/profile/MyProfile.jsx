@@ -15,6 +15,7 @@ import GetFollowerFeedListAPI from "../../api/post/GetFollowerFeedListAPI";
 import ListFeed from "../profile/ListFeed.jsx";
 import GreedFeed from "../profile/GreedFeed";
 import MyProduct from "../../components/profile/MyProduct.jsx";
+import { ClipLoader } from "react-spinners";
 
 //Modal.setAppElemnet("#root");
 export default function Profile() {
@@ -116,7 +117,16 @@ export default function Profile() {
             <ProfileHead>
               <div className="followerText" onClick={onClickFollower}>
                 {loading ? (
-                  <button className="followersNum">Loading...</button>
+                  <button className="followersNum">
+                    {" "}
+                    <Loading>
+                      <ClipLoader
+                        color="#56b778"
+                        size={20}
+                        speedMultiplier={0.7}
+                      />
+                    </Loading>
+                  </button>
                 ) : (
                   <button className="followersNum">
                     {profileInfo?.followerCount}
@@ -150,7 +160,16 @@ export default function Profile() {
               </div>
               <div className="followingText" onClick={onClickFollowing}>
                 {loading ? (
-                  <button className="followingsNum">Loading...</button>
+                  <button className="followingsNum">
+                    {" "}
+                    <Loading>
+                      <ClipLoader
+                        color="#56b778"
+                        size={20}
+                        speedMultiplier={0.7}
+                      />
+                    </Loading>
+                  </button>
                 ) : (
                   <button className="followingsNum">
                     {profileInfo?.followerCount}
@@ -161,17 +180,23 @@ export default function Profile() {
             </ProfileHead>
             <ProfileMid>
               {loading ? (
-                <p className="userName">Loading...</p>
+                <Loading>
+                  <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
+                </Loading>
               ) : (
                 <p className="userName">{profileInfo.username}</p>
               )}
               {loading ? (
-                <p className="id">Loading...</p>
+                <Loading>
+                  <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
+                </Loading>
               ) : (
                 <p className="id">{profileInfo.accountname}</p>
               )}
               {loading ? (
-                <p className="profileIntro">Loading...</p>
+                <Loading>
+                  <ClipLoader color="#56b778" size={20} speedMultiplier={0.7} />
+                </Loading>
               ) : (
                 <p className="profileIntro">{profileInfo.intro}</p>
               )}
@@ -341,4 +366,10 @@ const LayerNav = styled.div`
   img:hover {
     cursor: pointer;
   }
+`;
+
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 `;

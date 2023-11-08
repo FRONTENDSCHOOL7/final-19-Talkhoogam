@@ -2,6 +2,11 @@
 
 ![Group 2](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/3c4261a2-11e0-4975-967a-d00e250c17d5)
 
+<div align="center">
+<b>[톡후감 바로가기](https://talkhoogam.netlify.app/)</b> <br>
+Test ID : `talkhoogam@test.com` <br>
+Test PW : `test123` <br>
+</div>
 <br>
 
 ## \*️⃣목차
@@ -30,7 +35,7 @@
 저희는 **"🦝도와줘 너굴맨🦝"** 조 입니다.<br/>
 | **최창호** | **안정현** | **황시하** | **박예빈** |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| <img width="360" alt="창호이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/208158f8-bb5d-4f2b-93cd-032591823fe4"> | <img width="360"  alt="정현이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/b0e599fd-c882-43db-937f-77721a42575c"> | <img width="360" alt="시하이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/204d6e0d-0acd-492c-a84f-5e68f2bd71a7"> | <img width="360" alt="예빈이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/66b34004-7caf-4729-bff0-9043855da981" > |
+| <img width="360" alt="창호이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/208158f8-bb5d-4f2b-93cd-032591823fe4"> | <img width="360"  alt="정현이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/17d69428-300c-4441-873d-c9e3946dc5fc"> | <img width="360" alt="시하이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/204d6e0d-0acd-492c-a84f-5e68f2bd71a7"> | <img width="360" alt="예빈이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/66b34004-7caf-4729-bff0-9043855da981" > |
 | [ChangHoChoi92](https://github.com/ChangHoChoi92) | [nonelijah](https://github.com/nonelijah) | [coo1river](https://github.com/coo1river) | [yebinholmes](https://github.com/yebinholmes) |
 | 팀장 | 팀원 | 팀원 | 팀원 |
 
@@ -151,9 +156,9 @@
 | ![02-로그인](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/27156fec-6d63-4112-b0e9-326567b972b2) | ![04-검색ver2](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/25bddddc-47ad-4885-9426-be7b867c4b5c) | ![06-NotFound](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/352e66df-f63f-481d-a51d-dc7765ff4542) |
 |                                                                                                                           |
 
-|                                                         피드 조회                                                          |                                                      댓글(등록, 삭제)                                                       |                                                          독서모임                                                           |
+|                                                         피드 조회                                                          |                                                      댓글(등록, 삭제)                                                       |                                                          피드 등록                                                          |
 | :------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
-| ![07-홈-피드](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/7dcf52b7-295c-49fb-a66f-2a320a4e971e) | ![08-피드댓글](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/0eceeb3c-9fec-422c-837c-8cb7f4d222b2) | ![09-독서모임](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/7afee91c-7296-41c0-9a5d-63849134471b) |
+| ![07-홈-피드](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/7dcf52b7-295c-49fb-a66f-2a320a4e971e) | ![08-피드댓글](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/0eceeb3c-9fec-422c-837c-8cb7f4d222b2) | ![08-피드등록](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/4d61a7b1-77e8-463a-b22a-8a63aa1151ef) |
 
 |                                                             상품 등록                                                             |                                                           상품 삭제                                                            |                                                             상품 수정                                                              |
 | :-------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: |
@@ -163,9 +168,9 @@
 | :----------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: |
 | ![11-2-내 프로필](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/4ae703d3-c73a-4091-b3f1-6cbdb8b24c09) | ![11-프로필 수정](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/7f607d46-db1f-4934-9915-4b30917aa664) | ![12-follow](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/3c81fabf-0676-40b7-ab29-e764e9091b1c) |
 
-|                                                             다른유저프로필                                                             |                                                         채팅                                                          |
-| :------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: |
-| ![13-다른유저-프로필ver2](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/de4997cb-4577-4d7f-896c-3e443c0bc62c) | ![15-DM](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/a1beff77-a19f-43d9-95bb-8024e2f6a20a) |
+|                                                             다른유저프로필                                                             |                                                         채팅                                                          |                                                          독서모임                                                           |
+| :------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
+| ![13-다른유저-프로필ver2](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/de4997cb-4577-4d7f-896c-3e443c0bc62c) | ![15-DM](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/a1beff77-a19f-43d9-95bb-8024e2f6a20a) | ![09-독서모임](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/7afee91c-7296-41c0-9a5d-63849134471b) |
 
 <br>
 

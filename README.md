@@ -42,20 +42,26 @@ Test PW : `test123` <br>
 | [ChangHoChoi92](https://github.com/ChangHoChoi92) | [nonelijah](https://github.com/nonelijah) | [coo1river](https://github.com/coo1river) | [yebinholmes](https://github.com/yebinholmes) |
 | 팀장 | 팀원 | 팀원 | 팀원 |
 
+<br>
+
 ### 역할 분담
 
-![Group 7](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/e44d2138-2243-417b-90a7-ea0fe09cebe3)
+![Group 7 (2)](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/0a333a10-15f2-4c6a-b8fa-e5e70052dcf5)
+
 
 <br>
 
 ## <span id="period">3. 🗓️개발 일정</span>
 
+![image](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/a527d5db-1645-4fd5-967a-a0573fa0212e)
+
+
 |         **주차**          | **내용**                                                                                                                                                                                    |
 | :-----------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1주차 <br> (10/16 -10/21) | `기획` <br> 프로젝트 주제 선정 및 서비스 기획. 화면 기능 및 목록 작성. 기술 스택 및 협업툴 결정. <br> `초기설정` <br> 협업 툴 결정 및 협업 기술 사용 숙달. 컨벤션 및 기타 초기 세팅 결정 등 |
-| 2주차 <br> (10/22 -10/28) | `마크업 및 기능 구현` <br> 명세에 따른 필수 기능 위주의 마크업 및 기능 구현. 페이지 및 기능별 역할 분담.                                                                                    |
-| 3주차 <br> (10/29 -11/03) | ` 마크업 및 기능구현` <br>서비스 기획에 따른 세부 기능에 대한 마크업 및 기능 구현 <br> `리팩토링` <br> 기존 코드에 대한 리팩토링(버그 수정 및 기능 보완 등)                                 |
-| 4주차 <br> (11/04 -11/06) | `마무리` <br> 구현 기능에 대한 추가적인 리팩토링(디테일 및 오류 수정, 코드 정리 등). README 작성 등                                                                                         |
+| 1주차 <br> (10/16 -10/21) | **`기획`** <br> 프로젝트 주제 선정 및 서비스 기획. 화면 기능 및 목록 작성. 기술 스택 및 협업툴 결정. <br> **`초기설정`** <br> 협업 툴 결정 및 협업 기술 사용 숙달. 컨벤션 및 기타 초기 세팅 결정 등 |
+| 2주차 <br> (10/22 -10/28) | **`마크업 및 기능 구현`** <br> 명세에 따른 필수 기능 위주의 마크업 및 기능 구현. 페이지 및 기능별 역할 분담.                                                                                    |
+| 3주차 <br> (10/29 -11/03) | **` 마크업 및 기능구현`** <br>서비스 기획에 따른 세부 기능에 대한 마크업 및 기능 구현 <br> **`리팩토링`** <br> 기존 코드에 대한 리팩토링(버그 수정 및 기능 보완 등)                                 |
+| 4주차 <br> (11/04 -11/06) | **`마무리`** <br> 구현 기능에 대한 추가적인 리팩토링(디테일 및 오류 수정, 코드 정리 등). README 작성 등                                                                                         |
 
 <br>
 
@@ -246,6 +252,27 @@ Test PW : `test123` <br>
 - 실시간 쉐어 프로그래밍을 통한 문제 해결
 - 개발 중에는 프로젝트 디스코드 채널에 접속하여 진행
 
+<br>
+
+### notion
+
+
+[*노션 링크*](https://www.notion.so/19-87cb11003f4b494badb5c13f84c8b4a5)
+
+
+---
+
+![image](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/00e148d3-0828-4d9a-8153-780e24a25281)
+
+![image](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/27818df4-6d2c-44f6-b396-e9499bfd97b8)
+
+![image](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/f5f1059c-3692-4e2e-bbab-080c114c5a31)
+
+- 진행 상황 공유, 버그 리포트, 회의록, 깃 사용법 등을 노션에서 문서화 하여 관리했습니다.
+
+
+<br>
+
 ### GitHub
 
 ---
@@ -308,7 +335,7 @@ Test PW : `test123` <br>
 
 ## <span id="refactoring">7. ♻️리팩토링</span>
 
-- **반응형웹 개발**<br>
+- **반응형 웹 개발**<br>
 - **시멘틱 마크업 준수**<br>
 - **새로운 기능 추가**<br>
 - **팀원 코드 리팩토링**<br>

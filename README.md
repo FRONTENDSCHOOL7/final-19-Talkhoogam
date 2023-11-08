@@ -16,8 +16,8 @@ Test PW : `test123` <br>
 3. [🗓️개발 일정](#period)
 4. [🔨기술 스택 및 이유](#technology-stack)
 5. [🔍기능 및 구조](#function-and-structure)
-6. [👫협업방식](#cooperation)
-7. [♻️리펙토링](#refactoring)
+6. [👫협업 방식](#cooperation)
+7. [♻️리팩토링](#refactoring)
 
 <br>
 
@@ -35,10 +35,11 @@ Test PW : `test123` <br>
 저희는 **"🦝도와줘 너굴맨🦝"** 조 입니다.<br/>
 | **최창호** | **안정현** | **황시하** | **박예빈** |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-| <img width="360" alt="창호이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/208158f8-bb5d-4f2b-93cd-032591823fe4"> | <img width="360"  alt="정현이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/17d69428-300c-4441-873d-c9e3946dc5fc"> | <img width="360" alt="시하이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/204d6e0d-0acd-492c-a84f-5e68f2bd71a7"> | <img width="360" alt="예빈이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/66b34004-7caf-4729-bff0-9043855da981" > |
+| <img width="360" alt="창호이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/208158f8-bb5d-4f2b-93cd-032591823fe4"> | <img width="360"  alt="정현이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/91508043/17d69428-300c-4441-873d-c9e3946dc5fc"> | <img width="360" alt="시하이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/28d8fc96-6b36-4524-b282-c3ff9ef9729e"> | <img width="360" alt="예빈이미지" src="https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/115566147/66b34004-7caf-4729-bff0-9043855da981" > |
 | [ChangHoChoi92](https://github.com/ChangHoChoi92) | [nonelijah](https://github.com/nonelijah) | [coo1river](https://github.com/coo1river) | [yebinholmes](https://github.com/yebinholmes) |
 | 팀장 | 팀원 | 팀원 | 팀원 |
 
+### 역할 분담
 ![Group 7](https://github.com/FRONTENDSCHOOL7/final-19-Talkhoogam/assets/122965945/e44d2138-2243-417b-90a7-ea0fe09cebe3)
 
 <br>
@@ -302,7 +303,7 @@ Test PW : `test123` <br>
 
 <br>
 
-## <span id="refactoring">7. ♻️리펙토링</span>
+## <span id="refactoring">7. ♻️리팩토링</span>
 
 - **반응형웹 개발**<br>
 - **시멘틱 마크업 준수**<br>

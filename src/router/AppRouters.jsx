@@ -66,6 +66,7 @@ export default function Routers() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="*" element={!check && <Navigate to={"/login"} />} />
+          <Route path="/" element={<Welcome />} />
         </Routes>
       }
     </>

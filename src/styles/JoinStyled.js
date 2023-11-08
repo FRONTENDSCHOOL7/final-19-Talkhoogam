@@ -22,8 +22,14 @@ export const JoinForm = styled.form`
   margin-top: 40px;
 `;
 
-export const JoinLabel = styled.label`
-  font-size: 16px;
+export const InputWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const InputLabel = styled.label`
+  font-size: 17px;
   font-weight: bold;
   color: #3d3d3d;
 `;
@@ -32,15 +38,15 @@ export const InforText = styled.p`
   margin: 10px 0;
 `;
 
-export const JoinInput = styled.input`
+export const UnderInput = styled.input`
   margin-top: 5px;
   box-sizing: border-box;
   width: 100%;
-  padding: 10px 10px;
+  padding: 10px 0px;
   border-bottom: 2.5px solid #56b77869;
   font-family: "Pretendard", sans-serif;
   font-size: 16px;
-  color: #767676;
+  color: var(--color-darkgrey);
 
   &::placeholder {
     font-size: 14px;
@@ -55,9 +61,9 @@ export const JoinInput = styled.input`
 
 export const NextBtn = styled(Btn)`
   margin-top: 10px;
-  background-color: #56b77869;
 
   &:enabled {
+    transition: background-color 0.8s, color 0.5s;
     background-color: var(--color-mainColor);
     cursor: pointer;
   }

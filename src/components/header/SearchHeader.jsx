@@ -1,7 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { BackBtn, HeaderMain } from '../../styles/HeaderStyled';
+import React, { useEffect, useRef, useState } from "react";
+import { BackBtn, HeaderMain } from "../../styles/HeaderStyled";
+import iconArrow from "../../assets/icons/icon-arrow-left.svg";
+import { useRecoilState } from "recoil";
+import { result } from "../../recoil/searchResult";
 
 export default function SearchHeader() {
+  const [searchResult, setSearchResult] = useRecoilState(result);
+
   // 처음 헤더의 input에 focus가 오도록
   const inputRef = useRef(null);
   useEffect(() => {
@@ -11,9 +16,9 @@ export default function SearchHeader() {
   }, []);
 
   // searchInput의 value
-  const [value, setValue] = useState('');
   function searchValue(e) {
-    setValue(e.target.value);
+    setSearchResult(e.target.value);
+    console.log(searchResult);
   }
 
   // 뒤로가기
@@ -24,12 +29,13 @@ export default function SearchHeader() {
 
   return (
     <HeaderMain>
-      <BackBtn onClick={goBack} />
-      <label className="a11y-hidden" htmlFor="headerInp"></label>
+      <BackBtn onClick={goBack}>
+        <img src={iconArrow} alt="뒤로가기 버튼" />
+      </BackBtn>
+      <label className="a11y-hidden" htmlFor="headerInp" />
       <input
         type="text"
         placeholder="검색어를 입력해주세요."
-        value={value}
         onChange={searchValue}
         className="searchInput"
         id="headerInp"

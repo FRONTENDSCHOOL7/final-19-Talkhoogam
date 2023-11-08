@@ -277,7 +277,7 @@
 ✏️ Rename : 파일명 혹은 폴더명 수정, 위치 이동<br>
 🗑️ Remove : 파일 삭제<br>
 
-## **Prettier**
+### **Prettier**
 
 ---
 

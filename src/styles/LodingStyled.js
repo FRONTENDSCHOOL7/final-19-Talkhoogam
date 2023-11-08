@@ -9,6 +9,10 @@ const fadeBackground = keyframes`
     }
 `;
 export const LodingLayOut = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   position: absolute;
   position: fixed;
   top: 0;

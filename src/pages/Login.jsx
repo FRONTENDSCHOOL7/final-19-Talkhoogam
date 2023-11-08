@@ -21,8 +21,8 @@ import accountname from "../recoil/accountname";
 
 export default function Login() {
   // 이메일, 패스워드 상태 관리
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("talkhoogam@test.com");
+  const [password, setPassword] = useState("test123");
 
   // 에러 메시지 상태 관리
   const [error, setError] = useState("");
@@ -88,6 +88,7 @@ export default function Login() {
             placeholder="이메일"
             onChange={EmailValue}
             className="email-input"
+            value={email}
           />
           <InputBox
             type="password"
@@ -95,6 +96,7 @@ export default function Login() {
             minLength="6"
             maxLength="20"
             onChange={PasswordValue}
+            value={password}
           />
         </InputWrap>
         <ErrorText>{error}</ErrorText>

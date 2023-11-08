@@ -16,7 +16,7 @@ export const LogoImg = styled.img`
 `;
 
 export const EmptyText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   color: var(--color-darkgrey);
 `;
 

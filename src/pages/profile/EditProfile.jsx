@@ -17,19 +17,21 @@ import {
   ImgUploader,
 } from "../../styles/SetProfileStyled";
 import ProfileInfoAPI from "../../api/profile/ProfileInfoAPI";
-import IdValidApi from "../../api/IdValidApi";
 import EditProfileApi from "../../api/EditProfileApi";
 import { useRecoilState } from "recoil";
-import loginToken from "../../recoil/loginToken";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 import { useNavigate } from "react-router-dom";
 import accountname from "../../recoil/accountname";
 import BasicHeader from "../../components/header/BasicHeader";
 import { LayoutStyle } from "../../styles/LayoutStyled";
+import useValid from "../../hook/useValid";
+import loginToken from "../../recoil/loginToken";
 
 export default function EditProfile() {
   const [data, setData] = useState({});
+  const [token, setToken] = useRecoilState(loginToken);
 
+  // 닉네임, 아이디, 소개, 이미지 상태 관리
   const [form, setForm] = useState({
     userName: "",
     userId: "",
@@ -41,23 +43,17 @@ export default function EditProfile() {
   const navigate = useNavigate();
   const [editId, setEditId] = useRecoilState(accountname);
 
-  // 닉네임 에러, 아이디 에러, 소개 에러 상태 관리
-  const [usernameErr, setUsernameErr] = useState("");
-  const [userIdErr, setUserIdErr] = useState("");
-  const [introErr, setIntroErr] = useState("");
-
-  // 토큰, 버튼 상태 값 관리
-  const [token, setToken] = useRecoilState(loginToken);
-  const [btnState, SetBtnState] = useState(false);
-
   // 최초 렌더링 시 각 input value에 기존 정보 값 입력
   useEffect(() => {
     async function fetchData() {
       const userRes = await ProfileInfoAPI();
-      setForm({ ...form, userName: userRes.username });
-      setForm({ ...form, userId: userRes.accountname });
-      setForm({ ...form, intro: userRes.intro });
-      setForm({ ...form, image: userRes.image });
+      setForm({
+        ...form,
+        userName: userRes.username,
+        userId: userRes.accountname,
+        intro: userRes.intro,
+        image: userRes.image,
+      });
     }
     fetchData();
   }, []);
@@ -88,62 +84,28 @@ export default function EditProfile() {
     setForm({ ...form, intro: e.target.value });
   };
 
-  // 각 input 유효성 검사
-  const UsernameValid = () => {
-    if (!form.userName) {
-      setUsernameErr("필수 입력 항목입니다.");
-    } else if (form.userName.length < 2) {
-      setUsernameErr("2자 이상 닉네임을 입력해 주세요.");
-    } else if (form.userName.length > 10) {
-      setUsernameErr("10자 이하 닉네임을 입력해 주세요.");
-    } else {
-      setUsernameErr("");
-    }
-  };
+  const {
+    error,
+    UserNameValid,
+    UserIdValid,
+    IntroValid,
+    btnState,
+    EditBtnActive,
+  } = useValid(form);
+  const [validError, setValidError] = useState(error);
 
-  // 아이디 조건(정규 표현식)
-  const userIdReg = /^[A-Za-z0-9_.]{5,}$/;
+  useEffect(() => {
+    setValidError(error);
+  }, [error]);
 
-  const UserIdValid = async () => {
-    if (!form.userId) {
-      setUserIdErr("필수 입력 항목입니다.");
-    } else if (!userIdReg.test(form.userId)) {
-      setUserIdErr("아이디 형식이 올바르지 않습니다.");
-    } else {
-      const idValidRes = await IdValidApi(form.userId);
-      setUserIdErr(idValidRes);
-    }
-  };
-
-  const IntroValid = () => {
-    if (!form.intro) {
-      setIntroErr("필수 입력 항목입니다.");
-    } else {
-      setIntroErr("");
-    }
-  };
-
-  // 버튼 활성화
-  const BtnActive = () => {
-    if (form.userName && form.userId && form.intro) {
-      if (
-        (!usernameErr &&
-          // 아이디를 변경한 경우 아이디 중복 확인, 변경하지 않은 경우 에러 메시지가 출력되지 않아야 함
-          userIdErr === "사용 가능한 계정ID 입니다.") ||
-        (!userIdErr && !introErr)
-      ) {
-        console.log("활성화");
-        SetBtnState(false);
-      } else {
-        console.log("비활성화");
-        SetBtnState(true);
-      }
-    }
-  };
+  useEffect(() => {
+    EditBtnActive();
+  }, [form.userName, form.userId, form.intro]);
 
   // 프로필 수정 api
   const EditData = async (e) => {
     e.preventDefault();
+    console.log("Form Data:", form);
     const res = await EditProfileApi(
       token,
       form.userName,
@@ -172,7 +134,7 @@ export default function EditProfile() {
               accept="image/*"
               onChange={(e) => {
                 UploadImage(e);
-                BtnActive();
+                EditBtnActive();
               }}
               ref={InputFile}
             />
@@ -187,13 +149,10 @@ export default function EditProfile() {
             id="nickname"
             placeholder="닉네임"
             value={form.userName}
-            onBlur={(e) => {
-              UsernameValid(e);
-              BtnActive();
-            }}
+            onBlur={() => UserNameValid(form.userName)}
             onChange={UsernameValue}
           />
-          <ErrorText>{usernameErr}</ErrorText>
+          <ErrorText>{error.userNameErr}</ErrorText>
 
           <InputWrap>
             <InputLabel htmlFor="id">아이디</InputLabel>
@@ -204,13 +163,10 @@ export default function EditProfile() {
             id="id"
             placeholder="아이디"
             value={form.userId}
-            onBlur={(e) => {
-              UserIdValid(e);
-              BtnActive();
-            }}
+            onBlur={() => UserIdValid(form.userId)}
             onChange={UserIdValue}
           />
-          <ErrorText>{userIdErr}</ErrorText>
+          <ErrorText>{error.userIdErr}</ErrorText>
 
           <InputWrap>
             <InputLabel htmlFor="intro">소개</InputLabel>
@@ -222,12 +178,12 @@ export default function EditProfile() {
             placeholder="소개"
             value={form.intro}
             onBlur={(e) => {
-              IntroValid(e);
-              BtnActive();
+              IntroValid(form.intro);
+              EditBtnActive();
             }}
             onChange={IntroValue}
           />
-          <ErrorText>{introErr}</ErrorText>
+          <ErrorText>{error.introErr}</ErrorText>
           <NextBtn onClick={EditData} disabled={btnState}>
             수정하기
           </NextBtn>

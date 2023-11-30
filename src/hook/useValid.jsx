@@ -62,20 +62,9 @@ export const useValid = (form) => {
     }
   };
 
-  const BtnActive = () => {
-    if (
-      !error.userNameErr &&
-      error.userIdErr === "사용 가능한 계정ID 입니다." &&
-      !error.introErr &&
-      form.userName &&
-      form.userId &&
-      form.intro
-    ) {
-      setBtnState(false);
-    } else {
-      setBtnState(true);
-    }
-  };
+  // useEffect(() => {
+  //   BtnActive(form, error);
+  // }, [form, error, BtnActive]);
 
   // api 호출, 성공 시 로그인 페이지로 이동
   const HandleJoin = async (e) => {
@@ -102,17 +91,47 @@ export const useValid = (form) => {
     }
   };
 
-  useEffect(() => {
-    BtnActive();
-  }, [form.userName, form.userId, form.intro]);
+  const SetBtnActive = () => {
+    if (
+      !error.userNameErr &&
+      error.userIdErr === "사용 가능한 계정ID 입니다." &&
+      !error.introErr &&
+      form.userName &&
+      form.userId &&
+      form.intro
+    ) {
+      setBtnState(false);
+    } else {
+      setBtnState(true);
+    }
+  };
+
+  const EditBtnActive = () => {
+    if (
+      form.userName &&
+      form.userId &&
+      form.intro &&
+      !error.userNameErr &&
+      error.userIdErr === "사용 가능한 계정ID 입니다." &&
+      !error.userIdErr &&
+      !error.introErr
+    ) {
+      console.log("활성화");
+      setBtnState(false);
+    } else {
+      console.log("비활성화");
+      setBtnState(true);
+    }
+  };
 
   return {
     error,
     UserNameValid,
     UserIdValid,
     IntroValid,
-    btnState,
     HandleJoin,
+    SetBtnActive,
+    EditBtnActive,
   };
 };
 

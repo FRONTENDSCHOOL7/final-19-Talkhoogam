@@ -17,10 +17,6 @@ import {
   InforText,
   InputWrap,
 } from "../../styles/JoinStyled";
-import { emailState, newToken, userData, pwState } from "../../recoil/joinData";
-import { useRecoilState, useRecoilValue } from "recoil";
-import JoinApi from "../../api/JoinApi";
-import { useNavigate } from "react-router-dom";
 import ImageUploadAPI from "../../api/upload/ImageUploadAPI";
 import useValid from "../../hook/useValid";
 
@@ -34,31 +30,24 @@ export default function SetProfile() {
   });
   const InputFile = useRef(null);
 
-  // 이메일, 패스워드 상태 관리(리코일)
-  const email = useRecoilValue(emailState);
-  const password = useRecoilValue(pwState);
-
-  // 토큰, 유저 데이터 상태 관리(리코일)
-  const [token, setToken] = useRecoilState(newToken);
-  const [user, setUser] = useRecoilState(userData);
-
-  // useNavigate 사용
-  const navigate = useNavigate();
-
   const {
     error,
     UserNameValid,
     UserIdValid,
     IntroValid,
-    btnState,
     HandleJoin,
+    btnState,
+    SetBtnActive,
   } = useValid(form);
-
   const [validError, setValidError] = useState(error);
 
   useEffect(() => {
     setValidError(error);
   }, [error]);
+
+  useEffect(() => {
+    SetBtnActive();
+  }, [form.userName, form.userId, form.intro]);
 
   // userName, userId, intro 값을 useState에 저장
   const UserNameValue = (e) => {

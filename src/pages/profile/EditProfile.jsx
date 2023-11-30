@@ -29,11 +29,15 @@ import { LayoutStyle } from "../../styles/LayoutStyled";
 
 export default function EditProfile() {
   const [data, setData] = useState({});
-  const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState("");
-  const [intro, setIntro] = useState("");
-  const [image, setImage] = useState(null);
+
+  const [form, setForm] = useState({
+    userName: "",
+    userId: "",
+    intro: "",
+    image: null,
+  });
   const InputFile = useRef(null);
+
   const navigate = useNavigate();
   const [editId, setEditId] = useRecoilState(accountname);
 
@@ -42,18 +46,18 @@ export default function EditProfile() {
   const [userIdErr, setUserIdErr] = useState("");
   const [introErr, setIntroErr] = useState("");
 
+  // 토큰, 버튼 상태 값 관리
   const [token, setToken] = useRecoilState(loginToken);
-
   const [btnState, SetBtnState] = useState(false);
 
   // 최초 렌더링 시 각 input value에 기존 정보 값 입력
   useEffect(() => {
     async function fetchData() {
       const userRes = await ProfileInfoAPI();
-      setUsername(userRes.username);
-      setUserId(userRes.accountname);
-      setIntro(userRes.intro);
-      setImage(userRes.image);
+      setForm({ ...form, userName: userRes.username });
+      setForm({ ...form, userId: userRes.accountname });
+      setForm({ ...form, intro: userRes.intro });
+      setForm({ ...form, image: userRes.image });
     }
     fetchData();
   }, []);
@@ -65,32 +69,32 @@ export default function EditProfile() {
     const image = e.target.files[0];
     const imageRes = await ImageUploadAPI(image);
     if (imageRes) {
-      setImage(imageRes);
+      setForm({ ...form, image: imageRes });
     } else {
-      setImage(data.image);
+      setForm({ ...form, image: data.image });
     }
   };
 
   // username, userId, intro 값을 useState에 저장
   const UsernameValue = (e) => {
-    setUsername(e.target.value);
+    setForm({ ...form, userName: e.target.value });
   };
 
   const UserIdValue = (e) => {
-    setUserId(e.target.value);
+    setForm({ ...form, userId: e.target.value });
   };
 
   const IntroValue = (e) => {
-    setIntro(e.target.value);
+    setForm({ ...form, intro: e.target.value });
   };
 
   // 각 input 유효성 검사
   const UsernameValid = () => {
-    if (!username) {
+    if (!form.userName) {
       setUsernameErr("필수 입력 항목입니다.");
-    } else if (username.length < 2) {
+    } else if (form.userName.length < 2) {
       setUsernameErr("2자 이상 닉네임을 입력해 주세요.");
-    } else if (username.length > 10) {
+    } else if (form.userName.length > 10) {
       setUsernameErr("10자 이하 닉네임을 입력해 주세요.");
     } else {
       setUsernameErr("");
@@ -101,18 +105,18 @@ export default function EditProfile() {
   const userIdReg = /^[A-Za-z0-9_.]{5,}$/;
 
   const UserIdValid = async () => {
-    if (!userId) {
+    if (!form.userId) {
       setUserIdErr("필수 입력 항목입니다.");
-    } else if (!userIdReg.test(userId)) {
+    } else if (!userIdReg.test(form.userId)) {
       setUserIdErr("아이디 형식이 올바르지 않습니다.");
     } else {
-      const idValidRes = await IdValidApi(userId);
+      const idValidRes = await IdValidApi(form.userId);
       setUserIdErr(idValidRes);
     }
   };
 
   const IntroValid = () => {
-    if (!intro) {
+    if (!form.intro) {
       setIntroErr("필수 입력 항목입니다.");
     } else {
       setIntroErr("");
@@ -121,7 +125,7 @@ export default function EditProfile() {
 
   // 버튼 활성화
   const BtnActive = () => {
-    if (username && userId && intro) {
+    if (form.userName && form.userId && form.intro) {
       if (
         (!usernameErr &&
           // 아이디를 변경한 경우 아이디 중복 확인, 변경하지 않은 경우 에러 메시지가 출력되지 않아야 함
@@ -140,12 +144,17 @@ export default function EditProfile() {
   // 프로필 수정 api
   const EditData = async (e) => {
     e.preventDefault();
-    console.log("dd");
-    const res = await EditProfileApi(token, username, userId, intro, image);
+    const res = await EditProfileApi(
+      token,
+      form.userName,
+      form.userId,
+      form.intro,
+      form.image
+    );
 
     //recoil에서 관리하는 accountname에도 값 저장
-    setEditId(userId);
-    navigate(`/profile/${userId}`);
+    setEditId(form.userId);
+    navigate(`/profile/${form.userId}`);
   };
 
   return (
@@ -155,7 +164,7 @@ export default function EditProfile() {
         <PageTitle style={{ marginTop: "0px" }}>프로필 수정</PageTitle>
         <SetProfileForm>
           <ImgWrapper>
-            <ProfileImg src={image} />
+            <ProfileImg src={form.image} />
             <ImgLabel htmlFor="img-file" />
             <ImgUploader
               type="file"
@@ -177,7 +186,7 @@ export default function EditProfile() {
             type="text"
             id="nickname"
             placeholder="닉네임"
-            value={username}
+            value={form.userName}
             onBlur={(e) => {
               UsernameValid(e);
               BtnActive();
@@ -194,7 +203,7 @@ export default function EditProfile() {
             type="text"
             id="id"
             placeholder="아이디"
-            value={userId}
+            value={form.userId}
             onBlur={(e) => {
               UserIdValid(e);
               BtnActive();
@@ -211,7 +220,7 @@ export default function EditProfile() {
             type="text"
             id="intro"
             placeholder="소개"
-            value={intro}
+            value={form.intro}
             onBlur={(e) => {
               IntroValid(e);
               BtnActive();

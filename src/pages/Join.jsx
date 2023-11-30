@@ -93,11 +93,9 @@ export default function Join() {
   const handleValid = () => {
     if (email && password && pwCheck) {
       if (emailErr === "사용 가능한 이메일 입니다." && !pwErr && !pwCheckErr) {
-        console.log("활성화");
         SetBtnState(false);
       }
     } else {
-      console.log("비활성화");
       SetBtnState(true);
     }
   };

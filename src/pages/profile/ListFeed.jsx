@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Modal from "react-modal";
-import styled from "styled-components";
-import ImgVertical from "../../assets/icons/s-icon-more-vertical.svg";
-import IconHeart from "../../assets/icons/heart.svg";
-import IconHeartActive from "../../assets/icons/heart-avtive.svg";
-import IconMessage from "../../assets/icons/icon-message-circle.svg";
-import MyFeedListAPI from "../../api/post/MyFeedListAPI.jsx";
-import accountName from "../../recoil/accountname";
-import Empty from "../../components/empty/Empty";
-import LogoImg from "../../assets/images/Logo.png";
-import CommonModal from "../../components/modal/CommonModal";
-import { useRecoilValue } from "recoil";
-import timeFormat from "../../utils/timeFormat.js";
-import LikeHeart from "../../components/common/LikeHeart";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import ImgVertical from '../../assets/icons/s-icon-more-vertical.svg';
+import IconHeart from '../../assets/icons/heart.svg';
+import IconHeartActive from '../../assets/icons/heart-avtive.svg';
+import IconMessage from '../../assets/icons/icon-message-circle.svg';
+import MyFeedListAPI from '../../api/post/MyFeedListAPI.jsx';
+import accountName from '../../recoil/accountname';
+import Empty from '../../components/empty/Empty';
+import LogoImg from '../../assets/images/Logo.png';
+import CommonModal from '../../components/modal/CommonModal';
+import { useRecoilValue } from 'recoil';
+import timeFormat from '../../utils/timeFormat.js';
+import LikeHeart from '../../components/common/LikeHeart';
 
 export default function ListFeed(accountname) {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function ListFeed(accountname) {
   const [modalOpen, setModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
   const loginName = useRecoilValue(accountName);
-  const [postId, setPostId] = useState("");
+  const [postId, setPostId] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ export default function ListFeed(accountname) {
         setMyFeedData(list);
         setLoading(true);
       } catch (error) {
-        console.error("데이터 가져오기 오류:", error);
+        console.error('데이터 가져오기 오류:', error);
         setLoading(false);
       }
     };
@@ -65,18 +65,19 @@ export default function ListFeed(accountname) {
     <UlStyled>
       {loading && myFeedData.post.length === 0 ? (
         <>
-        <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
-        <div className="noneFeed">        
-        <img src={LogoImg}></img>
-        게시글이 존재하지 않습니다.
-        </div>
-      </>
+          <h1 className="a11y-hidden">게시글이 존재하지 않습니다.</h1>
+          <div className="noneFeed">
+            <img src={LogoImg}></img>
+            게시글이 존재하지 않습니다.
+          </div>
+        </>
       ) : (
-        loading && myFeedData.post.map((item, index) => {
+        loading &&
+        myFeedData.post.map((item, index) => {
           const bookData = {
-            bookTitle: "",
-            bookAuthor: "",
-            bookContent: "",
+            bookTitle: '',
+            bookAuthor: '',
+            bookContent: '',
           };
 
           const titleMatch = item.content.match(/bookTitle:(.*?),/);
@@ -84,15 +85,15 @@ export default function ListFeed(accountname) {
           const contentMatch = item.content.match(/inputContent:(.*?)(?:,|$)/);
 
           if (titleMatch) {
-            bookData.bookTitle = titleMatch[1] || "";
+            bookData.bookTitle = titleMatch[1] || '';
           }
 
           if (authorMatch) {
-            bookData.bookAuthor = authorMatch[1] || "";
+            bookData.bookAuthor = authorMatch[1] || '';
           }
 
           if (contentMatch) {
-            bookData.bookContent = contentMatch[1] || "";
+            bookData.bookContent = contentMatch[1] || '';
           }
 
           return (
@@ -124,7 +125,8 @@ export default function ListFeed(accountname) {
                 <div className="list-icon">
                   {/*<img onClick={colorChangeHandler} src={iconColor} alt="좋아요"/>
                 <p>{item.heartCount}</p>*/}
-                  <LikeHeart />
+                  <LikeHeart item={item} />
+                  <p>{item.heartCount}</p>
                   <img src={IconMessage} alt="댓글" />
                   <p>{item.commentCount}</p>
                 </div>
@@ -244,7 +246,7 @@ const UlStyled = styled.ul`
     left: 50%;
     margin-bottom: 90px;
     transform: translate(-50%, -50%);
-  };
+  }
   .noneFeed img {
     width: 110px;
     display: block;

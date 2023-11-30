@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-import PostDetailAPI from "../../api/post/PostDetailAPI";
-import { LayoutStyle, LayoutInsideStyle } from "../../styles/LayoutStyled";
-import BasicHeader from "../../components/header/BasicHeader";
-import IconDot from "../../assets/icons/s-icon-more-vertical.svg";
-import IconMessage from "../../assets/icons/icon-message-circle.svg";
-import CommonModal from "../../components/modal/CommonModal";
-import accountname from "../../recoil/accountname";
-import { useRecoilValue } from "recoil";
-import Comment from "../../components/comment/Comment";
-import CommentInput from "../../components/comment/CommentInput";
-import timeFormat from "../../utils/timeFormat";
-import LikeHeart from "../../components/common/LikeHeart";
-import { ClipLoader } from "react-spinners";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import PostDetailAPI from '../../api/post/PostDetailAPI';
+import { LayoutStyle, LayoutInsideStyle } from '../../styles/LayoutStyled';
+import BasicHeader from '../../components/header/BasicHeader';
+import IconDot from '../../assets/icons/s-icon-more-vertical.svg';
+import IconMessage from '../../assets/icons/icon-message-circle.svg';
+import CommonModal from '../../components/modal/CommonModal';
+import accountname from '../../recoil/accountname';
+import { useRecoilValue } from 'recoil';
+import Comment from '../../components/comment/Comment';
+import CommentInput from '../../components/comment/CommentInput';
+import timeFormat from '../../utils/timeFormat';
+import LikeHeart from '../../components/common/LikeHeart';
+import { ClipLoader } from 'react-spinners';
 
 export default function PostDetail() {
   const params = useParams();
@@ -23,18 +23,18 @@ export default function PostDetail() {
   const [postDetail, setPostDetail] = useState(() => {});
   const [modalOpen, setModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
-  const [createName, setCreateName] = useState("");
-  const [idState, setIdState] = useState("");
-  const [isLocation, setIsLocation] = useState("");
-  const [bookTitle, setBookTitle] = useState("");
-  const [bookAuthor, setBookAuthor] = useState("");
-  const [bookContent, setBookContent] = useState("");
+  const [createName, setCreateName] = useState('');
+  const [idState, setIdState] = useState('');
+  const [isLocation, setIsLocation] = useState('');
+  const [bookTitle, setBookTitle] = useState('');
+  const [bookAuthor, setBookAuthor] = useState('');
+  const [bookContent, setBookContent] = useState('');
 
   useEffect(() => {
     const detailList = async () => {
       try {
         const list = await getPostDetail(params.id);
-        console.log(list.post.content);
+        // console.log(list.post.content);
         setPostDetail(list.post);
 
         const titleMatch = list.post.content.match(/bookTitle:(.*?),/);
@@ -43,10 +43,10 @@ export default function PostDetail() {
           if (title) {
             setBookTitle(title);
           } else {
-            setBookTitle("");
+            setBookTitle('');
           }
         } else {
-          setBookTitle("");
+          setBookTitle('');
         }
 
         const authorMatch = list.post.content.match(/bookAuthor:(.*?),/);
@@ -55,27 +55,27 @@ export default function PostDetail() {
           if (author) {
             setBookAuthor(author);
           } else {
-            setBookAuthor("");
+            setBookAuthor('');
           }
         } else {
-          setBookAuthor("");
+          setBookAuthor('');
         }
 
         const contentMatch = list.post.content.match(
-          /inputContent:(.*?)(?:,|$)/
+          /inputContent:(.*?)(?:,|$)/,
         );
         if (contentMatch) {
           const content = contentMatch[1];
           if (content) {
             setBookContent(content);
           } else {
-            setBookContent("");
+            setBookContent('');
           }
         } else {
-          setBookContent("");
+          setBookContent('');
         }
       } catch (error) {
-        console.error("에러", error);
+        console.error('에러', error);
       }
     };
     detailList();
@@ -143,7 +143,7 @@ export default function PostDetail() {
                       showModal(
                         params.id,
                         postDetail.author.accountname,
-                        "post"
+                        'post',
                       );
                     }}
                   />
@@ -159,7 +159,8 @@ export default function PostDetail() {
                 <p className="timeline-main-text">{bookContent}</p>
                 <div className="social-wrap">
                   <div>
-                    <LikeHeart />
+                    <LikeHeart item={postDetail} />
+                    <p>{postDetail.heartCount}</p>
                   </div>
                   <div>
                     <img

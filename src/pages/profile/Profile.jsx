@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Modal from "react-modal";
-import styled from "styled-components";
-import ImgProfile from "../../assets/images/img-profile.png";
-import ImgShare from "../../assets/icons/icon-share.svg";
-import ImgMessage from "../../assets/icons/icon-message-circle.svg";
-import ImgFeedListOff from "../../assets/icons/icon-post-list-off.svg";
-import ImgFeedListOn from "../../assets/icons/icon-post-list-on.svg";
-import ImgFeedGridOff from "../../assets/icons/icon-post-album-off.svg";
-import ImgFeedGridOn from "../../assets/icons/icon-post-album-on.svg";
-import ProfileInfoAPI from "../../api/profile/ProfileInfoAPI";
-import BasicHeader from "../../components/header/BasicHeader";
-import { LayoutStyle } from "../../styles/LayoutStyled.js";
-import Footer from "../../components/footer/Footer";
-import GetFollowerFeedListAPI from "../../api/post/GetFollowerFeedListAPI";
-import ListFeed from "../profile/ListFeed.jsx";
-import GreedFeed from "../profile/GreedFeed";
-import MyProduct from "../../components/profile/MyProduct.jsx";
-import AccountNameProfileAPI from "../../api/post/AcountNameProfileAPI";
-import accountname from "../../recoil/accountname";
-import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import Loading from "../../components/loading/Loading.jsx";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import ImgProfile from '../../assets/images/img-profile.png';
+import ImgShare from '../../assets/icons/icon-share.svg';
+import ImgMessage from '../../assets/icons/icon-message-circle.svg';
+import ImgFeedListOff from '../../assets/icons/icon-post-list-off.svg';
+import ImgFeedListOn from '../../assets/icons/icon-post-list-on.svg';
+import ImgFeedGridOff from '../../assets/icons/icon-post-album-off.svg';
+import ImgFeedGridOn from '../../assets/icons/icon-post-album-on.svg';
+import ProfileInfoAPI from '../../api/profile/ProfileInfoAPI';
+import BasicHeader from '../../components/header/BasicHeader';
+import { LayoutStyle } from '../../styles/LayoutStyled.js';
+import Footer from '../../components/footer/Footer';
+import GetFollowerFeedListAPI from '../../api/post/GetFollowerFeedListAPI';
+import ListFeed from '../profile/ListFeed.jsx';
+import GreedFeed from '../profile/GreedFeed';
+import MyProduct from '../../components/profile/MyProduct.jsx';
+import AccountNameProfileAPI from '../../api/post/AcountNameProfileAPI';
+import accountname from '../../recoil/accountname';
+import { useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import Loading from '../../components/loading/Loading.jsx';
+import FollowAPI from '../../api/profile/FollowAPI.jsx';
+import UnFollowAPI from '../../api/profile/UnFollowAPI.jsx';
 
 //Modal.setAppElemnet("#root");
 export default function Profile() {
@@ -41,18 +43,12 @@ export default function Profile() {
     const info = await ProfileInfoAPI();
   };
 
-  //내 프로필에서 팔로우/언팔로우 버튼
-  const [isFollowing, setIsFollowing] = useState(false);
-  const handleClick = () => {
-    setIsFollowing(!isFollowing);
-  };
-
   //다른 사람의 프로필에서 프로필 설정, 상품 등록
   const onClickSetProfile = () => {
-    navigate("../editprofile");
+    navigate('../editprofile');
   };
   const onClickProductAdd = () => {
-    navigate("../productadd");
+    navigate('../productadd');
   };
 
   //유저 정보 불러오기
@@ -99,7 +95,7 @@ export default function Profile() {
         const data = await getFeedListAPI(); // 데이터 가져오기
         setFeedData(data); // 데이터를 상태에 저장
       } catch (error) {
-        console.error("데이터 가져오기 오류:", error);
+        console.error('데이터 가져오기 오류:', error);
       }
     }
     fetchData();
@@ -110,21 +106,23 @@ export default function Profile() {
   const { getAccountNameProfile } = AccountNameProfileAPI(params.accountname);
   const [userInfo, setUserInfo] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await getAccountNameProfile();
         setUserInfo(data.profile);
+        setIsFollowing(data.profile.isfollow);
       } catch (error) {
-        console.error("데이터 가져오기 오류:", error);
+        console.error('데이터 가져오기 오류:', error);
       } finally {
         setLoading(false);
       }
     }
     fetchData();
   }, [params.accountname]);
-  console.log(userInfo);
+  // console.log(userInfo);
 
   //팔로워 목록
   const navigate = useNavigate();
@@ -138,6 +136,40 @@ export default function Profile() {
 
   //내 프로필
   const myAccount = useRecoilValue(accountname);
+
+  // 팔로잉 API
+  const { followUser } = FollowAPI(params.accountname);
+  const handleFollow = async () => {
+    try {
+      const res = await followUser();
+      console.log(res);
+      console.log('팔로우 하는데 성공하였습니다.');
+    } catch (error) {
+      console.error('팔로우 하는데 실패하였습니다.', error);
+    }
+  };
+  // 언팔로잉 API
+  const { unFollowUser } = UnFollowAPI(params.accountname);
+  const handleUnFollow = async () => {
+    try {
+      const res = await unFollowUser();
+      console.log(res);
+      console.log('언팔로우 하는데 성공하였습니다.');
+    } catch (error) {
+      console.error('언팔로우 하는데 실패하였습니다.', error);
+    }
+  };
+
+  //내 프로필에서 팔로우/언팔로우 버튼
+  const handleClick = () => {
+    if (isFollowing) {
+      handleUnFollow();
+      setIsFollowing(false);
+    } else {
+      handleFollow();
+      setIsFollowing(true);
+    }
+  };
 
   return (
     <>

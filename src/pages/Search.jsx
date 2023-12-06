@@ -34,6 +34,8 @@ export default function Search() {
     window.history.back();
   }
 
+
+  // 딜레이 함수
   function useDebounce(value, delay = 500) {
     const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -47,8 +49,11 @@ export default function Search() {
     return debouncedValue;
   }
 
+  // 딜레이 함수를 searchResult라는 변수에 할당
   const searchResult = useDebounce(searchId);
 
+
+  // useEffect를 통해 searchResult가 변경되는 경우 
   useEffect(() => {
     const setResult = async () => {
       if (searchResult) {

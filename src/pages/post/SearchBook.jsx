@@ -39,6 +39,7 @@ export default function SearchBook() {
     window.history.back();
   }
 
+  // 검색 값이 있을 때마다 useEffect를 통해 책 검색 api 실행
   useEffect(() => {
     const fetchSearch = async () => {
       const searchRes = await SearchBookApi(keyword);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LayoutStyle = styled.section`
-  max-width: 390px;
+  min-width: 390px;
   /* height: 100vh; */
   margin: 0 auto;
   min-height: 800px;

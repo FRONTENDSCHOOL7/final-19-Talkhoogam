@@ -10,11 +10,13 @@ export const ImgWrapper = styled.div`
   position: relative;
   display: flex;
   margin-bottom: 25px;
+  vertical-align: center;
 `;
 
 export const ProfileImg = styled.img`
   width: 110px;
   height: 110px;
+
   border-radius: 50%;
   margin: 0 auto;
 `;
@@ -25,10 +27,14 @@ export const ImgLabel = styled.label`
   margin: 0 auto;
   cursor: pointer;
 
+  @media screen and (min-width: 390px) {
+    left: calc(50% - 60px);
+    top: calc(50% - 60px);
+  }
+
   background-image: url(${imgBtn});
   background-size: 36px 36px;
   background-repeat: no-repeat;
-  background-position: center center;
   background-position: 83px 74px;
   margin: 0 auto;
   position: absolute;

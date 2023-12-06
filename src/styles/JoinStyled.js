@@ -2,8 +2,12 @@ import styled from "styled-components";
 import { Btn } from "../components/common/button/Button";
 
 export const PageArticle = styled.article`
+  @media screen and (max-width: 390px) {
+    min-width: 390px;
+  }
+
+  max-width: 500px;
   height: 100vh;
-  max-width: 390px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;

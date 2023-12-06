@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SearchList = styled.article`
-  margin: 10px;
+  margin: 10px 20px;
   display: flex;
   gap: 10px;
   cursor: pointer;

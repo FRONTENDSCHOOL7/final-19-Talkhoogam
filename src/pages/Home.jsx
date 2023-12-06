@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import IconMessage from "../assets/icons/icon-message-circle.svg";
-import IconDot from "../assets/icons/s-icon-more-vertical.svg";
-import { LayoutStyle, LayoutInsideStyle } from "../styles/LayoutStyled";
-import Footer from "../components/footer/Footer";
-import GetFollowerFeedListAPI from "../api/post/GetFollowerFeedListAPI";
-import Empty from "../components/empty/Empty";
-import LogoImg from "../assets/images/Logo.png";
-import CommonModal from "../components/modal/CommonModal";
-import { useNavigate } from "react-router-dom";
-import timeFormat from "../utils/timeFormat";
-import BasicHeader from "../components/header/BasicHeader";
-import LikeHeart from "../components/common/LikeHeart";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import IconMessage from '../assets/icons/icon-message-circle.svg';
+import IconDot from '../assets/icons/s-icon-more-vertical.svg';
+import { LayoutStyle, LayoutInsideStyle } from '../styles/LayoutStyled';
+import Footer from '../components/footer/Footer';
+import GetFollowerFeedListAPI from '../api/post/GetFollowerFeedListAPI';
+import Empty from '../components/empty/Empty';
+import LogoImg from '../assets/images/Logo.png';
+import CommonModal from '../components/modal/CommonModal';
+import { useNavigate } from 'react-router-dom';
+import timeFormat from '../utils/timeFormat';
+import BasicHeader from '../components/header/BasicHeader';
+import LikeHeart from '../components/common/LikeHeart';
 
 export function HomeContents({ feedData, setFeedData, showModal }) {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
         setFeedData(data); // 데이터를 상태에 저장
         setLoding(true);
       } catch (error) {
-        console.error("데이터 가져오기 오류:", error);
+        console.error('데이터 가져오기 오류:', error);
       }
     };
 
@@ -43,7 +43,7 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
         {loding && feedData.posts.length === 0 ? (
           <>
             <h1 className="a11y-hidden">팔로우가 존재하지 않습니다.</h1>
-            <Empty image={LogoImg} alt={"404페이지"}>
+            <Empty image={LogoImg} alt={'404페이지'}>
               유저를 검색해 팔로우 해보세요!
             </Empty>
           </>
@@ -52,27 +52,27 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
             <>
               {feedData.posts.map((item, index) => {
                 const bookData = {
-                  bookTitle: "",
-                  bookAuthor: "",
-                  bookContent: "",
+                  bookTitle: '',
+                  bookAuthor: '',
+                  bookContent: '',
                 };
 
                 const titleMatch = item.content.match(/bookTitle:(.*?),/);
                 const authorMatch = item.content.match(/bookAuthor:(.*?),/);
                 const contentMatch = item.content.match(
-                  /inputContent:(.*?)(?:,|$)/
+                  /inputContent:(.*?)(?:,|$)/,
                 );
 
                 if (titleMatch) {
-                  bookData.bookTitle = titleMatch[1] || "";
+                  bookData.bookTitle = titleMatch[1] || '';
                 }
 
                 if (authorMatch) {
-                  bookData.bookAuthor = authorMatch[1] || "";
+                  bookData.bookAuthor = authorMatch[1] || '';
                 }
 
                 if (contentMatch) {
-                  bookData.bookContent = contentMatch[1] || "";
+                  bookData.bookContent = contentMatch[1] || '';
                 }
                 return (
                   <div key={index} className="user-timeline">
@@ -120,7 +120,8 @@ export function HomeContents({ feedData, setFeedData, showModal }) {
                             src={iconColor}
                             alt="하트아이콘"
                           /> */}
-                          <LikeHeart />
+                          <LikeHeart item={item} />
+                          <p>{item.heartCount}</p>
                         </div>
                         <div>
                           <img
